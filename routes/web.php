@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/inicio', function () {
-    return view('crm.escritorio');
+Route::get('/clientes', function () {
+    return view('crm.clientes');
+});
+Route::get('/clientes-detalle', function () {
+    return view('crm.clientes-detalle');
 });
 
 Route::middleware([
