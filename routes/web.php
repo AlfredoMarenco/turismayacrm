@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Menusidebar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Menusidebar::class);
 Route::get('/clientes', function () {
     return view('crm.clientes');
 });

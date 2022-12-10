@@ -1,4 +1,5 @@
-<div>
+<x-guest-layout>
+<div class="bg-white">
 
   <div class="relative z-40 md:hidden" role="dialog" aria-modal="true">
     <!--
@@ -51,7 +52,7 @@
         <div class="mt-5 h-0 flex-1 overflow-y-auto">
           <nav class="space-y-1 px-2">
             <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
-            <a href="#" class="bg-lime-350 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+            <a wire:click="selectItem(1)" class="bg-lime-350 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
               <!-- Heroicon name: outline/home -->
               <svg class="mr-4 h-6 w-6 flex-shrink-0 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -60,7 +61,7 @@
               Clientes
             </a>
 
-            <a href="#" class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
+            <a wire:click="selectItem(2)"  class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
               <svg class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
               </svg>
@@ -126,7 +127,7 @@
       <div class="mt-5 flex flex-1 flex-col">
         <nav class="flex-1 space-y-1 px-2 pb-4">
           <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
-          <a href="#" class="bg-lime-350 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+          <a wire:click="selectItem('1')" class="bg-lime-350 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
               <!-- Heroicon name: outline/home -->
               <svg class="mr-4 h-6 w-6 flex-shrink-0 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -135,7 +136,7 @@
               Clientes
             </a>
 
-            <a href="#" class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
+            <a wire:click="selectItem('2')" class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
               <svg class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
               </svg>
@@ -186,4 +187,23 @@
     </div>
   </div>
 
-</div>
+{{-- Panel Cambiante del menu --}}
+  <div class="bg-white">
+    
+        {{-- <div>
+          @livewire('clients', key('clients'))
+        </div> --}}
+
+        {{-- <div>
+          @livewire('disponibilities', key('disponibilities'))  
+        </div>   --}}  
+
+         <div>
+          @livewire('travels', key('travels'))
+        </div>
+    
+            
+    
+  </div>
+
+</x-guest-layout>
