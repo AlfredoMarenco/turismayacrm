@@ -198,11 +198,17 @@
           @livewire('disponibilities', key('disponibilities'))  
         </div>   --}}  
 
-         <div>
+         {{-- <div>
           @livewire('travels', key('travels'))
+        </div> --}}
+        
+        {{-- <div>
+          @livewire('payments', key('payments'))
+        </div> --}}
+        
+        <div>
+          @livewire('units', key('units'))
         </div>
-    
-            
     
   </div>
 

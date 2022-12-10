@@ -8,7 +8,7 @@
                         <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                             <h2
                                 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                                Panel de Clientes</h2>
+                                Panel de Viajes</h2>
                             <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
   
                                 <div class="mt-2 flex items-center text-sm text-gray-500">
@@ -24,24 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 flex lg:mt-0 lg:ml-4">
-  
-  
-  
-                            <span class="md:pl-3 lg:pr-8 sm:ml-3">
-                                <button type="button"
-                                    class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                    <!-- Heroicon name: mini/check -->
-                                    <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                        fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Agregar Nuevo
-                                </button>
-                            </span>
-                        </div>
+                        
                     </div>
   
                 </div>
@@ -49,7 +32,7 @@
                     <!-- Replace with your content -->
                     <div class="py-4">
                         <div class="py-42px-4 sm:px-6 lg:px-8">
-                            <p >Buscar Viaje por</p>
+                            <p class="font-bold py-2">Buscar Viaje por:</p>
                             <div class="grid grid-cols-10 gap-4">
                                 <div class="col-span-2">
                                     <label for="num" class="block text-sm font-medium text-gray-700">Mostrar</label>
@@ -60,7 +43,7 @@
                                         <option>30</option>
                                     </select>
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-4">
                                   <label for="email" class="block text-sm font-medium text-gray-700">Nombre</label>
                                   <div class="relative mt-1 rounded-md shadow-sm">
                                       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -72,35 +55,18 @@
                                       <input type="text" name="text" id="name" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Jane Cooper">
                                   </div>
                                   
-                                </div>
-                                <div class="col-span-2">
-                                  <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
-                                  <div class="relative mt-1 rounded-md shadow-sm">
-                                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                      <!-- Heroicon name: mini/envelope -->
-                                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-                                      </svg>
-                                      </div>
-                                      <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
-                                  </div>
-                                </div>
-                               
-                                <div class="col-span-2">
-                                  <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                                  <div class="relative mt-1 rounded-md shadow-sm">
-                                      <input type="tel" name="tel" id="phone" class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="(999) 955 2316">
-                                  </div>
-                                  
-                                </div>
-  
-                                <div class="col-span-2">
-                                  <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                                  <div class="relative mt-1 rounded-md shadow-sm">
-                                      <input type="tel" name="tel" id="phone" class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="(999) 955 2316">
-                                  </div>
-                                  
+                                </div>                              
+                                
+                                <div class="col-span-4">
+                                  <label for="tel" class="block text-sm font-medium text-gray-700">Estatus</label>
+                                    <div class="col-span-2">
+                                        <select id="num" name="num"
+                                            class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                            <option selected>Viaje iniciado</option>
+                                            <option>Viaje apartado</option>
+                                            <option>Viaje cancelado</option>
+                                        </select>
+                                    </div>
                                 </div>
   
                             </div>
@@ -120,7 +86,7 @@
                                                             VIAJE</th>
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                            CORREO</th>
+                                                            FECHA</th>
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                                             ESTATUS</th>
@@ -137,17 +103,33 @@
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                             Mérida - Cancún</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            jane.cooper@example.com</td>
+                                                            14 de Septiembre 2022</td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                             Viaje iniciado</td>
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                             <a href="#"
-                                                                class="text-blue-900 hover:text-indigo-900">Ver más<span
+                                                                class="text-gray-400 hover:text-indigo-900">Liquidado<span
                                                                     class="sr-only">, Lindsay Walton</span></a>
                                                         </td>
                                                     </tr>
-  
+                                                    <tr>
+                                                        <td
+                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                            Jane Cooper</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            Mérida - Cancún</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            14 de Septiembre 2022</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            Viaje iniciado</td>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                            <a href="#"
+                                                                class="text-blue-900 hover:text-indigo-900">Cancelar<span
+                                                                    class="sr-only">, Lindsay Walton</span></a>
+                                                        </td>
+                                                    </tr>
                                                     <!-- More people... -->
                                                 </tbody>
                                             </table>
