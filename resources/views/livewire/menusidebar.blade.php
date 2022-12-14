@@ -190,9 +190,9 @@
 {{-- Panel Cambiante del menu --}}
   <div class="bg-white">
     
-        {{-- <div>
+        <div>
           @livewire('clients', key('clients'))
-        </div> --}}
+        </div>
 
         {{-- <div>
           @livewire('disponibilities', key('disponibilities'))  
@@ -210,9 +210,9 @@
           @livewire('units', key('units'))
         </div> --}}
 
-        <div>
+        {{-- <div>
           @livewire('driver', key('driver'))
-        </div>
+        </div> --}}
     
   </div>
 
