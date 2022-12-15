@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Agregar extends Component
+class Budget extends Component
 {
     public function render()
     {
-        return view('livewire.agregar');
+        return view('livewire.budget')->layout('layouts.guest');
     }
 }
