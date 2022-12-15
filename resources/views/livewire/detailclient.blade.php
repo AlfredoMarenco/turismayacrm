@@ -201,7 +201,9 @@
             
 
         </div> --}}
-        
+        <div>
+            @livewire('voucher', key('voucher'))
+        </div>
 
     </div>
 </div>
