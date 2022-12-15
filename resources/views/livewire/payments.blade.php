@@ -1,7 +1,7 @@
 <div class="flex flex-1 flex-col md:pl-64">
     <main>
         <div class="py-6 ">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            {{-- <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                         <h2
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <!-- Replace with your content -->
                 <div class="py-4">
