@@ -15,6 +15,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @stack('scripts')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

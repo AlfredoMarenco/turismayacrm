@@ -1,6 +1,9 @@
+@push('scripts')
+    <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
+@endpush
 <div class="h-screen flex flex-1 flex-col md:pl-64">
     <main>
-        <div class="py-6 ">
+        {{-- <div class="py-6 ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
@@ -36,7 +39,7 @@
                                         d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Crear solicitud de pago
+                               Folio de cotización
                             </button>
                         </span>
                     </div>
@@ -44,7 +47,7 @@
 
             </div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                {{-- <!-- Replace with your content -->
+                <!-- Replace with your content -->
                 <div class="py-4">
                     <div class="py-42px-4 sm:px-6 lg:px-8">
                         <p class="font-bold py-2">Buscar pago por:</p>
@@ -143,13 +146,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- /End replace --> --}}
+                <!-- /End replace -->
 
-                <div class="py-42 px-4 sm:px-6 lg:px-8">
-                    @livewire('createbudget', key('createbudget'))
-                </div>
+               
+            </div>
+        </div> --}}
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <div class="py-42 px-4 sm:px-6 lg:px-8">
+                @livewire('createbudget', key('createbudget'))
             </div>
         </div>
-
     </main>
 </div>
