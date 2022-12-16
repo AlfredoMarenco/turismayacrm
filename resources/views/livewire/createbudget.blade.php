@@ -1,7 +1,7 @@
 <div class="pt-6">
     <div class="pb-4 min-w-0 flex-1">
         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-            Panel de Pagos</h2>
+            Crear presupuesto</h2>
         <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
             <div class="mt-2 flex items-center text-sm text-gray-500">
@@ -66,7 +66,7 @@
                                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                             </svg>
                             <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Crear
-                                voucher</a>
+                                presupuesto</a>
                         </div>
                     </li>
 
@@ -152,7 +152,375 @@
                     }
                     ```
                     -->
-                <form action="">
+                    <form action="#">
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700">CANTIDAD</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="cantidad" id="cantidad"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700">PASAJEROS</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="cantidad" id="cantidad"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700 uppercase ">cantidad</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="cantidad" id="cantidad"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700 uppercase ">vueltas</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="vueltas" id="vueltas"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700 uppercase ">rendimiento</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="rendimiento" id="rendimiento"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700 uppercase ">litros</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        <input type="text" name="litros" id="litros"
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="1" aria-describedby="1">
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Precio
+                                        diesel</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="Precio-diesel" id="Precio-diesel"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo
+                                        diesel</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="costo-diesel" id="costo-diesel"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">sueldo</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="sueldo" id="sueldo"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">viáticos</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="viaticos" id="viaticos"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">hotel</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="hotel" id="hotel"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 uppercase">carga
+                                        impositiva</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="carga-impositiva" id="carga-impositiva"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-3">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">derecho de piso</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="derecho-de-piso" id="derecho-de-piso"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-3">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">casetas</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="casetas" id="casetas"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="amenidades" id="amenidades"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="subarrendo" id="subarrendo"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-2">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                        </div>
+                                        <input type="text" name="amenidades" id="amenidades"
+                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                            <div class="sm:col-span-3">
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo
+                                        total</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-white sm:text-sm">$</span>
+                                        </div>
+                                        <div type="text" name="costo-total" id="costo-total"
+                                            class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">2,340
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="sm:col-span-3">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">porcentaje de
+                                        utilidad</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+    
+                                        <input type="text" name="costo-total" id="costo-total"
+                                            class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="Ingrese un número" aria-describedby="price-currency">
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-gray-400 sm:text-sm" id="price-currency">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5 ">
+                            <div class="sm:col-span-6">
+                                <div>
+                                    <label for="price"
+                                        class="block text-sm font-medium text-gray-700 uppercase">Utilidad</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-white sm:text-sm">$</span>
+                                        </div>
+                                        <div type="text" name="costo-total" id="costo-total"
+                                            class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="0.00" aria-describedby="price-currency">2,340
+                                            <div
+                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </form>
+
+        </div>
+        <div class=" col-span-10 md:col-span-10 lg:col-span-5 bg-gray-50 p-3">
+            <h5 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight ">
+                CAMIONETAS</h4>
+                <form action="#">
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
                         <div class="sm:col-span-2">
                             <div>
@@ -245,7 +613,8 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Precio diesel</label>
+                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Precio
+                                    diesel</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -262,7 +631,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo diesel</label>
+                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo
+                                    diesel</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -279,7 +649,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">sueldo</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">sueldo</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -299,7 +670,8 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">viáticos</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">viáticos</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -316,7 +688,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">hotel</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">hotel</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -333,7 +706,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">carga impositiva</label>
+                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">carga
+                                    impositiva</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -353,7 +727,8 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                         <div class="sm:col-span-3">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">derecho de piso</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">derecho de piso</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -370,7 +745,8 @@
 
                         <div class="sm:col-span-3">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">casetas</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">casetas</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -390,7 +766,8 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -407,7 +784,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -424,7 +802,8 @@
 
                         <div class="sm:col-span-2">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -444,16 +823,19 @@
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                         <div class="sm:col-span-3">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo total</label>
+                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo
+                                    total</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-white sm:text-sm">$</span>
                                     </div>
-                                    <input type="text" name="costo-total" id="costo-total"
+                                    <div type="text" name="costo-total" id="costo-total"
                                         class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="0.00" aria-describedby="price-currency">
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                        placeholder="0.00" aria-describedby="price-currency">2,340
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -461,9 +843,11 @@
 
                         <div class="sm:col-span-3">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">porcentaje de utilidad</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">porcentaje de
+                                    utilidad</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
-                                    
+
                                     <input type="text" name="costo-total" id="costo-total"
                                         class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Ingrese un número" aria-describedby="price-currency">
@@ -476,19 +860,22 @@
 
                     </div>
 
-                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5 ">
                         <div class="sm:col-span-6">
                             <div>
-                                <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Utilidad</label>
+                                <label for="price"
+                                    class="block text-sm font-medium text-gray-700 uppercase">Utilidad</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-white sm:text-sm">$</span>
                                     </div>
-                                    <input type="text" name="utilidad" id="utilidad"
+                                    <div type="text" name="costo-total" id="costo-total"
                                         class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="0.00" aria-describedby="price-currency">
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                        placeholder="0.00" aria-describedby="price-currency">2,340
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <span class="text-white sm:text-sm" id="price-currency">MXN</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -498,360 +885,56 @@
                 </form>
 
         </div>
-        <div class=" col-span-10 md:col-span-10 lg:col-span-5 bg-gray-50 p-3">
-            <h5 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight ">
-                AUTOBUSES</h4>
-            <form action="">
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700">CANTIDAD</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="cantidad" id="cantidad"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700">PASAJEROS</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="cantidad" id="cantidad"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700 uppercase ">cantidad</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="cantidad" id="cantidad"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700 uppercase ">vueltas</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="vueltas" id="vueltas"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700 uppercase ">rendimiento</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="rendimiento" id="rendimiento"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <div class="flex justify-between">
-                                <label for="email"
-                                    class="block text-sm font-medium text-gray-700 uppercase ">litros</label>
-                            </div>
-                            <div class="mt-1">
-                                <input type="text" name="litros" id="litros"
-                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="1" aria-describedby="1">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Precio diesel</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="Precio-diesel" id="Precio-diesel"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo diesel</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="costo-diesel" id="costo-diesel"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">sueldo</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="sueldo" id="sueldo"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">viáticos</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="viaticos" id="viaticos"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">hotel</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="hotel" id="hotel"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">carga impositiva</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="carga-impositiva" id="carga-impositiva"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-3">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">derecho de piso</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="derecho-de-piso" id="derecho-de-piso"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">casetas</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="casetas" id="casetas"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="amenidades" id="amenidades"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="subarrendo" id="subarrendo"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="amenidades" id="amenidades"
-                                    class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                    <div class="sm:col-span-3">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo total</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-white sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="costo-total" id="costo-total"
-                                    class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-white sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">porcentaje de utilidad</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                
-                                <input type="text" name="costo-total" id="costo-total"
-                                    class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Ingrese un número" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-gray-400 sm:text-sm" id="price-currency">%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5 ">
-                    <div class="sm:col-span-6">
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 uppercase">Utilidad</label>
-                            <div class="relative mt-1 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-white sm:text-sm">$</span>
-                                </div>
-                                <input type="text" name="utilidad" id="utilidad"
-                                    class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="0.00" aria-describedby="price-currency">
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <span class="text-white sm:text-sm" id="price-currency">MXN</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-
-        </div>
     </div>
 
-    <div class="grid grid-cols-9 gap-4 pt-5">
-        <div class="col-span-3">
-
+    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
+        <div class="sm:col-span-2">
+            <div>
+                <div class="flex justify-between">
+                    <label for="email" class="block text-sm font-medium text-gray-700 uppercase">tarifa
+                        neta</label>
+                </div>
+                <div class="mt-1">
+                    <div type="text" name="tarifa-neta" id="tarifa-neta"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        aria-describedby="1">$ <span class="pl-3">1,504.00</span></div>
+                </div>
+            </div>
         </div>
+
+        <div class="sm:col-span-2">
+            <div>
+                <div class="flex justify-between">
+                    <label for="email" class="block text-sm font-medium text-gray-700 uppercase">impuestos
+                        (IVA)</label>
+                </div>
+                <div class="mt-1">
+                    <div type="text" name="impuestos-iva" id="impuestos-iva"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        aria-describedby="1">$ <span class="pl-3">1,504.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:col-span-2">
+            <div>
+                <div class="flex justify-between">
+                    <label for="email" class="block text-sm font-medium text-gray-700 uppercase">Total</label>
+                </div>
+                <div class="mt-1">
+                    <div type="text" name="presupuesto-total" id="presupuesto-total"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        aria-describedby="1">$ <span class="pl-3">1,504.00</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex flex-shrink-0 justify-end px-4 py-4 mt-7 border-t bg-white">
+        <button type="button"
+            class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Crear borrador</button>
+        <button type="submit"
+            class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finalizar presupuesto</button>
     </div>
 </div>
