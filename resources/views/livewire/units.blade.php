@@ -1,4 +1,4 @@
-<div class="flex flex-1 flex-col md:pl-64">
+<div class="h-screen flex flex-1 flex-col md:pl-64">
     <main>
         <div class="py-6 ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
@@ -47,6 +47,7 @@
                 <!-- Replace with your content -->
                 <div class="py-4">
                     <div class="py-42px-4 sm:px-6 lg:px-8">
+                        <p class="font-bold py-2">Buscar viaje por:</p>
                         <div class="grid grid-cols-10 gap-4">
                             <div class="col-span-1">
                                 <label for="num" class="block text-sm font-medium text-gray-700">Mostrar</label>

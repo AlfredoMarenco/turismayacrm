@@ -2,7 +2,7 @@
 
         <div class="relative z-40 md:hidden" role="dialog" aria-modal="true">
 
-            <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+            <div class=" fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
             <div class="fixed inset-0 z-40 flex">
 
@@ -238,25 +238,25 @@
 
                 @case(4)
                     <div>
-                        @livewire('budget', key('budget'))
+                        @livewire('payments', key('payments'))
                     </div>
                 @break
 
                 @case(5)
                     <div>
-                        @livewire('payments', key('payments'))
+                        @livewire('units', key('units'))
                     </div>
                 @break
 
                 @case(6)
                     <div>
-                        @livewire('units', key('units'))
+                        @livewire('driver', key('driver'))
                     </div>
                 @break
 
                 @case(7)
                     <div>
-                        @livewire('driver', key('driver'))
+                        @livewire('reports', key('reports'))
                     </div>
                 @break
 

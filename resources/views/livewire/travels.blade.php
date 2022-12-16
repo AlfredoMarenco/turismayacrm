@@ -1,5 +1,4 @@
-<div class="flex flex-1 flex-col md:pl-64">
-
+<div class="h-screen flex flex-1 flex-col md:pl-64">
     <main>
         <div class="py-6 ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
