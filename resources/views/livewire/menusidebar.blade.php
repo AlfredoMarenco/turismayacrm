@@ -266,6 +266,3 @@
 
         </div>
     </div>
-    <div class="hidden">
-        @livewire('agregar-algo', key('agregar-algo'))
-    </div>

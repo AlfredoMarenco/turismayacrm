@@ -173,7 +173,13 @@
   }
   ```
 -->
-       <div class="mt-5">
+
+<!--Comentario-->
+<h3 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mt-8">Detalles de Voucher</h3>
+<p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit debitis sint, molestias illum fugit veniam nulla eligendi hic velit ab voluptatum animi ad ex dolor expedita magni error rem dicta doloremque? Possimus repellat, saepe iusto laboriosam impedit, ipsa minus est perferendis libero ad hic voluptatem odio nobis at? Officiis, placeat.</p>
+
+
+       <div class="mt-4">
         <form action="#" class="relative">
             <div
                 class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
@@ -196,7 +202,7 @@
                     </div>
                 </div>
             </div>
-
+           
             <div class="absolute inset-x-px bottom-0">
                 <div class="flex items-center justify-end space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3">
                     
