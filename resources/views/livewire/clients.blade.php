@@ -3,7 +3,7 @@
       <main class="h-screen">
           {{-- Panel clientes --}}
 
-           <div class="py-6 ">
+          {{-- <div class="py-6 ">
               <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                   <div class="lg:flex lg:items-center lg:justify-between">
                       <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
@@ -61,46 +61,59 @@
                                   </select>
                               </div>
                               <div class="col-span-2">
-                                <label for="email" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                <div class="relative mt-1 rounded-md shadow-sm">
-                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <!-- Heroicon name: mini/envelope -->
-                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
-                                      </svg>
-                                    </div>
-                                    <input type="text" name="text" id="name" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Jane Cooper">
-                                </div>
-                                
+                                  <label for="email" class="block text-sm font-medium text-gray-700">Nombre</label>
+                                  <div class="relative mt-1 rounded-md shadow-sm">
+                                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                          <!-- Heroicon name: mini/envelope -->
+                                          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                              <path
+                                                  d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
+                                          </svg>
+                                      </div>
+                                      <input type="text" name="text" id="name"
+                                          class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          placeholder="Jane Cooper">
+                                  </div>
+
                               </div>
                               <div class="col-span-2">
-                                <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
-                                <div class="relative mt-1 rounded-md shadow-sm">
-                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <!-- Heroicon name: mini/envelope -->
-                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                                        <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-                                    </svg>
-                                    </div>
-                                    <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
-                                </div>
-                              </div>
-                             
-                              <div class="col-span-2">
-                                <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                                <div class="relative mt-1 rounded-md shadow-sm">
-                                    <input type="tel" name="tel" id="phone" class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="(999) 955 2316">
-                                </div>
-                                
+                                  <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
+                                  <div class="relative mt-1 rounded-md shadow-sm">
+                                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                          <!-- Heroicon name: mini/envelope -->
+                                          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                              <path
+                                                  d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                                              <path
+                                                  d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                                          </svg>
+                                      </div>
+                                      <input type="email" name="email" id="email"
+                                          class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          placeholder="you@example.com">
+                                  </div>
                               </div>
 
                               <div class="col-span-2">
-                                <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                                <div class="relative mt-1 rounded-md shadow-sm">
-                                    <input type="tel" name="tel" id="phone" class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="(999) 955 2316">
-                                </div>
-                                
+                                  <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                                  <div class="relative mt-1 rounded-md shadow-sm">
+                                      <input type="tel" name="tel" id="phone"
+                                          class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          placeholder="(999) 955 2316">
+                                  </div>
+
+                              </div>
+
+                              <div class="col-span-2">
+                                  <label for="tel" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                                  <div class="relative mt-1 rounded-md shadow-sm">
+                                      <input type="tel" name="tel" id="phone"
+                                          class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                          placeholder="(999) 955 2316">
+                                  </div>
+
                               </div>
 
                           </div>
@@ -159,15 +172,18 @@
                   </div>
                   <!-- /End replace -->
               </div>
+          </div> --}}
+
+          {{-- agregar cliente --}}
+          <div class="hidden">
+              @livewire('agregarcliente', key('agregarcliente'))
           </div>
 
-          <div class="">
-            @livewire('agregarcliente', key('agregarcliente'))
-        </div>
           {{-- contenido Ver más --}}
-          {{-- <div>
+          
+           <div>
               @livewire('detailclient', key('detailclient'))
-          </div> --}}
+          </div>
 
       </main>
   </div>

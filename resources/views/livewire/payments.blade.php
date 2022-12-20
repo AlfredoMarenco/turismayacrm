@@ -3,7 +3,7 @@
 @endpush
 <div class="h-screen flex flex-1 flex-col md:pl-64">
     <main>
-        {{-- <div class="py-6 ">
+        <div class="py-6 ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
@@ -150,11 +150,7 @@
 
                
             </div>
-        </div> --}}
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-            <div class="py-42 px-4 sm:px-6 lg:px-8">
-                @livewire('createbudget', key('createbudget'))
-            </div>
         </div>
+        
     </main>
 </div>

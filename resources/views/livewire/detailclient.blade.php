@@ -1,7 +1,7 @@
 <div class="h-screen  py-6">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 
-        {{-- <div class="grid grid-cols-10 gap-3">
+        <div class="grid grid-cols-10 gap-3">
 
             <div class="col-span-10 md:col-span-10 lg:col-span-6">
                 <div class="lg:flex lg:items-center lg:justify-between ">
@@ -200,11 +200,25 @@
             </div>
             
 
-        </div> --}}
-        <div>
-            @livewire('voucher', key('voucher'))
         </div>
 
+        {{-- Presupuesto --}}
+
+       {{--  <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <div class="py-42 px-4 sm:px-6 lg:px-8">
+                @livewire('createbudget', key('createbudget'))
+            </div>
+        </div> --}}
+
+
+
+        {{-- Crear voucher --}}
+
+        {{-- <div>
+            @livewire('voucher', key('voucher'))
+        </div> --}}
+
+        
     </div>
 </div>
 </div>

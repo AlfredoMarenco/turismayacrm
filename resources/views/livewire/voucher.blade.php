@@ -159,63 +159,56 @@
                 </div>
             </div>
 
-                  <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
+          
 
-<!--Comentario-->
-<h3 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mt-8">Detalles de Voucher</h3>
-<p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit debitis sint, molestias illum fugit veniam nulla eligendi hic velit ab voluptatum animi ad ex dolor expedita magni error rem dicta doloremque? Possimus repellat, saepe iusto laboriosam impedit, ipsa minus est perferendis libero ad hic voluptatem odio nobis at? Officiis, placeat.</p>
+            <!--Comentario-->
+            <h3 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mt-8">
+                Detalles de Voucher</h3>
+            <p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit debitis sint,
+                molestias illum fugit veniam nulla eligendi hic velit ab voluptatum animi ad ex dolor expedita magni
+                error rem dicta doloremque? Possimus repellat, saepe iusto laboriosam impedit, ipsa minus est
+                perferendis libero ad hic voluptatem odio nobis at? Officiis, placeat.</p>
 
 
-       <div class="mt-4">
-        <form action="#" class="relative">
-            <div
-                class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-                
-                <label for="description" class="sr-only">Description</label>
-                <textarea rows="2" name="description" id="description"
-                    class="block w-full mt-3 resize-none border-0 py-0 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    placeholder="Escribe las consideraciones del viaje..."></textarea>
+            <div class="mt-4">
+                <form action="#" class="relative">
+                    <div
+                        class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
 
-                <!-- Spacer element to match the height of the toolbar -->
-                <div aria-hidden="true">
-                    <div class="py-2">
-                        <div class="h-9"></div>
-                    </div>
-                    <div class="h-px"></div>
-                    <div class="py-2">
-                        <div class="py-px">
-                            <div class="h-9"></div>
+                        <label for="description" class="sr-only">Description</label>
+                        <textarea rows="2" name="description" id="description"
+                            class="block w-full mt-3 resize-none border-0 py-0 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                            placeholder="Escribe las consideraciones del viaje..."></textarea>
+
+                        <!-- Spacer element to match the height of the toolbar -->
+                        <div aria-hidden="true">
+                            <div class="py-2">
+                                <div class="h-9"></div>
+                            </div>
+                            <div class="h-px"></div>
+                            <div class="py-2">
+                                <div class="py-px">
+                                    <div class="h-9"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-           
-            <div class="absolute inset-x-px bottom-0">
-                <div class="flex items-center justify-end space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3">
-                    
-                    <div class="flex-shrink-0">
-                        <button type="submit"
-                            class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar detalle</button>
+
+                    <div class="absolute inset-x-px bottom-0">
+                        <div
+                            class="flex items-center justify-end space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3">
+
+                            <div class="flex-shrink-0">
+                                <button type="submit"
+                                    class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar
+                                    detalle</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
-       </div>
         </div>
     </div>
-   
+
 
 </div>

@@ -89,7 +89,7 @@
 
                                             <div class="sm:col-span-6">
                                                 <label for="phone-number"
-                                                    class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                                    class="block text-sm font-medium text-gray-700">Teléfono</label>
                                                 <div class="relative mt-1 rounded-md shadow-sm">
                                                     <input type="text" name="phone-number" id="phone-number"
                                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -161,5 +161,10 @@
         </div>
     </div>
     <!-- Fin agregar cliente -->
+
+    {{-- Cliente guardado exitosamente --}}
+    <div class="hidden">
+        @livewire('clienteagregado', key('clienteagregado'))
+    </div>
 </div>
 
