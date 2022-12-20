@@ -1,5 +1,5 @@
 <div class="py-6">
-    <div class="lg:flex lg:items-center lg:justify-between">
+    {{-- <div class="lg:flex lg:items-center lg:justify-between">
         <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 Panel de Pagos</h2>
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        {{--   <div class="mt-5 flex lg:mt-0 lg:ml-4">
+          <div class="mt-5 flex lg:mt-0 lg:ml-4">
             <span class="md:pl-3 lg:pr-8 sm:ml-3">
                 <div
                     class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -26,7 +26,7 @@
                     Folio de cotización: <span class="pl-2"> 546782</span>
                 </div>
             </span>
-        </div> --}}
+        </div>
 
     </div>
     <div class="grid grid-cols-12 gap-1">
@@ -172,6 +172,8 @@
         </div>
 
         <div class="col-span-12 md:col-span-12 lg:col-span-8 sm:mt-5">
+            <!-- barra lateral con conceptos -->
+
             <div>
                 <div class="flex flex-col sm:mr-6 sm:ml-6 lg:mr-14 lg:ml-14">
                     <div class="grid grid-cols-6 mt-3 mb-5">
@@ -211,7 +213,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    {{-- Mostrar máximo 6 --}}
+                                    <!-- Mostrar máximo 6 -->
                                     <tbody class="divide-y divide-gray-200 bg-white">
                                         <tr>
                                             <td
@@ -221,18 +223,20 @@
                                                 Mérida - Cancún</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">
                                                 5</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
+                                            <td
+                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                 0 de 5
-                                               
+
                                             </td>
 
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <div><button  class="text-blue-900 hover:text-indigo-900">Añadir concepto</button></div>
+                                                <div><button class="text-blue-900 hover:text-indigo-900">Añadir
+                                                        concepto</button></div>
                                                 <div><button class="text-gray-500 pr-7">Ver más</button></div>
                                             </td>
                                         </tr>
-                                        
+
                                         <!-- More people... -->
                                     </tbody>
                                 </table>
@@ -241,59 +245,66 @@
                     </div>
                 </div>
             </div>
-           <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
-                <div class="-mt-px flex w-0 flex-1">
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                        <!-- Heroicon name: mini/arrow-long-left -->
-                        <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Anterior
-                    </a>
-                </div>
-                <div class="hidden md:-mt-px md:flex">
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">1</a>
-                    <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600"
-                        aria-current="page">2</a>
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">3</a>
-                    <span
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">...</span>
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">8</a>
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">9</a>
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">10</a>
-                </div>
-                <div class="-mt-px flex w-0 flex-1 justify-end">
-                    <a href="#"
-                        class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                        Siguiente
-                        <!-- Heroicon name: mini/arrow-long-right -->
-                        <svg class="ml-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </div>
-            </nav>
-           </div>
+            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+                    <div class="-mt-px flex w-0 flex-1">
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                            <!-- Heroicon name: mini/arrow-long-left -->
+                            <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Anterior
+                        </a>
+                    </div>
+                    <div class="hidden md:-mt-px md:flex">
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">1</a>
+                        <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600"
+                            aria-current="page">2</a>
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">3</a>
+                        <span
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">...</span>
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">8</a>
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">9</a>
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">10</a>
+                    </div>
+                    <div class="-mt-px flex w-0 flex-1 justify-end">
+                        <a href="#"
+                            class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                            Siguiente
+                            <!-- Heroicon name: mini/arrow-long-right -->
+                            <svg class="ml-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </nav>
+            </div>
 
         </div>
 
-        {{-- cuentas de cliente --}}
-        
+        <!-- modal Añadir concepto -->
+        <div class="hidden">
+            @livewire('agregarconcepto', key('agregarconcepto'))
+        </div>
 
+    </div> --}}
+
+
+    <div>
+        @livewire('detalleorden', key('detalleorden'))
     </div>
 </div>

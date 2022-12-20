@@ -143,6 +143,7 @@
                                                   </tr>
                                               </thead>
                                               <tbody class="divide-y divide-gray-200 bg-white">
+
                                                   <tr>
                                                       <td
                                                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -150,9 +151,9 @@
                                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                           Mérida - Cancún</td>
                                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                          jane.cooper@example.com</td>
+                                                          jane@ejemplo.com</td>
                                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                          Viaje iniciado</td>
+                                                          Cotización enviada</td>
                                                       <td
                                                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                           <a href="#"
@@ -160,7 +161,6 @@
                                                                   class="sr-only">, Lindsay Walton</span></a>
                                                       </td>
                                                   </tr>
-
                                                   <!-- More people... -->
                                               </tbody>
                                           </table>
@@ -170,6 +170,8 @@
                           </div>
                       </div>
                   </div>
+
+
                   <!-- /End replace -->
               </div>
           </div> --}}
@@ -180,8 +182,8 @@
           </div>
 
           {{-- contenido Ver más --}}
-          
-           <div>
+
+          <div>
               @livewire('detailclient', key('detailclient'))
           </div>
 
