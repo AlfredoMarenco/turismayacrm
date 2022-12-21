@@ -33,14 +33,14 @@
                   </svg>
                 </div>
                 <div class="mt-3 text-center sm:mt-5">
-                  <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Fecha apartada</h3>
+                  <h3 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight" id="modal-title">¡Gracias!</h3>
                   <div class="mt-2">
-                    <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.</p>
+                    <p class="text-sm text-gray-500">Muchas gracias por concluir el último paso.</p>
                   </div>
                 </div>
               </div>
               <div class="mt-5 sm:mt-6">
-                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Ir a panel de viajes</button>
+                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Finalizar</button>
               </div>
             </div>
           </div>

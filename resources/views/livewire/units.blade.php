@@ -47,7 +47,7 @@
                 <!-- Replace with your content -->
                 <div class="py-4">
                     <div class="py-42px-4 sm:px-6 lg:px-8">
-                        <p class="font-bold py-2">Buscar viaje por:</p>
+                        <p class="font-bold py-2">Buscar unidad por:</p>
                         <div class="grid grid-cols-10 gap-4">
                             <div class="col-span-1">
                                 <label for="num" class="block text-sm font-medium text-gray-700">Mostrar</label>
@@ -131,9 +131,15 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                         10 de Diciembre 2024</td>
                                                     <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                       <div>
                                                         <a href="#"
-                                                            class="text-blue-900 hover:text-indigo-900">Ver más</a>
+                                                        class="text-blue-900 hover:text-indigo-900">Ver más</a>
+                                                       </div>
+                                                       <div>
+                                                        <a href="#"
+                                                        class="text-red-500 hover:text-red-800">Eliminar</a>
+                                                       </div>
                                                     </td>
                                                 </tr>
 
@@ -149,6 +155,13 @@
                 <!-- /End replace -->
             </div>
         </div>
+        <div class="hidden">
+            @livewire('agregarunidad', key('agregarunidad'))
+        </div>
 
+         {{-- eliminar --}}
+         <div class="hidden">
+            @livewire('eliminar', key('eliminar'))
+        </div>
     </main>
 </div>

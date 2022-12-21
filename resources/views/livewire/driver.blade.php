@@ -116,9 +116,15 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                         10 de Diciembre 2024</td>
                                                     <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a href="#"
+                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6 text-center">
+                                                        <div>
+                                                            <a href="#"
                                                             class="text-blue-900 hover:text-indigo-900">Editar</a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="#"
+                                                            class="text-red-500 hover:text-red-800">Eliminar</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -134,6 +140,13 @@
                 <!-- /End replace -->
             </div>
         </div>
+        <div class="hidden">
+            @livewire('agregarchofer', key('agregarchofer'))
+        </div>
 
+        {{-- eliminar --}}
+        <div class="hidden">
+            @livewire('eliminar', key('eliminar'))
+        </div>
     </main>
 </div>

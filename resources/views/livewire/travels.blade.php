@@ -129,6 +129,23 @@
                                                                 class="sr-only">, Lindsay Walton</span></a>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td
+                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                        Jane Cooper</td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        Mérida - Cancún</td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        14 de Septiembre 2022</td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        Viaje iniciado</td>
+                                                    <td
+                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                        <a href="#"
+                                                            class="text-blue-900 hover:text-indigo-900">Liquidar<span
+                                                                class="sr-only">, Lindsay Walton</span></a>
+                                                    </td>
+                                                </tr>
                                                 <!-- More people... -->
                                             </tbody>
                                         </table>
@@ -142,6 +159,15 @@
             </div>
         </div>
 
+        <div class="hidden">
+            @livewire('apartarfecha', key('apartarfecha'))
+        </div>
+        <div class="hidden">
+            @livewire('confirmarliquidacion', key('confirmarliquidacion'))
+        </div>
+        <div class="hidden">
+            @livewire('liquidaciondeviaje', key('liquidaciondeviaje'))
+        </div>
     </main>
 
 </div>

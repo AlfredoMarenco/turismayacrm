@@ -3,7 +3,7 @@
 @endpush
 <div class="h-screen flex flex-1 flex-col md:pl-64">
     <main>
-        {{-- <div class="py-6 ">
+        <div class="py-6 ">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 flex lg:mt-0 lg:ml-4">
+                    {{-- <div class="mt-5 flex lg:mt-0 lg:ml-4">
 
 
 
@@ -42,7 +42,7 @@
                                Folio de cotización
                             </button>
                         </span>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -130,10 +130,15 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                         1 de 5</td>
                                                     <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a href="#"
-                                                            class="text-blue-900 hover:text-indigo-900">Ver más<span
-                                                                class="sr-only">, Lindsay Walton</span></a>
+                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                        <div>
+                                                            <a href="#"
+                                                            class="text-blue-900 hover:text-indigo-900">Ver más</a>
+                                                           </div>
+                                                           <div>
+                                                            <a href="#"
+                                                            class="text-red-500 hover:text-red-800">Eliminar</a>
+                                                           </div>
                                                     </td>
                                                 </tr>
 
@@ -150,9 +155,12 @@
 
                
             </div>
-        </div> --}}
-        <div>
+        </div>
+        <div class="hidden">
             @livewire('detalledepagos', key('detalledepagos'))
+        </div>
+        <div class="hidden">
+            @livewire('eliminar', key('eliminar'))
         </div>
     </main>
 </div>

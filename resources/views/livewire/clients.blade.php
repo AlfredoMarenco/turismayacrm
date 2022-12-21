@@ -3,7 +3,7 @@
       <main class="h-screen">
           {{-- Panel clientes --}}
 
-          {{-- <div class="py-6 ">
+          <div class="py-6 ">
               <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                   <div class="lg:flex lg:items-center lg:justify-between">
                       <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
@@ -50,6 +50,7 @@
                   <!-- Replace with your content -->
                   <div class="py-4">
                       <div class="py-42px-4 sm:px-6 lg:px-8">
+                        <p class="font-bold py-2">Buscar cliente por:</p>
                           <div class="grid grid-cols-10 gap-4">
                               <div class="col-span-2">
                                   <label for="num" class="block text-sm font-medium text-gray-700">Mostrar</label>
@@ -154,11 +155,16 @@
                                                           jane@ejemplo.com</td>
                                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                           Cotización enviada</td>
-                                                      <td
-                                                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                          <td
+                                                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                         <div>
                                                           <a href="#"
-                                                              class="text-blue-900 hover:text-indigo-900">Ver más<span
-                                                                  class="sr-only">, Lindsay Walton</span></a>
+                                                          class="text-blue-900 hover:text-indigo-900">Ver más</a>
+                                                         </div>
+                                                         <div>
+                                                          <a href="#"
+                                                          class="text-red-500 hover:text-red-800">Eliminar</a>
+                                                         </div>
                                                       </td>
                                                   </tr>
                                                   <!-- More people... -->
@@ -174,7 +180,7 @@
 
                   <!-- /End replace -->
               </div>
-          </div> --}}
+          </div>
 
           {{-- agregar cliente --}}
           <div class="hidden">
@@ -183,8 +189,13 @@
 
           {{-- contenido Ver más --}}
 
-          <div>
+          <div class="hidden">
               @livewire('detailclient', key('detailclient'))
+          </div>
+          
+          {{-- Eliminar --}}
+          <div class="hidden">
+            @livewire('eliminar', key('eliminar'))
           </div>
 
       </main>

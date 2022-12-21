@@ -51,8 +51,7 @@
 
                                                 <div>
                                                     <label for="combobox"
-                                                        class="block text-sm font-medium text-gray-700">Assigned
-                                                        to</label>
+                                                        class="block text-sm font-medium text-gray-700">Cliente</label>
                                                     <div class="relative mt-1">
                                                         <input id="combobox" type="text"
                                                             class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
@@ -72,17 +71,12 @@
 
                                                         <ul class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                                             id="options" role="listbox">
-                                                            <!--
-          Combobox option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-  
-          Active: "text-white bg-indigo-600", Not Active: "text-gray-900"
-        -->
                                                             <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
                                                                 id="option-0" role="option" tabindex="-1">
                                                                 <!-- Selected: "font-semibold" -->
                                                                 <span class="block truncate">Leslie Alexander</span>
 
-                                     
+
                                                                 <span
                                                                     class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
                                                                     <!-- Heroicon name: mini/check -->
@@ -98,30 +92,57 @@
                                                             </li>
 
                                                             <li class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
-                                                            id="option-0" role="option" tabindex="-1">
-                                                            <!-- Selected: "font-semibold" -->
-                                                            <span class="block truncate">Leslie Alexander</span>
+                                                                id="option-0" role="option" tabindex="-1">
+                                                                <!-- Selected: "font-semibold" -->
+                                                                <span class="block truncate">Leslie Alexander</span>
 
-                                 
-                                                            <span
-                                                                class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                                <!-- Heroicon name: mini/check -->
-                                                                <svg class="h-5 w-5"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    viewBox="0 0 20 20" fill="currentColor"
-                                                                    aria-hidden="true">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                                        clip-rule="evenodd" />
-                                                                </svg>
-                                                            </span>
-                                                        </li>
+
+                                                                <span
+                                                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+                                                                    <!-- Heroicon name: mini/check -->
+                                                                    <svg class="h-5 w-5"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 20 20" fill="currentColor"
+                                                                        aria-hidden="true">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                                            clip-rule="evenodd" />
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
                                                             <!-- More items... -->
                                                         </ul>
                                                     </div>
                                                 </div>
 
 
+                                            </div>
+                                            
+                                            <div class="sm:col-span-6">
+                                                <div>
+                                                    <label for="price"
+                                                        class="block text-sm font-medium text-gray-700 ">Fecha de
+                                                        inicio</label>
+                                                    <div class="relative mt-1 rounded-md shadow-sm">
+    
+                                                        <div type="text" name="Precio-diesel" id="Precio-diesel"
+                                                            class="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                            placeholder="0.00" aria-describedby="price-currency">
+                                                            15/09/2023</div>
+                                                        <div
+                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                            <span class="text-gray-500 sm:text-sm" id="price-currency">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                                                </svg>
+    
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="sm:col-span-6">
@@ -141,7 +162,8 @@
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="w-6 h-6">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                                                 </svg>
 
@@ -225,7 +247,8 @@
                                 <button type="button"
                                     class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancelar</button>
                                 <button type="submit"
-                                    class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apartar fecha</button>
+                                    class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apartar
+                                    fecha</button>
                             </div>
                         </form>
                     </div>
