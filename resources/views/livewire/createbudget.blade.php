@@ -1,3 +1,6 @@
+@push('scripts')
+    <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
+@endpush
 <div class="pt-6">
     <div class="pb-4 min-w-0 flex-1">
         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
@@ -154,7 +157,7 @@
                     -->
                     <form action="#">
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-3">
                                 <div>
                                     <div class="flex justify-between">
                                         <label for="email"
@@ -168,7 +171,7 @@
                                 </div>
                             </div>
     
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-3">
                                 <div>
                                     <div class="flex justify-between">
                                         <label for="email"
@@ -182,7 +185,7 @@
                                 </div>
                             </div>
     
-                            <div class="sm:col-span-2">
+                            {{-- <div class="sm:col-span-2">
                                 <div>
                                     <div class="flex justify-between">
                                         <label for="email"
@@ -194,7 +197,7 @@
                                             placeholder="1" aria-describedby="1">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
     
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
@@ -396,7 +399,7 @@
                         </div>
     
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-3">
                                 <div>
                                     <label for="price"
                                         class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
@@ -414,33 +417,15 @@
                                 </div>
                             </div>
     
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-3">
                                 <div>
                                     <label for="price"
-                                        class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
+                                        class="block text-sm font-medium text-gray-700 uppercase">subarriendo</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
                                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <span class="text-gray-500 sm:text-sm">$</span>
                                         </div>
                                         <input type="text" name="subarrendo" id="subarrendo"
-                                            class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="0.00" aria-describedby="price-currency">
-                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                            <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="sm:col-span-2">
-                                <div>
-                                    <label for="price"
-                                        class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
-                                    <div class="relative mt-1 rounded-md shadow-sm">
-                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <span class="text-gray-500 sm:text-sm">$</span>
-                                        </div>
-                                        <input type="text" name="amenidades" id="amenidades"
                                             class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="0.00" aria-describedby="price-currency">
                                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -522,7 +507,7 @@
                 CAMIONETAS</h4>
                 <form action="#">
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <div>
                                 <div class="flex justify-between">
                                     <label for="email"
@@ -536,7 +521,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <div>
                                 <div class="flex justify-between">
                                     <label for="email"
@@ -550,19 +535,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-2">
-                            <div>
-                                <div class="flex justify-between">
-                                    <label for="email"
-                                        class="block text-sm font-medium text-gray-700 uppercase ">cantidad</label>
-                                </div>
-                                <div class="mt-1">
-                                    <input type="text" name="cantidad" id="cantidad"
-                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="1" aria-describedby="1">
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
@@ -764,7 +737,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <div>
                                 <label for="price"
                                     class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
@@ -782,10 +755,10 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <div>
                                 <label for="price"
-                                    class="block text-sm font-medium text-gray-700 uppercase">subarrendo</label>
+                                    class="block text-sm font-medium text-gray-700 uppercase">subarriendo</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <span class="text-gray-500 sm:text-sm">$</span>
@@ -799,7 +772,7 @@
                                 </div>
                             </div>
                         </div>
-
+{{-- 
                         <div class="sm:col-span-2">
                             <div>
                                 <label for="price"
@@ -816,7 +789,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -937,7 +910,10 @@
         <button type="submit"
             class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finalizar presupuesto</button>
     </div>
-    <div>
+
+    
+    <div class="hidden">
         @livewire('presupuestocreado', key('presupuestocreado'))
     </div>
+
 </div>

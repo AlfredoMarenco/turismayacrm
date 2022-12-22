@@ -201,14 +201,14 @@
 
         {{-- Panel Cambiante del menu --}}
 
-        <div class="bg-white ">
+        <div class="bg-white h-screen">
 
             @switch($itemSelect)
                 @case(1)
                     <div>
                         @livewire('clients', key('clients'))
-                        {{ $text }}
-                        <input type="text" wire:model="text">
+                        {{-- {{ $text }}
+                        <input type="text" wire:model="text"> --}}
                     </div>
                 @break
 

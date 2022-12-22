@@ -40,7 +40,7 @@
                 </div>
               </div>
               <div class="mt-5 sm:mt-6">
-                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Ir a panel de viajes</button>
+                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Ir a panel de disponibilidad</button>
               </div>
             </div>
           </div>

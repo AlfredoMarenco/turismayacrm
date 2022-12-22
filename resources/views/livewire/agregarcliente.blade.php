@@ -77,7 +77,6 @@
                                                         aria-describedby="email-description">
                                                 </div>
                                             </div>
-
                                             <div class="sm:col-span-3">
                                                 <label for="country"
                                                     class="block text-sm font-medium text-gray-700">Ciudad</label>
@@ -86,6 +85,16 @@
                                                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
                                             </div>
+
+                                            <div class="sm:col-span-6">
+                                                <label for="country"
+                                                    class="block text-sm font-medium text-gray-700">Contraseña</label>
+                                                <div class="mt-1">
+                                                    <input type="text" name="client-password" id="client-password"
+                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                </div>
+                                            </div>
+
 
                                             <div class="sm:col-span-6">
                                                 <label for="phone-number"

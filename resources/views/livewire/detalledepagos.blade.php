@@ -303,8 +303,8 @@
 
     </div>
 
-
-    <div class="hidden">
+    <div >
         @livewire('detalleorden', key('detalleorden'))
     </div>
+
 </div>

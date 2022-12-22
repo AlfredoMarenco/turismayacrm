@@ -180,7 +180,5 @@
     <div class="hidden">
         @livewire('cambiarestatus', key('cambiarestatus'))
     </div>
-    <div>
-        @livewire('solicitarpago', key('solicitarpago'))
-    </div>
+    
 </div>

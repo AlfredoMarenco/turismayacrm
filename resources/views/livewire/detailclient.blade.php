@@ -1,5 +1,5 @@
-<div class="h-screen  py-6">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+<div class="h-screen">
+    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 md:px-8">
 
         <div class="grid grid-cols-10 gap-3">
 
@@ -91,10 +91,10 @@
 
                     </div>
                 </div>
-                <div class="overflow-auto h-5/6">
+                <div >
                     <!--tabla-->
                     <div>
-                        <div class="py-42px-4 sm:px-6 lg:px-8">
+                        <div class="py-50 px-4 sm:px-6 lg:px-8">
                             <div class="mt-8 flex flex-col">
                                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -189,34 +189,38 @@
             </div>
 
             
-            <div class="relative col-span-10 md:col-span-10 lg:col-span-4  md:px-5 lg:px-2 flex-1 py-6 px-4 sm:px-6 overflow-auto">
-                <div class="absolute bg-white shadow sm:rounded-md h-full flex-col overflow-y-scroll w-full">
+            <div class="col-span-10 md:col-span-10 lg:col-span-4  md:px-5 lg:px-2 flex-1 py-q px-4 sm:px-6 lg:h-5/6">
+                <div class="relative sm:h-48 md:h-48 lg:h-full">
                     <div>
-                        @livewire('budget', key('budget'))
+                        <div class="absolute bg-white shadow sm:rounded-md sm:h-48 md:h-48 lg:h-full flex-col overflow-y-auto w-full">
+                            <div>
+                                @livewire('budget', key('budget'))
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
-                
+                <div class="sm:mt-6">
+                    <button type="button" class="inline-flex w-full content-end justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Nuevo prespuesto</button>
+                </div>
             </div>
-            
 
         </div>
 
         {{-- Presupuesto --}}
 
-       {{--  <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 hidden">
             <div class="py-42 px-4 sm:px-6 lg:px-8">
                 @livewire('createbudget', key('createbudget'))
             </div>
-        </div> --}}
+        </div>
 
 
 
         {{-- Crear voucher --}}
 
-        {{-- <div>
+        <div class="hidden">
             @livewire('voucher', key('voucher'))
-        </div> --}}
+        </div>
 
         
     </div>
