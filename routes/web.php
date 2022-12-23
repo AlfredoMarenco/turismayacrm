@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Menusidebar::class);
+
 Route::get('/clientes', function () {
     return view('crm.clientes');
 });
-Route::get('/clientes-detalle', function () {
-    return view('crm.clientes-detalle');
+Route::get('/login', function () {
+    return view('usuario.login');
+});
+Route::get('/restablecer-contrasena', function () {
+    return view('usuario.reset-password');
+});
+Route::get('/cuentas', function () {
+    return view('usuario.cuentas');
 });
 
 Route::middleware([
