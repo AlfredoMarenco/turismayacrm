@@ -7,7 +7,7 @@ use Livewire\Component;
 class Menusidebar extends Component
 {
     public $itemSelect=1;
-    public $text = "hola";
+    
 
 
     public function render()
