@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 
 class Clients extends Component
@@ -18,6 +19,8 @@ class Clients extends Component
 
     public function render()
     {
-        return view('livewire.clients');
+        return view('livewire.clients',[
+            'clients' => User::all()
+        ]);
     }
 }

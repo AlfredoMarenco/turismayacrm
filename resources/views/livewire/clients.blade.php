@@ -142,30 +142,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white">
-
-                                                <tr>
-                                                    <td
-                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                        Jane Cooper</td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        Mérida - Cancún</td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        jane@ejemplo.com</td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        Cotización enviada</td>
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-                                                        <div>
-                                                            <a href="#"
-                                                                class="text-blue-900 hover:text-indigo-900">Ver
-                                                                más</a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="#"
-                                                                class="text-red-500 hover:text-red-800">Eliminar</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                @foreach ($clients as $client)
+                                                    <tr>
+                                                        <td
+                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                            {{ $client->name }}</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            Mérida - Cancún</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            jane@ejemplo.com</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            Cotización enviada</td>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                            <div>
+                                                                <a href="#"
+                                                                    class="text-blue-900 hover:text-indigo-900">Ver
+                                                                    más</a>
+                                                            </div>
+                                                            <div>
+                                                                <a href="#"
+                                                                    class="text-red-500 hover:text-red-800">Eliminar</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                                 <!-- More people... -->
                                             </tbody>
                                         </table>
