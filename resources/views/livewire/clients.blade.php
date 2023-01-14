@@ -29,7 +29,7 @@
 
 
                         <span class="md:pl-3 lg:pr-8 sm:ml-3">
-                            <button type="button"
+                            <button type="button" wire:click='$set("addClient",true)'
                                 class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <!-- Heroicon name: mini/check -->
                                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -175,27 +175,28 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!-- /End replace -->
             </div>
         </div>
 
+
         {{-- agregar cliente --}}
-        <div class="">
-            @livewire('agregarcliente', key('agregarcliente'))
-        </div>
+
+        @if ($addClient)
+            @livewire('agregarcliente')
+        @endif
+
 
         {{-- contenido Ver más --}}
 
-        <div class="hidden">
+        {{-- <div class="hidden">
             @livewire('detailclient', key('detailclient'))
-        </div>
+        </div> --}}
 
         {{-- Eliminar --}}
-        <div class="hidden">
+        {{-- <div class="hidden">
             @livewire('eliminar', key('eliminar'))
-        </div>
+        </div> --}}
 
     </main>
 </div>

@@ -2,7 +2,7 @@
 @section('content')
 <!--
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -25,10 +25,9 @@
 <div>
 
   <div>
-    @livewire('menusidebar')
-    @livewire('agregar')
+    
   </div>
-  
+
 
 
 
