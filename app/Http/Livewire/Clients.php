@@ -25,15 +25,12 @@ class Clients extends Component
     public $modal_added=false;
     public $detailsClient=false;
     public $client;
+    public $paginate = 5;
 
     protected $listeners = [
         'closeAddClient'=>'closeAddClient',
         'render' => 'render'
     ];
-
-    public function mount(){
-
-    }
 
     public function closeAddClient(){
         $this->addClient=false;
@@ -60,7 +57,7 @@ class Clients extends Component
     public function render()
     {
         return view('livewire.clients',[
-            'clients' => User::paginate(5)
+            'clients' => User::paginate($this->paginate)
         ]);
     }
 }
