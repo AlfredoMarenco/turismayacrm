@@ -8,6 +8,6 @@ class Detailclient extends Component
 {
     public function render()
     {
-        return view('livewire.detailclient')->layout('layouts.guest');
+        return view('livewire.detailclient')->layout('layouts.app');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Detailclient;
 use App\Http\Livewire\Menusidebar;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,7 @@ Route::get('/', Menusidebar::class);
 Route::get('/clientes', function () {
     return view('crm.clientes');
 });
-/* Route::get('/login', function () {
-    return view('usuario.login');
-}); */
+
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');
 });
@@ -35,6 +34,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect('/admin');
     })->name('dashboard');
 });

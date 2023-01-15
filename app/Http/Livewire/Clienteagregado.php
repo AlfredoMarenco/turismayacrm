@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Clienteagregado extends Component
 {
-    public function render()
+        public function render()
     {
         return view('livewire.clienteagregado')->layout('layouts.app');
     }
