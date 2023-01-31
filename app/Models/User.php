@@ -65,4 +65,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function budgets(){
+        return $this->hasMany(Budget::class);
+    }
 }

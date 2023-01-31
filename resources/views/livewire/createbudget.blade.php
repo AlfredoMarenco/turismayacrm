@@ -114,7 +114,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input name="start" type="text"
+                    <input name="start" type="date"
                         class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Fecha de inicio">
                 </div>
@@ -128,7 +128,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input name="end" type="text"
+                    <input name="end" type="date"
                         class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Fecha de fin">
                 </div>
@@ -143,7 +143,7 @@
                 AUTOBUSES</h4>
                 <!--
                     This example requires some changes to your config:
-                    
+
                     ```
                     // tailwind.config.js
                     module.exports = {
@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-3">
                                 <div>
                                     <div class="flex justify-between">
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             {{-- <div class="sm:col-span-2">
                                 <div>
                                     <div class="flex justify-between">
@@ -199,7 +199,7 @@
                                 </div>
                             </div> --}}
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-2">
                                 <div>
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <div class="flex justify-between">
@@ -228,7 +228,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <div class="flex justify-between">
@@ -242,9 +242,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-2">
                                 <div>
@@ -263,7 +263,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <label for="price" class="block text-sm font-medium text-gray-700 uppercase">costo
@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <label for="price"
@@ -299,9 +299,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-2">
                                 <div>
@@ -320,7 +320,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <label for="price"
@@ -338,7 +338,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-2">
                                 <div>
                                     <label for="price" class="block text-sm font-medium text-gray-700 uppercase">carga
@@ -356,9 +356,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-3">
                                 <div>
@@ -377,7 +377,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-3">
                                 <div>
                                     <label for="price"
@@ -395,9 +395,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-3">
                                 <div>
@@ -416,7 +416,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-3">
                                 <div>
                                     <label for="price"
@@ -434,9 +434,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
                             <div class="sm:col-span-3">
                                 <div>
@@ -457,14 +457,14 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="sm:col-span-3">
                                 <div>
                                     <label for="price"
                                         class="block text-sm font-medium text-gray-700 uppercase">porcentaje de
                                         utilidad</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-    
+
                                         <input type="text" name="costo-total" id="costo-total"
                                             class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="Ingrese un número" aria-describedby="price-currency">
@@ -474,9 +474,9 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
-    
+
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5 ">
                             <div class="sm:col-span-6">
                                 <div>
@@ -497,7 +497,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
                     </form>
 
@@ -535,7 +535,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
@@ -772,24 +772,7 @@
                                 </div>
                             </div>
                         </div>
-{{-- 
-                        <div class="sm:col-span-2">
-                            <div>
-                                <label for="price"
-                                    class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
-                                <div class="relative mt-1 rounded-md shadow-sm">
-                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <span class="text-gray-500 sm:text-sm">$</span>
-                                    </div>
-                                    <input type="text" name="amenidades" id="amenidades"
-                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="0.00" aria-describedby="price-currency">
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <span class="text-gray-500 sm:text-sm" id="price-currency">MXN</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
+
 
                     </div>
 
@@ -911,7 +894,7 @@
             class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finalizar presupuesto</button>
     </div>
 
-    
+
     <div class="hidden">
         @livewire('presupuestocreado', key('presupuestocreado'))
     </div>
