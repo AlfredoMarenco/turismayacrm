@@ -533,7 +533,7 @@
                                                                         Nombre</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        Jane Cooper</td>
+                                                                        {{ $client->name }}</td>
 
                                                                 </tr>
                                                                 <tr class="bg-white">
@@ -542,7 +542,7 @@
                                                                         Teléfono</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        999 955 2316</td>
+                                                                        {{ $client->phone }}</td>
 
                                                                 </tr>
                                                                 <tr>
@@ -551,7 +551,7 @@
                                                                         Correo</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        janecooper@example.com</td>
+                                                                        {{ $client->email }}</td>
 
                                                                 </tr>
                                                                 <tr class="bg-white">
@@ -569,7 +569,7 @@
                                                                         Viajes</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        Mérida - Cancún</td>
+                                                                        </td>
 
                                                                 </tr>
                                                                 <tr class="bg-white">
@@ -578,7 +578,7 @@
                                                                         Ciudad</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        Mérida</td>
+                                                                        {{ $client->city }}</td>
 
                                                                 </tr>
                                                                 <tr>
@@ -587,7 +587,7 @@
                                                                         Observaciones</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        Personas con discapacidad</td>
+                                                                        {{ $client->observations }}</td>
 
                                                                 </tr>
                                                                 <tr class="bg-white">
@@ -619,10 +619,7 @@
                                 </div>
                                 <!--fin tabla-->
                             </div>
-
                         </div>
-
-
                         <div
                             class="col-span-10 md:col-span-10 lg:col-span-4  md:px-5 lg:px-2 flex-1 py-q px-4 sm:px-6 lg:h-5/6">
                             <div class="relative sm:h-48 md:h-48 lg:h-full">
@@ -631,7 +628,6 @@
                                         class="absolute bg-white shadow sm:rounded-md sm:h-48 md:h-48 lg:h-full flex-col overflow-y-auto w-full">
                                         <div>
                                             <ul role="list" class="divide-y divide-gray-200">
-
                                                 @foreach ($budgets as $budget)
                                                     @if ($budget->status == 0)
                                                     <li>
@@ -645,7 +641,7 @@
                                                                     <div class="ml-2 flex flex-shrink-0">
                                                                         <p
                                                                             class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-gray-800">
-                                                                            Cotización completa</p>
+                                                                            Cotización incompleta</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mt-2 sm:flex sm:justify-between">
@@ -842,7 +838,7 @@
 
 
                     {{-- Crear voucher --}}
-                    <div class="hidden">
+                    <div>
                         @livewire('voucher', key('voucher'))
                     </div>
                 </div>
@@ -1896,7 +1892,7 @@
                         </div>
 
 
-                        <div class="hidden">
+                        <div class="">
                             @livewire('presupuestocreado', key('presupuestocreado'))
                         </div>
 

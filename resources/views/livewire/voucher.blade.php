@@ -147,10 +147,6 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             Llevar un 12 de Cerveza Modelo</td>
                                     </tr>
-
-
-
-
                                     <!-- More people... -->
                                 </tbody>
                             </table>
@@ -159,7 +155,7 @@
                 </div>
             </div>
 
-          
+
 
             <!--Comentario-->
             <h3 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mt-8">

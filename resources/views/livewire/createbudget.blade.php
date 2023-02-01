@@ -895,7 +895,7 @@
     </div>
 
 
-    <div class="hidden">
+    <div class="">
         @livewire('presupuestocreado', key('presupuestocreado'))
     </div>
 
