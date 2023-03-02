@@ -20,11 +20,11 @@ class Units extends Component
     public $modal_add_unit = false;
     public $paginate = 10;
     public $model_search;
-    public $id_unit_search;
-    public $plate_search;
-    public $insurance_policy_search;
-    public $mechanical_checks_search;
-    public $smoke_checks_search;
+    public $id_unit_search='';
+    public $plate_search='';
+    public $insurance_policy_search='';
+    public $mechanical_checks_search='';
+    public $smoke_checks_search='';
 
 
 
@@ -46,11 +46,15 @@ class Units extends Component
     {   $units = Unit::paginate($this->paginate);
 
         if ($this->model_search) {
-            $units = Unit::where('model','%LIKE%',$this->model_search)->paginate($this->paginate);
+            $units = Unit::where('model','like',$this->model_search)->get();
+        }
+
+        if ($this->plate_search) {
+            $units = Unit::where('plate','%like%',$this->plate_search)->get();
         }
 
         return view('livewire.units',[
-            $units => Unit::paginate($this->paginate),
+            'units' => $units,
         ]);
     }
 }

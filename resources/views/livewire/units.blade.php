@@ -55,7 +55,7 @@
                             <div class="col-span-3">
                                 <label for="email" class="block text-sm font-medium text-gray-700">Modelo</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
-                                    <input type="text" name="text" id="name"
+                                    <input type="text" wire:model="model_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Mercedes Benz">
                                 </div>
@@ -65,7 +65,7 @@
                                 <label for="email" class="block text-sm font-medium text-gray-700">Placa</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
 
-                                    <input type="email" name="email" id="email"
+                                    <input type="email" wire:model="plate_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="YUC-2022">
                                 </div>
