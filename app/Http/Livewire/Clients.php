@@ -80,10 +80,11 @@ class Clients extends Component
     public $email_search='';
 
     public $createBudget = false;
-    public $modal_added=false;
-    public $detailsClient=false;
+    public $modal_added = false;
+    public $detailsClient = false;
     public $addClient = false;
     public $tableClients = true;
+    public $modalDeleting = false;
 
 
     protected $listeners = [
@@ -268,6 +269,15 @@ class Clients extends Component
         $this->addClient=false;
         $this->detailsClient=true;
 
+    }
+    public function deletingClient(User $client){
+        $this->client = $client;
+        $this->modalDeleting = true;
+    }
+
+    public function deleteClient(){
+        User::destroy($this->client);
+        $this->emit('render');
     }
 
     public function render()
