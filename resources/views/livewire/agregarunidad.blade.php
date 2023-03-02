@@ -8,21 +8,12 @@
         <div class="fixed inset-0 overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                    <!--
-             Slide-over panel, show/hide based on slide-over state.
-   
-             Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-               From: "translate-x-full"
-               To: "translate-x-0"
-             Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-               From: "translate-x-0"
-               To: "translate-x-full"
-           -->
                     <div class="pointer-events-auto w-screen max-w-md">
                         <form class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                             <div class="bg-blue-900 py-6 px-4 sm:px-6">
                                 <div class="flex items-center justify-between">
-                                    <h2 class="text-lg font-medium text-white" id="slide-over-title">Agregar o modificar unidades </h2>
+                                    <h2 class="text-lg font-medium text-white" id="slide-over-title">Agregar o modificar
+                                        unidades </h2>
                                     <div class="ml-3 flex h-7 items-center">
                                         <button type="button"
                                             class="rounded-md  text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
@@ -78,7 +69,8 @@
 
                                             <div class="sm:col-span-6">
                                                 <label for="rfc"
-                                                    class="block text-sm font-medium text-gray-700">Póliza de seguro</label>
+                                                    class="block text-sm font-medium text-gray-700">Póliza de
+                                                    seguro</label>
                                                 <div class="relative mt-1 rounded-md shadow-sm">
                                                     <input type="text" name="seguro" id="seguro"
                                                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -87,7 +79,8 @@
 
                                             <div class="sm:col-span-6">
                                                 <label for="rfc"
-                                                    class="block text-sm font-medium text-gray-700">Verificaciones fisicomecánicas</label>
+                                                    class="block text-sm font-medium text-gray-700">Verificaciones
+                                                    fisicomecánicas</label>
                                                 <div class="relative mt-1 rounded-md shadow-sm">
                                                     <input type="text" name="fisicomecanicas" id="fisicomecanicas"
                                                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -96,21 +89,13 @@
 
                                             <div class="sm:col-span-6">
                                                 <label for="rfc"
-                                                    class="block text-sm font-medium text-gray-700">Verificaciones de humo</label>
+                                                    class="block text-sm font-medium text-gray-700">Verificaciones de
+                                                    humo</label>
                                                 <div class="relative mt-1 rounded-md shadow-sm">
                                                     <input type="text" name="v-humo" id="v-humo"
                                                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
                                             </div>
-
-                                            {{-- <div class="sm:col-span-6">
-                                                <label for="rfc"
-                                                    class="block text-sm font-medium text-gray-700">Comentario</label>
-                                                <div class="relative mt-1 rounded-md shadow-sm">
-                                                    <input type="text" name="comment" id="comment"
-                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

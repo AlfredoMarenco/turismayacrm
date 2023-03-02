@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->text('model')->nullable();
+            $table->text('id_unit')->nullable();
+            $table->text('plate')->nullable();
+            $table->text('insurance_policy')->nullable();
+            $table->text('mechanical_checks')->nullable();
+            $table->text('smoke_checks')->nullable();
             $table->timestamps();
         });
     }

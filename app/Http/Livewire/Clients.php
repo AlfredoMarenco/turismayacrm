@@ -25,6 +25,20 @@ class Clients extends Component
     public $cif;
     public $comment;
     public $client;
+
+    public $formEdit = [
+        'name' => null,
+        'last_name' => null,
+        'email' => null,
+        'city' => null,
+        'password' => null,
+        'phone' => null,
+        'company' => null,
+        'city' => null,
+        'comment' => null,
+    ];
+
+
     public $paginate = 5;
     public $date;
 
@@ -85,6 +99,8 @@ class Clients extends Component
     public $addClient = false;
     public $tableClients = true;
     public $modalDeleting = false;
+    public $editing = false;
+    public $createVoucher = false;
 
 
     protected $listeners = [
@@ -270,22 +286,57 @@ class Clients extends Component
         $this->detailsClient=true;
 
     }
+
+
+
+    public function editClient(){
+        $this->editing = true;
+        $this->formEdit['name'] = $this->client->name;
+        $this->formEdit['phone'] = $this->client->phone;
+        $this->formEdit['email'] = $this->client->email;
+        $this->formEdit['password'] = '';
+        $this->formEdit['company'] = $this->client->company;
+        $this->formEdit['city'] = $this->client->city;
+        $this->formEdit['comment'] = $this->client->comment;
+    }
+
+
+    public function updateClient(){
+        $client = $this->client->update([
+            'name' => $this->formEdit['name'],
+            'phone' => $this->formEdit['phone'],
+            'email' => $this->formEdit['email'],
+            'password' => $this->formEdit['password'],
+            'company' => $this->formEdit['company'],
+            'city' => $this->formEdit['city'],
+            'comment' => $this->formEdit['comment']
+        ]);
+
+        $this->client = User::find($client);
+        $this->reset('formEdit');
+        $this->editing = false;
+    }
+
+
     public function deletingClient(User $client){
         $this->client = $client;
         $this->modalDeleting = true;
     }
 
-    public function deleteClient(){
-        User::destroy($this->client);
+    public function deleteClient(User $client){
+        User::destroy($client->id);
+        $this->client = null;
+        $this->resetPage();
+        $this->modalDeleting = false;
         $this->emit('render');
     }
 
     public function render()
     {
         if ($this->name_search != '') {
-            $clients = User::where('name',$this->name_search)->paginate($this->paginate);
+            $clients = User::where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
         }else{
-            $clients = User::paginate($this->paginate);
+            $clients = User::orderBy('id','desc')->paginate($this->paginate);
         }
 
         return view('livewire.clients',[
