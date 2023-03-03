@@ -53,7 +53,7 @@
                                 </select>
                             </div>
                             <div class="col-span-3">
-                                <label for="email" class="block text-sm font-medium text-gray-700">Modelo</label>
+                                <label for="text" class="block text-sm font-medium text-gray-700">Modelo</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
                                     <input type="text" wire:model="model_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -62,10 +62,10 @@
 
                             </div>
                             <div class="col-span-3">
-                                <label for="email" class="block text-sm font-medium text-gray-700">Placa</label>
+                                <label for="text" class="block text-sm font-medium text-gray-700">Placa</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
 
-                                    <input type="email" wire:model="plate_search"
+                                    <input type="text" wire:model="plate_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="YUC-2022">
                                 </div>
@@ -76,7 +76,7 @@
                                     serie</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
 
-                                    <input type="email" name="email" id="email"
+                                    <input type="text" wire:model="id_unit_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="567821C">
                                 </div>
