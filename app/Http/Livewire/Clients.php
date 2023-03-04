@@ -205,7 +205,7 @@ class Clients extends Component
 
     public function addBudget($status){
         Budget::create([
-            'travel_name' => $this->travel_name,
+            'name' => $this->travel_name,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'status' => $status,

@@ -70,7 +70,7 @@
                                   </div>
                                   <input type="text" name="text" id="name" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Jane Cooper">
                               </div>
-                              
+
                             </div>
                             <div class="col-span-4">
                               <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
@@ -85,10 +85,10 @@
                                   <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
                               </div>
                             </div>
-                           
-                           
 
-                            
+
+
+
 
                         </div>
                         <div class="mt-8 flex flex-col">
@@ -151,14 +151,14 @@
                 </div>
                 <!-- /End replace -->
 
-               
+
             </div>
         </div>
 
         <div class="hidden">
             @livewire('solicitarpago')
         </div>
-        <div class="hidden" >
+        <div class="" >
             @livewire('detalledepagos', key('detalledepagos'))
         </div>
         <div class="hidden">
