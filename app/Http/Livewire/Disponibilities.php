@@ -40,7 +40,6 @@ class Disponibilities extends Component
 
     public function render()
     {
-
         return view('livewire.disponibilities',[
             'users' => User::all(),
             'units' => Unit::all(),

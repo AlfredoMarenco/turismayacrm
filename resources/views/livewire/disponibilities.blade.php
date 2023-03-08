@@ -583,7 +583,7 @@
                                         <h2 class="text-lg font-medium text-white" id="slide-over-title">Apartar fecha
                                         </h2>
                                         <div class="ml-3 flex h-7 items-center">
-                                            <button type="button"
+                                            <button type="button" wire:click="$set('saveDate',false)"
                                                 class="rounded-md  text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                                                 <span class="sr-only">Close panel</span>
                                                 <!-- Heroicon name: outline/x-mark -->
@@ -701,7 +701,6 @@
                                                 </div>
 
                                                 <div class="sm:col-span-6">
-                                                    {{ $unit }}
                                                     <div>
                                                         <label for="unidad"
                                                             class="block text-sm font-medium text-gray-700">Unidades</label>
@@ -748,7 +747,7 @@
                                     <!-- /End replace -->
                                 </div>
                                 <div class="flex flex-shrink-0 justify-end px-4 py-4">
-                                    <button type="button"
+                                    <button type="button" wire:click="$set('saveDate',false)"
                                         class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancelar</button>
                                     <button type="submit"
                                         class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Apartar
