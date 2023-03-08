@@ -158,7 +158,7 @@
         <div class="hidden">
             @livewire('solicitarpago')
         </div>
-        <div class="" >
+        <div class="hidden" >
             @livewire('detalledepagos', key('detalledepagos'))
         </div>
         <div class="hidden">

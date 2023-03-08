@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Budget;
+use App\Models\Driver;
 use App\Models\Unit;
 use App\Models\User;
 use Livewire\Component;
@@ -43,6 +44,8 @@ class Disponibilities extends Component
         return view('livewire.disponibilities',[
             'users' => User::all(),
             'units' => Unit::all(),
+            'drivers' => Driver::all(),
+
         ]);
     }
 }

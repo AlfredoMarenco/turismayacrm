@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Menusidebar extends Component
 {
-    public $itemSelect=6;
+    public $itemSelect=1;
 
 
 

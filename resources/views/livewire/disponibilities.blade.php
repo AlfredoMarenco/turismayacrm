@@ -725,7 +725,7 @@
                                                             class="block text-sm font-medium text-gray-700">Chofer</label>
                                                         <select wire:model="driver"
                                                             class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                            <option>Chofer uno</option>
+                                                            8i<option>Chofer uno</option>
                                                             <option selected>Chofer dos</option>
                                                             <option>Chofer tres</option>
                                                             <option value="proveedor">Proveedor</option>{{-- Esta opción debe mantenerse estática, deberá marcarse cuando el usuario seleccione "subarriendo" --}}
