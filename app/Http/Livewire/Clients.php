@@ -25,6 +25,14 @@ class Clients extends Component
     public $cif;
     public $comment;
     public $client;
+    public $budget;
+
+    public $voucher_date;
+    public $voucher_time;
+    public $voucher_vehicle;
+    public $voucher_service;
+    public $voucher_note;
+
 
     public $formEdit = [
         'name' => null,
@@ -89,6 +97,7 @@ class Clients extends Component
     public $tax = 0;
     public $total = 0;
     public $budgets=[];
+    public $vouchers=[];
 
     public $name_search='';
     public $email_search='';
@@ -101,6 +110,7 @@ class Clients extends Component
     public $modalDeleting = false;
     public $editing = false;
     public $createVoucher = false;
+    public $addItem = false;
 
 
     protected $listeners = [
@@ -254,7 +264,7 @@ class Clients extends Component
             'tax' => $this->tax,
             'total' => $this->total
         ]);
-        $this->budgets = $this->client->budgets;
+        $this->budgets = Budget::where('user_id',$this->client->id)->get();
         $this->detailsClient=true;
         $this->createBudget = false;
     }
@@ -286,8 +296,6 @@ class Clients extends Component
         $this->detailsClient=true;
 
     }
-
-
 
     public function editClient(){
         $this->editing = true;
@@ -329,6 +337,24 @@ class Clients extends Component
         $this->resetPage();
         $this->modalDeleting = false;
         $this->emit('render');
+    }
+
+
+    public function createVoucher(Budget $budget){
+        $this->budget = $budget;
+        $this->vouchers = $budget->vouchers;
+        $this->createVoucher = true;
+        $this->detailsClient = false;
+    }
+
+    public function addVoucher(){
+        Voucher::create([
+            'date' => $this->voucher_date,
+            'time' => $this->voucher_time,
+            'vehicle' => $this->voucher_vehicle,
+            'service' => $this->voucher_service,
+            'note' => $this->voucher_note,
+        ]);
     }
 
     public function render()
