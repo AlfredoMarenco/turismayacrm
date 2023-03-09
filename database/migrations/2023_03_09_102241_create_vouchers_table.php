@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('vehicle')->nullable();
             $table->text('service')->nullable();
             $table->text('note')->nullable();
+            $table->foreignId('budget_id')->constrained('budgets');
             $table->timestamps();
         });
     }

@@ -270,6 +270,13 @@ class Clients extends Component
     }
 
     public function addClient(){
+        $this->validate([
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        
         $this->client = User::create([
             'name'=> $this->name,
             'last_name'=> $this->last_name,
@@ -284,7 +291,7 @@ class Clients extends Component
         ]);
 
         $this->reset('name','last_name','email','city','password','phone','company','rfc','cif','comment');
-        $this->modal_added=true;
+        $this->addClient=false;
     }
 
     public function showDetailsClient(User $client){

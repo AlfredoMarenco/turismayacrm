@@ -293,6 +293,7 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="name"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                    @error('name') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
 
@@ -302,6 +303,7 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="last_name"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                    @error('last_name') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
 
@@ -313,6 +315,7 @@
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="you@example.com"
                                                                     aria-describedby="email-description">
+                                                                    @error('email') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
                                                         <div class="sm:col-span-3">
@@ -330,6 +333,7 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="password"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                    @error('password') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
 
@@ -361,16 +365,6 @@
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                             </div>
                                                         </div>
-
-                                                        <div class="sm:col-span-6">
-                                                            <label for="rfc"
-                                                                class="block text-sm font-medium text-gray-700">Ciudad</label>
-                                                            <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="text"
-                                                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                            </div>
-                                                        </div>
-
                                                         <div class="flex sm:col-span-6 mt-2">
                                                             <label for="rfc"
                                                                 class="block text-sm font-medium text-gray-700 pr-5 my-auto">Agregar
@@ -2221,7 +2215,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                                        
+
                                                         @if (!$addItem)
                                                             <tr>
                                                                 <td
