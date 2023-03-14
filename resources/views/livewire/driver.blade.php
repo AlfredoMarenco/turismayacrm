@@ -224,7 +224,7 @@
                                                                 de
                                                                 licencia</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="text" wire:model="license_validity"
+                                                                <input type="date" wire:model="license_validity"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                             </div>
                                                         </div>
@@ -234,7 +234,7 @@
                                                                 class="block text-sm font-medium text-gray-700">Exámen
                                                                 psicofísico</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="text" wire:model="psychometric"
+                                                                <input type="date" wire:model="psychometric"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                             </div>
                                                         </div>
@@ -343,7 +343,7 @@
                                                                 de
                                                                 licencia</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="text"
+                                                                <input type="date"
                                                                     wire:model="formEdit.license_validity"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                             </div>
@@ -354,7 +354,7 @@
                                                                 class="block text-sm font-medium text-gray-700">Exámen
                                                                 psicofísico</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="text"
+                                                                <input type="date"
                                                                     wire:model="formEdit.psychometric"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                             </div>
