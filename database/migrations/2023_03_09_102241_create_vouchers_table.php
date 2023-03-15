@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->text('date')->nullable();
-            $table->text('time')->nullable();
-            $table->text('vehicle')->nullable();
-            $table->text('service')->nullable();
+            $table->string('date')->nullable();
+            $table->string('time')->nullable();
+            $table->string('vehicle')->nullable();
+            $table->string('service')->nullable();
             $table->text('note')->nullable();
             $table->foreignId('budget_id')->constrained('budgets');
             $table->timestamps();

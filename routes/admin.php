@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Detailclient;
+use App\Http\Livewire\Disponibilities;
 use App\Http\Livewire\Menusidebar;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Menusidebar::class);
+Route::get('/', Menusidebar::class)->name('admin.index');
+Route::get('disponibilities',Disponibilities::class)->name('disponibilities');
 
 Route::get('/clientes', function () {
     return view('crm.clientes');

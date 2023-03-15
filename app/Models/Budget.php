@@ -28,4 +28,9 @@ class Budget extends Model
     {
         return $this->hasMany(Voucher::class);
     }
+
+    public function availability(): HasOne
+    {
+        return $this->hasOne(Availability::class);
+    }
 }

@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function budgets(){
         return $this->hasMany(Budget::class);
     }
+
+    public function nameComplete(){
+        return $this->name .' '. $this->last_name;
+    }
 }
