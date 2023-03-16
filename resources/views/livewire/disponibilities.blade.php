@@ -52,8 +52,13 @@
                                     <time datetime="2022-01-19" class="w-28 flex-none">{{ $loop->iteration }}</time>
                                     <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
                                         {{ $availability->title }}</p>
-                                    <p class="flex-none sm:ml-6"><time datetime="2022-01-13T14:30">{{ $availability->start }}</time> -
-                                        <time datetime="2022-01-13T16:30">{{ $availability->end }}</time>
+                                    <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
+                                        {{ $availability->unit->model }} - {{ $availability->unit->id_unit }}</p>
+                                    <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
+                                        {{ $availability->driver->name }}</p>
+                                    <p class="flex-none sm:ml-6">
+                                        <time>{{ $availability->start }}</time> -
+                                        <time>{{ $availability->end }}</time>
                                     </p>
                                 </li>
                             @empty
@@ -208,12 +213,14 @@
                                                                 <option value="" selected disabled>Selecciona una
                                                                     opcion</option>
                                                                 @foreach ($units as $unit)
-                                                                    <option value="{{ $unit->id }}">
-                                                                        {{ $unit->model }}
-                                                                        - {{ $unit->id_unit }}
-                                                                    </option>
+                                                                    @if ($unit->status == 1)
+                                                                        <option value="{{ $unit->id }}">
+                                                                            {{ $unit->model }}
+                                                                            - {{ $unit->id_unit }}
+                                                                        </option>
+                                                                    @endif
                                                                 @endforeach
-                                                                <option value="-1">Subarriendo</option>
+                                                                <option value="0">Subarriendo</option>
                                                                 {{-- Esta opción debe mantenerse estática, al seleccionarla el chofer cambiará a "proveedor" --}}
                                                             </select>
                                                         </div>
@@ -230,7 +237,7 @@
                                                                     <option value="{{ $driver->id }}">
                                                                         {{ $driver->name }}</option>
                                                                 @endforeach
-                                                                <option value="proveedor">Proveedor</option>
+                                                                <option value="0">Proveedor</option>
                                                                 {{-- Esta opción debe mantenerse estática, deberá marcarse cuando el usuario seleccione "subarriendo" --}}
                                                             </select>
                                                         </div>

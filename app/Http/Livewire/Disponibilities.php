@@ -68,6 +68,7 @@ class Disponibilities extends Component
             'budget_id' => $this->budget_selected->id,
             'comment' => $this->comment
         ]);
+        $this->saveDate = false;
     }
 
     public function render()

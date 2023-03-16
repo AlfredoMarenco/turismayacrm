@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->date('start');
             $table->date('end');
-            $table->foreignId('unit_id')->constrained('units');
-            $table->foreignId('driver_id')->constrained('drivers');
+            $table->foreignId('unit_id')->constrained('units')->nullable();
+            $table->foreignId('driver_id')->constrained('drivers')->nullable();
             $table->text('comment');
             $table->timestamps();
         });

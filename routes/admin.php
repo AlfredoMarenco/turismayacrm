@@ -3,6 +3,7 @@
 use App\Http\Livewire\Detailclient;
 use App\Http\Livewire\Disponibilities;
 use App\Http\Livewire\Menusidebar;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Menusidebar::class)->name('admin.index');
 Route::get('disponibilities',Disponibilities::class)->name('disponibilities');
 
-Route::get('/clientes', function () {
-    return view('crm.clientes');
-});
+/* Route::get('/clientes', function () {
+    $hola = 'hola';
+    $pdf = PDF::loadView('welcome',compact('hola'));
+    return $pdf->download('prueba.pdf');
+}); */
 
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');
