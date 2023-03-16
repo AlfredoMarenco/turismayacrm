@@ -103,6 +103,10 @@ class Payments extends Component
             'payment_type' => $this->editForm['payment_type'],
             'comment' => $this->editForm['comment']
         ]);
+        $budget = Budget::find($this->split->payment->budget_id);
+        $budget->update([
+            'status' => 1
+        ]);
         $this->edit_status_split_modal = false;
         $this->splits = Split::where('payment_id',$this->payment->id)->get();
     }

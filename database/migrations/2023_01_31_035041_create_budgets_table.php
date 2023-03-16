@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->text('status');
+            $table->string('status')->default(0);
             $table->foreignId('user_id')->constrained('users');
             $table->double('qty_bus')->nullable();
             $table->double('km_bus')->nullable();

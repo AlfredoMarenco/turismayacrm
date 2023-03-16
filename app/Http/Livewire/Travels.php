@@ -166,7 +166,7 @@ class Travels extends Component
         $this->total_bus =  $budget->total ;
         $this->net_rate_bus =  $budget->net_rate ;
         $this->tax_bus =  $budget->tax ;
-        $this->total_bus =  $budget->total ;
+        $this->total =  $budget->total ;
     }
 
 

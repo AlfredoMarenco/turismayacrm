@@ -293,7 +293,10 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="name"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                                    @error('name') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
+                                                                @error('name')
+                                                                    <span
+                                                                        class="text-red-600 text-xs ">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -303,7 +306,10 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="last_name"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                                    @error('last_name') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
+                                                                @error('last_name')
+                                                                    <span
+                                                                        class="text-red-600 text-xs ">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -315,7 +321,10 @@
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="you@example.com"
                                                                     aria-describedby="email-description">
-                                                                    @error('email') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
+                                                                @error('email')
+                                                                    <span
+                                                                        class="text-red-600 text-xs ">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="sm:col-span-3">
@@ -333,7 +342,10 @@
                                                             <div class="mt-1">
                                                                 <input type="text" wire:model="password"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                                    @error('password') <span class="text-red-600 text-xs ">{{ $message }}</span> @enderror
+                                                                @error('password')
+                                                                    <span
+                                                                        class="text-red-600 text-xs ">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -791,218 +803,169 @@
                                         <div>
                                             <ul role="list" class="divide-y divide-gray-200">
                                                 @foreach ($budgets as $budget)
-                                                    @if ($budget->status == 0)
-                                                        <li>
-                                                            <a href="#" class="block hover:bg-gray-50">
-                                                                <div class="px-4 py-4 sm:px-6">
-                                                                    <div class="flex items-center justify-between">
+                                                    <li>
+                                                        <a href="#" class="block hover:bg-gray-50">
+                                                            <div class="px-4 py-4 sm:px-6">
+                                                                <div class="flex items-center justify-between">
+                                                                    <p
+                                                                        class="truncate text-sm font-medium text-blue-900">
+                                                                        {{ $budget->name }}
+                                                                    </p>
+                                                                    <div class="ml-2 flex flex-shrink-0">
+                                                                        @switch($budget->status)
+                                                                            @case(0)
+                                                                                <p
+                                                                                    class="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-yellow-800">
+                                                                                    Presupuesto sin pago realizado</p>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5" stroke="currentColor"
+                                                                                    class="w-4 h-4 mr-1">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                                </svg>
+                                                                            @break
+
+                                                                            @case(1)
+                                                                                <p
+                                                                                    class="inline-flex rounded-full bg-orange-100 px-2 text-xs font-semibold leading-5 text-orange-800">
+                                                                                    Presupuesto con 1 o más pagos realizados</p>
+                                                                            @break
+
+                                                                            @default
+                                                                        @endswitch
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-2 sm:flex sm:justify-between">
+
+                                                                    <div class="sm:flex">
                                                                         <p
-                                                                            class="truncate text-sm font-medium text-blue-900">
-                                                                            {{ $budget->name }}
+                                                                            class="flex items-center text-sm text-gray-500">
+                                                                            <!-- Heroicon name: mini/users -->
+                                                                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20"
+                                                                                fill="currentColor"
+                                                                                aria-hidden="true">
+                                                                                <path
+                                                                                    d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
+                                                                            </svg>
+                                                                            <span>{{ $budget->passangers_bus + $budget->passangers_pickup }}</span>
+                                                                            pax
                                                                         </p>
-                                                                        <div class="ml-2 flex flex-shrink-0">
-                                                                            <p
-                                                                                class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-gray-800">
-                                                                                Cotización incompleta</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path
-                                                                                        d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
-                                                                                </svg>
-                                                                                <span>{{ $budget->passangers_bus + $budget->passangers_pickup }}</span>
-                                                                                pax
-                                                                            </p>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path fill-rule="evenodd"
-                                                                                        d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
-                                                                                        clip-rule="evenodd" />
-                                                                                </svg>
-                                                                                {{ $budget->name }}
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path fill-rule="evenodd"
-                                                                                        d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
-                                                                                        clip-rule="evenodd" />
-                                                                                </svg>
-                                                                                Viajan el <time datetime="2022-15-09"
-                                                                                    class="pl-1">
-                                                                                    {{ \Carbon\Carbon::parse($budget->start_date)->format('D M Y') }}
-                                                                                </time>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="flex items-center justify-between">
-                                                                            <button type="button"
-                                                                                class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                                                <!-- Heroicon name: mini/envelope -->
-
-                                                                                Editar
-                                                                            </button>
-
-                                                                        </div>
                                                                     </div>
 
                                                                 </div>
-                                                            </a>
-                                                        </li>
-                                                    @else
-                                                        <li>
-                                                            <a href="#" class="block hover:bg-gray-50">
-                                                                <div class="px-4 py-4 sm:px-6">
-                                                                    <div class="flex items-center justify-between">
+
+                                                                <div class="mt-2 sm:flex sm:justify-between">
+                                                                    <div class="sm:flex">
                                                                         <p
-                                                                            class="truncate text-sm font-medium text-blue-900">
+                                                                            class="flex items-center text-sm text-gray-500">
+                                                                            <!-- Heroicon name: mini/users -->
+                                                                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20"
+                                                                                fill="currentColor"
+                                                                                aria-hidden="true">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
                                                                             {{ $budget->name }}
                                                                         </p>
-                                                                        <div class="ml-2 flex flex-shrink-0">
-                                                                            <p
-                                                                                class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                                                                Cotización completa</p>
-                                                                        </div>
                                                                     </div>
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
+                                                                </div>
 
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path
-                                                                                        d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
-                                                                                </svg>
-                                                                                <span>{{ $budget->passangers_bus + $budget->passangers_pickup }}</span>
-                                                                                pax
-                                                                            </p>
-                                                                        </div>
-
+                                                                <div class="mt-2 sm:flex sm:justify-between">
+                                                                    <div class="sm:flex">
+                                                                        <p
+                                                                            class="flex items-center text-sm text-gray-500">
+                                                                            <!-- Heroicon name: mini/users -->
+                                                                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20"
+                                                                                fill="currentColor"
+                                                                                aria-hidden="true">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+                                                                            Viajan el <time datetime="2022-15-09"
+                                                                                class="pl-1">{{ $budget->start_date }}
+                                                                            </time>
+                                                                        </p>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path fill-rule="evenodd"
-                                                                                        d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
-                                                                                        clip-rule="evenodd" />
-                                                                                </svg>
-                                                                                {{ $budget->name }}
-                                                                            </p>
-                                                                        </div>
+                                                                <div class="mt-2 sm:flex sm:justify-between">
+                                                                    <div class="sm:flex">
+                                                                        <p
+                                                                            class="flex items-center text-sm text-gray-500">
+                                                                            <!-- Heroicon name: mini/users -->
+                                                                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20"
+                                                                                fill="currentColor"
+                                                                                aria-hidden="true">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+                                                                            Total: <time datetime="2022-15-09"
+                                                                                class="pl-1">${{ number_format($budget->total, 2) }}
+                                                                            </time>
+                                                                        </p>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="sm:flex">
-                                                                            <p
-                                                                                class="flex items-center text-sm text-gray-500">
-                                                                                <!-- Heroicon name: mini/users -->
-                                                                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor"
-                                                                                    aria-hidden="true">
-                                                                                    <path fill-rule="evenodd"
-                                                                                        d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
-                                                                                        clip-rule="evenodd" />
-                                                                                </svg>
-                                                                                Viajan el <time datetime="2022-15-09"
-                                                                                    class="pl-1">{{ $budget->start_date }}
-                                                                                </time>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mt-2 sm:flex sm:justify-between">
-                                                                        <div class="flex items-center justify-between">
-                                                                            <button type="button"
-                                                                                class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                                                <!-- Heroicon name: mini/envelope -->
-
-                                                                                Ver más
-                                                                            </button>
-                                                                            @php
-                                                                                $flat = 0;
-                                                                                if ($budget->payment) {
-                                                                                    $splits = $budget->payment->splits;
-                                                                                    foreach ($splits as $split) {
+                                                                <div class="mt-2 sm:flex sm:justify-between">
+                                                                    <div class="flex items-center justify-between">
+                                                                        <button type="button"
+                                                                            class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                                            <!-- Heroicon name: mini/envelope -->
+                                                                            Descargar Recibo
+                                                                        </button>
+                                                                        @php
+                                                                            $flat = 0;
+                                                                            if ($budget->payment) {
+                                                                                $splits = $budget->payment->splits;
+                                                                                foreach ($splits as $split) {
+                                                                                    if ($split->status != 1) {
                                                                                         $flat = $flat + 1;
                                                                                     }
                                                                                 }
-                                                                            @endphp
-                                                                            @if ($flat >= 1)
-                                                                                <div class="ml-2 flex flex-shrink-0">
-                                                                                    <button type="button"
-                                                                                        wire:click="createVoucher({{ $budget }})"
-                                                                                        class="inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                                                        <!-- Heroicon name: mini/envelope -->
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke-width="1.5"
-                                                                                            stroke="currentColor"
-                                                                                            class="-ml-0.5 mr-2 h-4 w-4">
-                                                                                            <path
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round"
-                                                                                                d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                                                                                        </svg>
-                                                                                        Crear Voucher
-                                                                                    </button>
-                                                                                </div>
-                                                                            @endif
-                                                                        </div>
+                                                                            }
+                                                                        @endphp
+                                                                        @if ($flat >= 1 && $budget->status == 1)
+                                                                            <div class="ml-2 flex flex-shrink-0">
+                                                                                <button type="button"
+                                                                                    wire:click="createVoucher({{ $budget }})"
+                                                                                    class="inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                                                    <!-- Heroicon name: mini/envelope -->
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        fill="none"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        stroke-width="1.5"
+                                                                                        stroke="currentColor"
+                                                                                        class="-ml-0.5 mr-2 h-4 w-4">
+                                                                                        <path stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                                                                    </svg>
+                                                                                    @if ($budget->vouchers->count() > 0)
+                                                                                    Editar Voucher
+                                                                                    @else
+                                                                                    Crear Voucher
+                                                                                    @endif
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
-                                                            </a>
-                                                        </li>
-                                                    @endif
+                                                            </div>
+                                                        </a>
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -1050,7 +1013,7 @@
                                     <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
                                         <li class="flex">
                                             <div class="flex items-center">
-                                                <a href="#" class="text-gray-400 hover:text-gray-500">
+                                                <a wire:click="goHome" class="text-gray-400 hover:text-gray-500">
                                                     <!-- Heroicon name: mini/home -->
                                                     <svg class="h-5 w-5 flex-shrink-0"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -2062,7 +2025,7 @@
                             {{-- <button type="button" wire:click="addBudget(0)"
                                 class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Crear
                                 borrador</button> --}}
-                            <button type="button" wire:click="addBudget(1)"
+                            <button type="button" wire:click="addBudget(0)"
                                 class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finalizar
                                 presupuesto</button>
                         </div>
@@ -2087,7 +2050,7 @@
                             <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                                 <h2
                                     class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                                    Crear Voucher: <span>{{ $client->name }}</span></h2>
+                                    Crear Voucher: <span>{{ $client->nameComplete() }}</span></h2>
                                 <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
                                     <div class="mt-2 flex items-center text-sm text-gray-500">
@@ -2187,9 +2150,12 @@
                         <div class="py-4">
                             <div class="py-42px-4 sm:px-6 lg:px-8">
                                 <div class="mt-3 flex flex-col">
-                                    <h5
+                                    <div class="flex mb-2 mt-2">
+                                        <h5
                                         class="pb-3 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                                         ITINERARIO</h5>
+                                        <x-jet-button class="ml-auto">Descargar Voucher</x-jet-button>
+                                    </div>
                                     <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                             <div
@@ -2215,60 +2181,93 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="divide-y divide-gray-200 bg-white">
-
-                                                        @if (!$addItem)
+                                                        @foreach ($vouchers as $voucher)
                                                             <tr>
                                                                 <td
                                                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                    <x-jet-input type="date"
-                                                                        wire:model="voucher_date" />
+                                                                    <div>
+                                                                        {{ $voucher->date }}
+                                                                    </div>
                                                                 </td>
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                    <x-jet-input type="time"
-                                                                        wire:model="voucher_time" />
+                                                                    <div>
+                                                                        {{ $voucher->time }}
+                                                                    </div>
                                                                 </td>
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                    <x-jet-input type="text"
-                                                                        wire:model="voucher_vehicle" />
+                                                                    <div>
+                                                                        {{ $voucher->vehicle }}
+                                                                    </div>
                                                                 </td>
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                    <x-jet-input type="text"
-                                                                        wire:model="voucher_service" />
+                                                                    <div>
+                                                                        {{ $voucher->service }}
+                                                                    </div>
                                                                 </td>
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                    <x-jet-input type="text"
-                                                                        wire:model="voucher_note" />
+                                                                    <div>
+                                                                        {{ $voucher->note }}
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <td
-                                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                        @endforeach
 
-                                                                </td>
-                                                                <td
-                                                                    class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <tr>
+                                                            <td
+                                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                <x-jet-input type="date"
+                                                                    wire:model="voucher_date" />
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                <x-jet-input type="time"
+                                                                    wire:model="voucher_time" />
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                <x-jet-input type="text"
+                                                                    wire:model="voucher_vehicle" />
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                <x-jet-input type="text"
+                                                                    wire:model="voucher_service" />
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                <x-jet-input type="text"
+                                                                    wire:model="voucher_note" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td
+                                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
 
-                                                                </td>
-                                                                <td
-                                                                    class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 
-                                                                </td>
-                                                                <td
-                                                                    class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 
-                                                                </td>
-                                                                <td
-                                                                    class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                    <x-jet-button wire:click="addVoucher">
-                                                                        Agregar Itinerario
-                                                                        </x-jet-buetton>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
+                                                            </td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                <x-jet-button wire:click="addVoucher">
+                                                                    Agregar Itinerario
+                                                                    </x-jet-buetton>
+                                                            </td>
+                                                        </tr>
+
                                                         <!-- More people... -->
                                                     </tbody>
                                                 </table>
@@ -2281,40 +2280,21 @@
                                 <h3
                                     class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mt-8">
                                     Detalles de Voucher</h3>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Odit debitis sint,
-                                    molestias illum fugit veniam nulla eligendi hic velit ab voluptatum animi ad ex
-                                    dolor
-                                    expedita magni
-                                    error rem dicta doloremque? Possimus repellat, saepe iusto laboriosam impedit, ipsa
-                                    minus est
-                                    perferendis libero ad hic voluptatem odio nobis at? Officiis, placeat.</p>
+                                    <p>{{ $budget_comment }}</p>
                                 <div class="mt-4">
-                                    <form action="#" class="relative">
+                                    <form class="relative">
                                         <div
                                             class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
                                             <label for="description" class="sr-only">Description</label>
-                                            <textarea rows="2" name="description" id="description"
+                                            <textarea rows="4" wire:ignore wire:model='budget_comment'
                                                 class="block w-full mt-3 resize-none border-0 py-0 placeholder-gray-500 focus:ring-0 sm:text-sm"
                                                 placeholder="Escribe las consideraciones del viaje..."></textarea>
-                                            <!-- Spacer element to match the height of the toolbar -->
-                                            <div aria-hidden="true">
-                                                <div class="py-2">
-                                                    <div class="h-9"></div>
-                                                </div>
-                                                <div class="h-px"></div>
-                                                <div class="py-2">
-                                                    <div class="py-px">
-                                                        <div class="h-9"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="absolute inset-x-px bottom-0">
                                             <div
                                                 class="flex items-center justify-end space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3">
                                                 <div class="flex-shrink-0">
-                                                    <button type="submit"
+                                                    <button type="button" wire:click='addCommentBudget'
                                                         class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar
                                                         detalle</button>
                                                 </div>

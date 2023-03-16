@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Budget;
 use App\Models\User;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -32,6 +33,7 @@ class Clients extends Component
     public $voucher_vehicle;
     public $voucher_service;
     public $voucher_note;
+    public $budget_comment;
 
 
     public $formEdit = [
@@ -139,7 +141,7 @@ class Clients extends Component
     //Calculo de los costos
     public function updated(){
 
-        if ($this->km_bus == '' || $this->qty_bus == '' || $this->passangers_bus == '' || $this->laps_bus == '' || $this->performance_bus == '' || $this->liters_bus == '' || $this->disel_price_bus == '' || $this->disel_cost_bus == '' || $this->salary_bus == '' || $this->per_diem_bus == '' || $this->hotel_bus == '' || $this->tax_burden_bus == '' || $this->flor_rigth_bus == '' || $this->booths_bus == '' || $this->maintenance_bus == '' || $this->amenities_bus == '' || $this->sublet_bus == '' || $this->total_cost_bus == '' || $this->utility_percentage_bus == ''|| $this->utility_bus == '') {
+/*         if ($this->km_bus == '' || $this->qty_bus == '' || $this->passangers_bus == '' || $this->laps_bus == '' || $this->performance_bus == '' || $this->liters_bus == '' || $this->disel_price_bus == '' || $this->disel_cost_bus == '' || $this->salary_bus == '' || $this->per_diem_bus == '' || $this->hotel_bus == '' || $this->tax_burden_bus == '' || $this->flor_rigth_bus == '' || $this->booths_bus == '' || $this->maintenance_bus == '' || $this->amenities_bus == '' || $this->sublet_bus == '' || $this->total_cost_bus == '' || $this->utility_percentage_bus == ''|| $this->utility_bus == '') {
             $this->qty_bus = 1;
             $this->km_bus = 0;
             $this->passangers_bus = 1;
@@ -183,32 +185,38 @@ class Clients extends Component
             $this->total_cost_pickup = 0;
             $this->utility_percentage_pickup = 1;
             $this->utility_pickup = 0;
-        }
+        } */
+
+
         //Calculo para los autobuses
-        if ($this->km_bus != 0) {
-            $this->maintenance_bus = 66.25;
-            $this->tax_burden_bus = 40;
+        try {
+            if ($this->km_bus != 0) {
+                $this->maintenance_bus = 66.25;
+                $this->tax_burden_bus = 40;
+            }
+
+            if ($this->km_pickup != 0) {
+                $this->maintenance_pickup = 66.25;
+                $this->tax_burden_pickup = 40;
+            }
+
+
+            $this->liters_bus = ($this->km_bus * $this->laps_bus)/($this->performance_bus);
+            $this->disel_cost_bus = $this->disel_price_bus*$this->liters_bus;
+            $this->total_cost_bus = $this->disel_cost_bus + $this->salary_bus + $this->per_diem_bus + $this->hotel_bus + $this->tax_burden_bus + $this->flor_rigth_bus + $this->booths_bus + $this->amenities_bus + $this->sublet_bus + $this->maintenance_bus;
+            $this->utility_bus = $this->total_cost_bus * ($this->utility_percentage_bus/100);
+            //Calculo para las camionetas
+            $this->liters_pickup = ($this->km_pickup * $this->laps_pickup)/($this->performance_pickup);
+            $this->disel_cost_pickup = $this->disel_price_pickup*$this->liters_pickup;
+            $this->total_cost_pickup = $this->disel_cost_pickup + $this->salary_pickup + $this->per_diem_pickup + $this->hotel_pickup + $this->tax_burden_pickup + $this->flor_rigth_pickup + $this->booths_pickup + $this->amenities_pickup + $this->sublet_pickup + $this->maintenance_pickup;
+            $this->utility_pickup = $this->total_cost_pickup * ($this->utility_percentage_pickup/100);
+
+            $this->net_rate = (($this->qty_bus)*($this->utility_bus + $this->total_cost_bus)) + (($this->qty_pickup)*($this->utility_pickup + $this->total_cost_pickup));
+            $this->tax = $this->net_rate *.16;
+            $this->total = $this->tax + $this->net_rate;
+        } catch (\Throwable $th) {
+
         }
-
-        if ($this->km_pickup != 0) {
-            $this->maintenance_pickup = 66.25;
-            $this->tax_burden_pickup = 40;
-        }
-
-
-        $this->liters_bus = ($this->km_bus * $this->laps_bus)/($this->performance_bus);
-        $this->disel_cost_bus = $this->disel_price_bus*$this->liters_bus;
-        $this->total_cost_bus = $this->disel_cost_bus + $this->salary_bus + $this->per_diem_bus + $this->hotel_bus + $this->tax_burden_bus + $this->flor_rigth_bus + $this->booths_bus + $this->amenities_bus + $this->sublet_bus + $this->maintenance_bus;
-        $this->utility_bus = $this->total_cost_bus * ($this->utility_percentage_bus/100);
-        //Calculo para las camionetas
-        $this->liters_pickup = ($this->km_pickup * $this->laps_pickup)/($this->performance_pickup);
-        $this->disel_cost_pickup = $this->disel_price_pickup*$this->liters_pickup;
-        $this->total_cost_pickup = $this->disel_cost_pickup + $this->salary_pickup + $this->per_diem_pickup + $this->hotel_pickup + $this->tax_burden_pickup + $this->flor_rigth_pickup + $this->booths_pickup + $this->amenities_pickup + $this->sublet_pickup + $this->maintenance_pickup;
-        $this->utility_pickup = $this->total_cost_pickup * ($this->utility_percentage_pickup/100);
-
-        $this->net_rate = (($this->qty_bus)*($this->utility_bus + $this->total_cost_bus)) + $this->utility_pickup + $this->total_cost_pickup;
-        $this->tax = $this->net_rate *.16;
-        $this->total = $this->tax + $this->net_rate;
     }
 
     //Creacion de cotizaciones
@@ -276,7 +284,7 @@ class Clients extends Component
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         $this->client = User::create([
             'name'=> $this->name,
             'last_name'=> $this->last_name,
@@ -350,6 +358,7 @@ class Clients extends Component
     public function createVoucher(Budget $budget){
         $this->budget = $budget;
         $this->vouchers = $budget->vouchers;
+        $this->budget_comment = $budget->comment;
         $this->createVoucher = true;
         $this->detailsClient = false;
     }
@@ -361,7 +370,18 @@ class Clients extends Component
             'vehicle' => $this->voucher_vehicle,
             'service' => $this->voucher_service,
             'note' => $this->voucher_note,
+            'budget_id' => $this->budget->id,
         ]);
+
+        $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
+        $this->reset('voucher_date','voucher_time','voucher_vehicle','voucher_service','voucher_note');
+    }
+
+    public function addCommentBudget(){
+        $this->budget->update([
+            'comment' => $this->budget_comment
+        ]);
+        $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
     }
 
     public function render()
