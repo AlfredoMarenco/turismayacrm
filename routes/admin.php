@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Menusidebar::class)->name('admin.index');
-Route::get('disponibilities',Disponibilities::class)->name('disponibilities');
+/* Route::get('disponibilities',Disponibilities::class)->name('disponibilities'); */
 
-/* Route::get('/clientes', function () {
-    $hola = 'hola';
-    $pdf = PDF::loadView('welcome',compact('hola'));
-    return $pdf->download('prueba.pdf');
-}); */
+Route::get('/clientes', function () {
+    $pdf = PDF::loadView('voucher');
+    return $pdf->stream();
+    /* return view('voucher'); */
+});
 
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');

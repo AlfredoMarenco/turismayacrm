@@ -11,6 +11,7 @@ class Travels extends Component
     public $dates;
     public $budget;
     public $modal_liquidate_travel = false;
+    public $table_travels=true;
 
     public $travel_name;
     public $start_date;
@@ -35,6 +36,10 @@ class Travels extends Component
     public $total_cost_bus = 0;
     public $utility_percentage_bus = 1;
     public $utility_bus = 0;
+    public $total_bus = 0;
+    public $total_bus_real = 0;
+    public $difference_bus = 0;
+
     public $qty_pickup = 1;
     public $km_pickup = 0;
     public $passangers_pickup = 1;
@@ -55,20 +60,21 @@ class Travels extends Component
     public $total_cost_pickup = 0;
     public $utility_percentage_pickup = 1;
     public $utility_pickup = 0;
-    public $net_rate_bus = 0;
-    public $tax_bus = 0;
-    public $total_bus = 0;
+    public $net_rate = 0;
+    public $tax = 0;
+    public $total = 0;
 
 
 
-    //Real Propierty
     public $travel_name_real;
     public $start_date_real;
     public $end_date_real;
+
+    //Real propierties Bus
     public $qty_bus_real = 1;
     public $km_bus_real = 0;
     public $passangers_bus_real = 1;
-    public $laps_bus_real = 0;
+    public $laps_bus_real = 1;
     public $performance_bus_real = 1;
     public $liters_bus_real = 0;
     public $disel_price_bus_real = 0;
@@ -85,6 +91,8 @@ class Travels extends Component
     public $total_cost_bus_real = 0;
     public $utility_percentage_bus_real = 1;
     public $utility_bus_real = 0;
+
+    //Real Properties Pickup
     public $qty_pickup_real = 1;
     public $km_pickup_real = 0;
     public $passangers_pickup_real = 1;
@@ -116,8 +124,8 @@ class Travels extends Component
 
     public function selectedBudget(Budget $budget){
         $this->modal_liquidate_travel = true;
+        $this->table_travels = false;
         $this->budget = $budget;
-
         $this->travel_name =  $budget->travel_name ;
         $this->start_date =  $budget->start_date ;
         $this->end_date =  $budget->end_date ;
@@ -161,14 +169,69 @@ class Travels extends Component
         $this->total_cost_pickup =  $budget->total_cost_pickup ;
         $this->utility_percentage_pickup =  $budget->utility_percentage_pickup ;
         $this->utility_pickup =  $budget->utility_pickup ;
-        $this->net_rate_bus =  $budget->net_rate ;
-        $this->tax_bus =  $budget->tax ;
-        $this->total_bus =  $budget->total ;
-        $this->net_rate_bus =  $budget->net_rate ;
-        $this->tax_bus =  $budget->tax ;
+        $this->net_rate =  $budget->net_rate ;
+        $this->tax =  $budget->tax ;
         $this->total =  $budget->total ;
+
+        $this->liters_bus = ($this->km_bus * $this->laps_bus)/($this->performance_bus);
+        $this->disel_cost_bus = $this->disel_price_bus*$this->liters_bus;
+        $this->total_cost_bus = $this->disel_cost_bus + $this->salary_bus + $this->per_diem_bus + $this->hotel_bus + $this->tax_burden_bus + $this->flor_rigth_bus + $this->booths_bus + $this->amenities_bus + $this->sublet_bus + $this->maintenance_bus;
+        $this->utility_bus = $this->total_cost_bus * ($this->utility_percentage_bus/100);
+        //Calculo para las camionetas
+        $this->liters_pickup_real = ($this->km_pickup_real * $this->laps_pickup_real)/($this->performance_pickup_real);
+        $this->disel_cost_pickup_real = $this->disel_price_pickup_real*$this->liters_pickup_real;
+        $this->total_cost_pickup_real = $this->disel_cost_pickup_real + $this->salary_pickup_real + $this->per_diem_pickup_real + $this->hotel_pickup_real + $this->tax_burden_pickup_real + $this->flor_rigth_pickup_real + $this->booths_pickup_real + $this->amenities_pickup_real + $this->sublet_pickup_real + $this->maintenance_pickup_real;
+        $this->utility_pickup_real = $this->total_cost_pickup_real * ($this->utility_percentage_pickup_real/100);
+
+        $this->net_rate = (($this->qty_bus)*($this->utility_bus + $this->total_cost_bus));
+        $this->tax = $this->net_rate *.16;
+        $this->total = $this->tax + $this->net_rate;
     }
 
+
+
+    public function updated(){
+        //Calculo para los autobuses
+        try {
+            if ($this->km_bus_real != 0) {
+                $this->maintenance_bus_real = 66.25;
+                $this->tax_burden_bus_real = 40;
+            }
+
+            if ($this->km_pickup_real != 0) {
+                $this->maintenance_pickup_real = 66.25;
+                $this->tax_burden_pickup_real = 40;
+            }
+
+
+            $this->liters_bus_real = ($this->km_bus_real * $this->laps_bus_real)/($this->performance_bus_real);
+            $this->disel_cost_bus_real = $this->disel_price_bus_real*$this->liters_bus_real;
+            $this->total_cost_bus_real = $this->disel_cost_bus_real + $this->salary_bus_real + $this->per_diem_bus_real + $this->hotel_bus_real + $this->tax_burden_bus_real + $this->flor_rigth_bus_real + $this->booths_bus_real + $this->amenities_bus_real + $this->sublet_bus_real + $this->maintenance_bus_real;
+            $this->utility_bus_real = $this->total_cost_bus_real * ($this->utility_percentage_bus_real/100);
+            //Calculo para las camionetas
+            $this->liters_pickup_real = ($this->km_pickup_real * $this->laps_pickup_real)/($this->performance_pickup_real);
+            $this->disel_cost_pickup_real = $this->disel_price_pickup_real*$this->liters_pickup_real;
+            $this->total_cost_pickup_real = $this->disel_cost_pickup_real + $this->salary_pickup_real + $this->per_diem_pickup_real + $this->hotel_pickup_real + $this->tax_burden_pickup_real + $this->flor_rigth_pickup_real + $this->booths_pickup_real + $this->amenities_pickup_real + $this->sublet_pickup_real + $this->maintenance_pickup_real;
+            $this->utility_pickup_real = $this->total_cost_pickup_real * ($this->utility_percentage_pickup_real/100);
+
+            $this->total_bus_real = (($this->qty_bus_real)*($this->utility_bus_real + $this->total_cost_bus_real))+(($this->qty_bus_real)*($this->utility_bus_real + $this->total_cost_bus_real)*(.16));
+            $this->difference_bus = ($this->total) - ($this->total_bus_real);
+
+        } catch (\Throwable $th) {
+
+        }
+    }
+
+
+    public function closeBudget(){
+        $this->budget->update([
+            'status' => 4
+        ]);
+
+        $this->modal_liquidate_travel = false;
+        $this->table_travels = true;
+
+    }
 
     public function render()
     {

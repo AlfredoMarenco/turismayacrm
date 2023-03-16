@@ -140,54 +140,6 @@ class Clients extends Component
 
     //Calculo de los costos
     public function updated(){
-
-/*         if ($this->km_bus == '' || $this->qty_bus == '' || $this->passangers_bus == '' || $this->laps_bus == '' || $this->performance_bus == '' || $this->liters_bus == '' || $this->disel_price_bus == '' || $this->disel_cost_bus == '' || $this->salary_bus == '' || $this->per_diem_bus == '' || $this->hotel_bus == '' || $this->tax_burden_bus == '' || $this->flor_rigth_bus == '' || $this->booths_bus == '' || $this->maintenance_bus == '' || $this->amenities_bus == '' || $this->sublet_bus == '' || $this->total_cost_bus == '' || $this->utility_percentage_bus == ''|| $this->utility_bus == '') {
-            $this->qty_bus = 1;
-            $this->km_bus = 0;
-            $this->passangers_bus = 1;
-            $this->laps_bus = 0;
-            $this->performance_bus = 1;
-            $this->liters_bus = 0;
-            $this->disel_price_bus = 0;
-            $this->disel_cost_bus = 0;
-            $this->salary_bus = 0;
-            $this->per_diem_bus = 0;
-            $this->hotel_bus = 0;
-            $this->tax_burden_bus = 0;
-            $this->flor_rigth_bus = 0;
-            $this->booths_bus = 0;
-            $this->maintenance_bus = 0;
-            $this->amenities_bus = 0;
-            $this->sublet_bus = 0;
-            $this->total_cost_bus = 0;
-            $this->utility_percentage_bus = 1;
-            $this->utility_bus = 0;
-        }
-
-        if ($this->km_pickup == '' || $this->qty_pickup == '' || $this->passangers_pickup == '' || $this->laps_pickup == '' || $this->performance_pickup == '' || $this->liters_pickup == '' || $this->disel_price_pickup == '' || $this->disel_cost_pickup == '' || $this->salary_pickup == '' || $this->per_diem_pickup == '' || $this->hotel_pickup == '' || $this->tax_burden_pickup == '' || $this->flor_rigth_pickup == '' || $this->booths_pickup == '' || $this->maintenance_pickup == '' || $this->amenities_pickup == '' || $this->sublet_pickup == '' || $this->total_cost_pickup == '' || $this->utility_percentage_pickup == ''|| $this->utility_pickup == '') {
-            $this->qty_pickup = 1;
-            $this->km_pickup = 0;
-            $this->passangers_pickup = 1;
-            $this->laps_pickup = 0;
-            $this->performance_pickup = 1;
-            $this->liters_pickup = 0;
-            $this->disel_price_pickup = 0;
-            $this->disel_cost_pickup = 0;
-            $this->salary_pickup = 0;
-            $this->per_diem_pickup = 0;
-            $this->hotel_pickup = 0;
-            $this->tax_burden_pickup = 0;
-            $this->flor_rigth_pickup = 0;
-            $this->booths_pickup = 0;
-            $this->maintenance_pickup = 0;
-            $this->amenities_pickup = 0;
-            $this->sublet_pickup = 0;
-            $this->total_cost_pickup = 0;
-            $this->utility_percentage_pickup = 1;
-            $this->utility_pickup = 0;
-        } */
-
-
         //Calculo para los autobuses
         try {
             if ($this->km_bus != 0) {
