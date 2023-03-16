@@ -10,8 +10,14 @@ class Travels extends Component
 {
     public $dates;
     public $budget;
+
+    public $message;
+    public $percentage_refund ;
+    public $refund;
+    public $total_paid;
     public $modal_liquidate_travel = false;
     public $table_travels=true;
+    public $modal_cancel_travel= false;
 
     public $travel_name;
     public $start_date;
@@ -227,10 +233,21 @@ class Travels extends Component
         $this->budget->update([
             'status' => 4
         ]);
-
         $this->modal_liquidate_travel = false;
         $this->table_travels = true;
+    }
 
+    public function deleteBudget(Budget $budget){
+        $this->budget = $budget;
+        $this->modal_cancel_travel = true;
+
+    }
+
+
+    public function cancelBudget(){
+        $this->budget->update([
+            'status' => 4,
+        ]);
     }
 
     public function render()
