@@ -246,8 +246,10 @@ class Travels extends Component
 
     public function cancelBudget(){
         $this->budget->update([
-            'status' => 4,
+            'status' => 5,
         ]);
+        $this->modal_cancel_travel = false;
+        $this->table_travels = true;
     }
 
     public function render()

@@ -121,7 +121,7 @@
                                                                         Por liquidar
                                                                     @break
 
-                                                                    @case(2)
+                                                                    @case(5)
                                                                         Cancelado
                                                                     @break
                                                                     @case(4)
@@ -2187,7 +2187,7 @@
                                 </div>
                             </div>
                             <div class="mt-5 sm:mt-6">
-                                <button type="button"
+                                <button type="button" wire:click="cancelBudget"
                                     class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Finalizar</button>
                             </div>
                         </div>
