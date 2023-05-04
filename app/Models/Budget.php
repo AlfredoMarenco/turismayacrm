@@ -33,4 +33,10 @@ class Budget extends Model
     {
         return $this->hasOne(Availability::class);
     }
+
+    public function concepts(): HasMany
+    {
+        return $this->hasMany(Concept::class);
+    }
+
 }

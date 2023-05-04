@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Budget;
+use App\Models\Concept;
 use App\Models\User;
 use App\Models\Voucher;
 use Carbon\Carbon;
@@ -99,6 +100,7 @@ class Clients extends Component
     public $tax = 0;
     public $total = 0;
     public $budgets=[];
+    public $concepts=[];
     public $vouchers=[];
 
     public $name_search='';
@@ -113,6 +115,7 @@ class Clients extends Component
     public $editing = false;
     public $createVoucher = false;
     public $addItem = false;
+    public $formBudget=false;
 
 
     protected $listeners = [
@@ -133,7 +136,18 @@ class Clients extends Component
         $this->addClient=false;
     }
 
-    public function createBudget(){
+    public function createBudget($status){
+        $this->budget = Budget::create([
+            'user_id' => $this->client->id,
+            'status' => $status,
+        ]);
+        $this->detailsClient=false;
+        $this->createBudget = true;
+    }
+
+    public function editBudget(Budget $budget){
+        $this->budget = $budget;
+        $this->concepts = Concept::where('budget_id',$this->budget->id)->get();
         $this->detailsClient=false;
         $this->createBudget = true;
     }
@@ -173,13 +187,12 @@ class Clients extends Component
 
     //Creacion de cotizaciones
 
-    public function addBudget($status){
-        Budget::create([
+    public function addBudget(){
+        Concept::create([
             'name' => $this->travel_name,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'status' => $status,
-            'user_id' => $this->client->id,
+            'budget_id' => $this->budget->id,
             'qty_bus' => $this->qty_bus,
             'km_bus' => $this->km_bus,
             'passangers_bus' => $this->passangers_bus,
@@ -224,9 +237,9 @@ class Clients extends Component
             'tax' => $this->tax,
             'total' => $this->total
         ]);
-        $this->budgets = Budget::where('user_id',$this->client->id)->get();
-        $this->detailsClient=true;
-        $this->createBudget = false;
+        $this->concepts = Concept::where('budget_id',$this->budget->id)->get();
+        // $this->detailsClient=true;
+        $this->formBudget = false;
     }
 
     public function addClient(){
