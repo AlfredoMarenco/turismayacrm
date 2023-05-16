@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->date('date');
+            
             $table->string('status')->default(0);
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
