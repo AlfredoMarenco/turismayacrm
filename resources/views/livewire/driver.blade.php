@@ -144,7 +144,7 @@
             </div>
         </div>
         @if ($add_driver_modal)
-            <div>
+            <div wire:ignore>
                 <div class="fixed inset-0 bg-gray-400 bg-opacity-75"></div>
                 <!-- agregar cliente -->
                 <div class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
