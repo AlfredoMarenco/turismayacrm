@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Unit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->default(0);
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
+        Schema::table('units', function (Blueprint $table) {
+            $table->enum('status',['inactive' => Unit::INACTIVE, 'active' => Unit::ACTIVE,'mantenice' => Unit::MANTENICE])->after('smoke_checks')->default(1);
         });
     }
 
@@ -28,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::table('units', function (Blueprint $table) {
+            //
+        });
     }
 };

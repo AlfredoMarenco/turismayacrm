@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('cancelations', function (Blueprint $table) {
             $table->id();
-            $table->string('model')->nullable();
-            $table->string('id_unit')->nullable();
-            $table->string('plate')->nullable();
-            $table->date('insurance_policy')->nullable();
-            $table->date('mechanical_checks')->nullable();
-            $table->date('smoke_checks')->nullable();
+            $table->text('message')->nullable();
+            $table->float('percentage_refund')->nullable();
+            $table->string('refund')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('cancelations');
     }
 };

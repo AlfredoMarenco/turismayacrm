@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->default(0);
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
+        Schema::table('budgets', function (Blueprint $table) {
+            $table->text('comment')->nullable();
+            $table->string('status_voucher')->default(0);
         });
     }
 
@@ -28,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::table('budgets', function (Blueprint $table) {
+            //
+        });
     }
 };

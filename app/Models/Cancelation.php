@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Driver extends Model
+class Cancelation extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
-
-    public function availability():HasOne{
-        return $this->hasOne(Availability::class);
-    }
 }

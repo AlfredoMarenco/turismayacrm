@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->default(0);
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
+        Schema::table('availabilities', function (Blueprint $table) {
+            $table->foreignId('budget_id')->constrained('budgets')->after('total');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::table('availabilities', function (Blueprint $table) {
+            //
+        });
     }
 };

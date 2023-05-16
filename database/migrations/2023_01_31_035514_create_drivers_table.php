@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->text('name')->nullable();
-            $table->text('age')->nullable();
-            $table->text('phone')->nullable();
-            $table->text('license_validity')->nullable();
-            $table->text('psychometric')->nullable();
+            $table->string('name')->nullable();
+            $table->string('age')->nullable();
+            $table->string('phone')->nullable();
+            $table->date('license_validity')->nullable();
+            $table->date('psychometric')->nullable();
             $table->timestamps();
         });
     }

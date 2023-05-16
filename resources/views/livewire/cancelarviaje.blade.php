@@ -1,5 +1,7 @@
 <div>
-    <div class=" relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+
+    {{-- <div class=" relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!--
           Background backdrop, show/hide based on modal state.
 
@@ -56,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!--
@@ -136,8 +138,9 @@
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-6">
-                        <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Finalizar</button>
-                      </div>
+                        <button type="button"
+                            class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Finalizar</button>
+                    </div>
                 </div>
             </div>
         </div>

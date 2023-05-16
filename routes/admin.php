@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Livewire\Detailclient;
+use App\Http\Livewire\Disponibilities;
 use App\Http\Livewire\Menusidebar;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Menusidebar::class);
+Route::get('/', Menusidebar::class)->name('admin.index');
+/* Route::get('disponibilities',Disponibilities::class)->name('disponibilities'); */
 
 Route::get('/clientes', function () {
-    return view('crm.clientes');
+    $pdf = PDF::loadView('voucher');
+    return $pdf->stream();
+    /* return view('voucher'); */
 });
 
 Route::get('/restablecer-contrasena', function () {
