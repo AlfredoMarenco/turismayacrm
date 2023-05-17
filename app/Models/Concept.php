@@ -13,13 +13,10 @@ class Concept extends Model
     protected $guarded = ['id'];
 
     //Relacion una a muchos inversa
-    public function budget() : BelongsTo
+    public function vehicle() : BelongsTo
     {
-        return $this->belongsTo(Budget::class);
+        return $this->belongsTo(Vehicle::class);
     }
 
-    public function pax(){
-        return $this->passangers_bus + $this->passangers_pickup;
-    }
-    
+
 }

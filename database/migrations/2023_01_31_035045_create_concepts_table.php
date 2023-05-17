@@ -15,31 +15,27 @@ return new class extends Migration
     {
         Schema::create('concepts', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->foreignId('budget_id')->constrained('budgets');
-            $table->double('qty_bus')->nullable();
-            $table->double('km_bus')->nullable();
-            $table->double('passangers_bus')->nullable();
-            $table->double('laps_bus')->nullable();
-            $table->double('performance_bus')->nullable();
-            $table->double('liters_bus')->nullable();
-            $table->double('disel_price_bus')->nullable();
-            $table->double('disel_cost_bus')->nullable();
-            $table->double('salary_bus')->nullable();
-            $table->double('per_diem_bus')->nullable();
-            $table->double('hotel_bus')->nullable();
-            $table->double('tax_burden_bus')->nullable();
-            $table->double('flor_rigth_bus')->nullable();
-            $table->double('booths_bus')->nullable();
-            $table->double('maintenance_bus')->nullable();
-            $table->double('amenities_bus')->nullable();
-            $table->double('sublet_bus')->nullable();
-            $table->double('total_cost_bus')->nullable();
-            $table->double('utility_percentage_bus')->nullable();
-            $table->double('utility_bus')->nullable();
-            $table->double('qty_pickup')->nullable();
+            $table->date('date');
+            $table->text('description')->nullable();
+            $table->double('km')->nullable();
+            $table->double('laps')->nullable();
+            $table->double('performance')->nullable();
+            $table->double('liters')->nullable();
+            $table->double('disel_price')->nullable();
+            $table->double('disel_cost')->nullable();
+            $table->double('salary')->nullable();
+            $table->double('per_diem')->nullable();
+            $table->double('hotel')->nullable();
+            $table->double('tax_burden')->nullable();
+            $table->double('flor_rigth')->nullable();
+            $table->double('booths')->nullable();
+            $table->double('maintenance')->nullable();
+            $table->double('amenities')->nullable();
+            $table->double('sublet')->nullable();
+            $table->double('total_cost')->nullable();
+            $table->double('utility_percentage')->nullable();
+            $table->double('utility')->nullable();
+            /* $table->double('qty_pickup')->nullable();
             $table->double('km_pickup')->nullable();
             $table->double('passangers_pickup')->nullable();
             $table->double('laps_pickup')->nullable();
@@ -58,10 +54,11 @@ return new class extends Migration
             $table->double('sublet_pickup')->nullable();
             $table->double('total_cost_pickup')->nullable();
             $table->double('utility_percentage_pickup')->nullable();
-            $table->double('utility_pickup')->nullable();
+            $table->double('utility_pickup')->nullable(); */
             $table->double('net_rate')->nullable();
             $table->double('tax')->nullable();
             $table->double('total')->nullable();
+            $table->foreignId('vehicle_id')->constrained('vehicles');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Budget;
 use App\Models\Concept;
 use App\Models\User;
+use App\Models\Vehicle;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -51,9 +52,11 @@ class Clients extends Component
 
 
     public $paginate = 5;
-    public $date;
+    public $budget_date;
+    public $vehicle_type=1;
+    public $vehicle_pax=0;
 
-    public $travel_name;
+    public $budget_name;
     public $start_date;
     public $end_date;
     public $qty_bus = 1;
@@ -102,6 +105,7 @@ class Clients extends Component
     public $budgets=[];
     public $concepts=[];
     public $vouchers=[];
+    public $vehicles=[];
 
     public $name_search='';
     public $email_search='';
@@ -116,6 +120,9 @@ class Clients extends Component
     public $createVoucher = false;
     public $addItem = false;
     public $formBudget=false;
+    public $modal_create_budget=false;
+    public $modal_create_vehicle=false;
+    public $modal_create_concept=false;
 
 
     protected $listeners = [
@@ -136,20 +143,79 @@ class Clients extends Component
         $this->addClient=false;
     }
 
-    public function createBudget($status){
+    public function modalCreateBudget(){
+        /* $this->detailsClient=false; */
+        $this->modal_create_budget = true;
+    }
+
+    public function createBudget(){
         $this->budget = Budget::create([
+            'name' =>  $this->budget_name,
+            'date' => $this->budget_date,
             'user_id' => $this->client->id,
-            'status' => $status,
+            'status' => 0,
         ]);
+        $this->budgets = Budget::where('user_id',$this->client->id)->get();
+        $this->modal_create_budget = false;
         $this->detailsClient=false;
         $this->createBudget = true;
     }
 
+    public function createVehicle(){
+        Vehicle::create([
+            'type' => $this->vehicle_type,
+            'pax' => $this->vehicle_pax,
+            'budget_id' => $this->budget->id,
+        ]);
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        $this->modal_create_vehicle = false;
+    }
+
     public function editBudget(Budget $budget){
         $this->budget = $budget;
-        $this->concepts = Concept::where('budget_id',$this->budget->id)->get();
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        /* $this->concepts = Concept::where('vehicles_id',$this->budget->id)->get(); */
         $this->detailsClient=false;
         $this->createBudget = true;
+    }
+
+    public function modalCreateConcept(Vehicle $vehicle){
+        $this->modal_create_concept = true;
+    }
+
+    public function addConcept(Vehicle $vehicle){
+        Concept::create([
+            'name' => $this->travel_name,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'budget_id' => $this->budget->id,
+            'qty' => $this->qty,
+            'km' => $this->km,
+            'passangers' => $this->passangers,
+            'laps' => $this->laps,
+            'performance' => $this->performance,
+            'liters' => $this->liters,
+            'disel_price' => $this->disel_price,
+            'disel_cost' => $this->disel_cost,
+            'salary' => $this->salary,
+            'per_diem' => $this->per_diem,
+            'hotel' => $this->hotel,
+            'tax_burden' => $this->tax_burden,
+            'flor_rigth' => $this->flor_rigth,
+            'booths' => $this->booths,
+            'maintenance' => $this->maintenance,
+            'amenities' => $this->amenities,
+            'sublet' => $this->sublet,
+            'total_cost' => $this->total_cost,
+            'utility_percentage' => $this->utility_percentage,
+            'utility' => $this->utility,
+            'net_rate' => $this->net_rate,
+            'tax' => $this->tax,
+            'total' => $this->total
+        ]);
+        $this->concepts = Concept::where('vehicle_id',$vehicle->id)->get();
+        // $this->detailsClient=true;
+        $this->formBudget = false;
     }
 
     //Calculo de los costos

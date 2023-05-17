@@ -34,9 +34,9 @@ class Budget extends Model
         return $this->hasOne(Availability::class);
     }
 
-    public function concepts(): HasMany
+    public function vehicles(): HasMany
     {
-        return $this->hasMany(Concept::class);
+        return $this->hasMany(Vehicle::class);
     }
 
 }

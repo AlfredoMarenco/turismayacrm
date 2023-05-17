@@ -805,7 +805,8 @@
                                                                 <div class="flex items-center justify-between">
                                                                     <p
                                                                         class="truncate text-sm font-medium text-blue-900">
-                                                                        {{ $budget->name }}
+                                                                        Folio: <span
+                                                                            class="mx-1">{{ $budget->id }}</span>
                                                                     </p>
                                                                     <div class="ml-2 flex flex-shrink-0">
                                                                         @switch($budget->status)
@@ -813,7 +814,8 @@
                                                                                 <p
                                                                                     class="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-yellow-800">
                                                                                     Presupuesto sin pago realizado</p>
-                                                                                <svg wire:click="editBudget({{ $budget }})" xmlns="http://www.w3.org/2000/svg"
+                                                                                <svg wire:click="editBudget({{ $budget }})"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
                                                                                     fill="none" viewBox="0 0 24 24"
                                                                                     stroke-width="1.5" stroke="currentColor"
                                                                                     class="w-4 h-4 mr-1">
@@ -888,7 +890,7 @@
                                                                                     clip-rule="evenodd" />
                                                                             </svg>
                                                                             Viajan el <time datetime="2022-15-09"
-                                                                                class="pl-1">{{ $budget->start_date }}
+                                                                                class="pl-1">{{ $budget->date }}
                                                                             </time>
                                                                         </p>
                                                                     </div>
@@ -969,10 +971,30 @@
                                 </div>
                             </div>
                             <div class="sm:mt-6">
-                                <button wire:click="createBudget('0')"
+                                <button wire:click="modalCreateBudget()"
                                     class="inline-flex w-full content-end justify-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm">Nuevo
                                     prespuesto</button>
                             </div>
+                            <x-jet-dialog-modal wire:model="modal_create_budget">
+                                <x-slot name="title">
+                                    Crear nuevo presupuesto
+                                </x-slot>
+                                <x-slot name="content">
+                                    <div>
+                                        <x-jet-label value="Nombre descriptivo" />
+                                        <x-jet-input class="w-full" type="text" wire:model='budget_name' />
+                                    </div>
+                                    <div>
+                                        <x-jet-label value="Fecha" />
+                                        <x-jet-input class="w-full" type="date" wire:model='budget_date' />
+                                    </div>
+                                </x-slot>
+                                <x-slot name="footer">
+                                    <x-jet-danger-button class="mx-2"
+                                        wire:click="$set('modal_create_budget',false)">Cancelar</x-jet-danger-button>
+                                    <x-jet-button wire:click="createBudget">Siguiente</x-jet-button>
+                                </x-slot>
+                            </x-jet-dialog-modal>
                         </div>
                     </div>
                     {{-- Presupuesto --}}
@@ -1067,7 +1089,7 @@
                                 </nav>
                             </div>
                             <div class="col-span-3">
-                                <button type="button" wire:click='$set("formBudget",true)'
+                                <button type="button" wire:click="$set('modal_create_vehicle',true)"
                                     class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                     <!-- Heroicon name: mini/check -->
                                     <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
@@ -1076,8 +1098,36 @@
                                             d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    Agregar un item
+                                    Agregar una unidad
                                 </button>
+                                <x-jet-dialog-modal wire:model="modal_create_vehicle">
+                                    <x-slot name="title">
+                                        Agregar unidad al presupuesto
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        <div>
+                                            <x-jet-label value="Tipo de Unicad" />
+                                            <select
+                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                wire:model="vehicle_type">
+                                                <option value="1">Autobus</option>
+                                                <option value="2">Camioneta</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <x-jet-label value="Pax" />
+                                            <x-jet-input
+                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                type="number" wire:model='vehicle_pax' />
+                                        </div>
+                                    </x-slot>
+                                    <x-slot name="footer">
+                                        <x-jet-danger-button class="mx-2"
+                                            wire:click="$set('modal_create_vehicle',false)">Cancelar
+                                        </x-jet-danger-button>
+                                        <x-jet-button wire:click="createVehicle">Siguiente</x-jet-button>
+                                    </x-slot>
+                                </x-jet-dialog-modal>
                             </div>
                         </div>
                         <div>
@@ -1102,32 +1152,572 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                    @foreach ($concepts as $concepts)
+                                    @foreach ($vehicles as $vehicle)
                                         <tr>
                                             <td
                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                @if ($vehicle->type == 1)
+                                                    Autobus
+                                                @else
+                                                    Camioneta
+                                                @endif
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $vehicle->pax }}</td>
+                                            @foreach ($vehicle->concepts as $concept)
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    conceptos
                                                 </td>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $concepts->pax() }}</td>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                </td>
-                                            <td
-                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                </td>
+                                            @endforeach
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            </td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 <div>
-                                                    <a wire:click=""
-                                                        class="text-blue-900 hover:text-indigo-900 cursor-pointer">Ver
-                                                        más</a>
+                                                    <a wire:click="modalCreateConcept({{ $vehicle }})"
+                                                        class="text-blue-900 hover:text-indigo-900 cursor-pointer">Agregar
+                                                        nuevo concepto</a>
                                                 </div>
                                                 <div>
-                                                    <a wire:click=""
+                                                    <a wire:click="$set('modal_create_concept',false)"
                                                         class="text-red-500 hover:text-red-800 cursor-pointer">Eliminar</a>
 
                                                 </div>
+
+                                                <x-jet-dialog-modal wire:model="modal_create_concept">
+                                                    <x-slot name="title">
+                                                        Crear nuevo concepto
+                                                    </x-slot>
+                                                    <x-slot name="content">
+                                                        <div class="col-span-10 md:col-span-10 lg:col-span-5">
+                                                            {{-- form calculador de cotizacion --}}
+                                                                <form>
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
+                                                                        <div class="sm:col-span-6">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700">KILOMETROS</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <input type="number"
+                                                                                        wire:model='km'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="1"
+                                                                                        aria-describedby="1">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase ">vueltas</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <input type="number"
+                                                                                        wire:model='laps'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="1"
+                                                                                        aria-describedby="1">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase ">rendimiento</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <input type="number"
+                                                                                        wire:model='performance'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="1"
+                                                                                        aria-describedby="1">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase ">litros</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <input type="number"
+                                                                                        wire:model='liters'
+                                                                                        disabled
+                                                                                        class="block w-full rounded-md text-white placeholder-white bg-gray-400 text border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="1"
+                                                                                        aria-describedby="1">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">Precio
+                                                                                    diesel</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='disel_price'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">costo
+                                                                                    diesel</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='disel_cost'
+                                                                                        disabled
+                                                                                        class="pl-7 pr-12 block w-full rounded-md text-white placeholder-white bg-gray-400 text border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">sueldo</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='salary'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">viáticos</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='per_diem'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">hotel</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='hotel'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">carga
+                                                                                    impositiva</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number" disabled
+                                                                                        wire:model='tax_burden'
+                                                                                        class="block w-full rounded-md  bg-gray-400 text-white border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">derecho
+                                                                                    de
+                                                                                    piso</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='flor_rigth'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">casetas</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='booths'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">Mantenimiento</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='maintenance'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-3">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">amenidades</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='amenities'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-3">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">subarriendo</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        wire:model='sublet'
+                                                                                        class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-500 sm:text-sm"
+                                                                                            id="price-currency">MXN</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5">
+                                                                        <div class="sm:col-span-3">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">costo
+                                                                                    total</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <div type="number"
+                                                                                        wire:model='total_cost'
+                                                                                        class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                        {{ number_format($total_cost, 2) }}
+                                                                                        <div
+                                                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                            <span
+                                                                                                class="text-white sm:text-sm"
+                                                                                                id="price-currency">MXN</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-3">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">porcentaje
+                                                                                    de
+                                                                                    utilidad</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+
+                                                                                    <input type="number"
+                                                                                        wire:model='utility_percentage_bus'
+                                                                                        class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="Ingrese un número"
+                                                                                        aria-describedby="price-currency">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                        <span
+                                                                                            class="text-gray-400 sm:text-sm"
+                                                                                            id="price-currency">%</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-5 ">
+                                                                        <div class="sm:col-span-6">
+                                                                            <div>
+                                                                                <label for="price"
+                                                                                    class="block text-sm font-medium text-gray-700 uppercase">Utilidad</label>
+                                                                                <div
+                                                                                    class="relative mt-1 rounded-md shadow-sm">
+                                                                                    <div
+                                                                                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                                                        <span
+                                                                                            class="text-white sm:text-sm">$</span>
+                                                                                    </div>
+                                                                                    <div type="number"
+                                                                                        wire:model='utility_bus'
+                                                                                        class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        placeholder="0.00"
+                                                                                        aria-describedby="price-currency">
+                                                                                        {{ number_format($utility_bus, 2) }}
+                                                                                        <div
+                                                                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                                                            <span
+                                                                                                class="text-white sm:text-sm"
+                                                                                                id="price-currency">MXN</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase">tarifa
+                                                                                        neta</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <div type="text" wire:model='net_rate'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        aria-describedby="1">$ <span
+                                                                                            class="pl-3">{{ number_format($net_rate, 2) }}</span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase">impuestos
+                                                                                        (IVA)</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <div type="text" wire:model='tax'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        aria-describedby="1">$ <span
+                                                                                            class="pl-3">{{ number_format($tax, 2) }}</span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <div>
+                                                                                <div class="flex justify-between">
+                                                                                    <label for="email"
+                                                                                        class="block text-sm font-medium text-gray-700 uppercase">Total</label>
+                                                                                </div>
+                                                                                <div class="mt-1">
+                                                                                    <div type="text" wire:model='total'
+                                                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                                        aria-describedby="1">$ <span
+                                                                                            class="pl-3">{{ number_format($total, 2) }}</span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </form>
+
+                                                        </div>
+                                                    </x-slot>
+                                                    <x-slot name="footer">
+                                                        <x-jet-danger-button class="mx-2"
+                                                        wire:click="$set('modal_create_concept',false)">Cancelar
+                                                        </x-jet-danger-button>
+                                                        <x-jet-button wire:click="createBudget">Siguiente
+                                                        </x-jet-button>
+                                                    </x-slot>
+                                                </x-jet-dialog-modal>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -1137,7 +1727,7 @@
                             </table>
                         </div>
                         @if ($formBudget)
-                            <div class="grid grid-cols-10 gap-4 pt-5">
+                            {{-- <div class="grid grid-cols-10 gap-4 pt-5">
 
                                 <div class="col-span-5">
                                     <label for="email"
@@ -1200,9 +1790,9 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="grid grid-cols-10 gap-4 mt-5 pt-3 pb-3">
+                            {{-- <div class="grid grid-cols-10 gap-4 mt-5 pt-3 pb-3">
                                 <div class="col-span-10 md:col-span-10 lg:col-span-5">
                                     <h5
                                         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight pb-3">
@@ -1309,7 +1899,8 @@
                                                             </div>
                                                             <input type="number" wire:model='disel_price_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1329,9 +1920,11 @@
                                                                 class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                                                 <span class="text-white sm:text-sm">$</span>
                                                             </div>
-                                                            <input type="number" wire:model='disel_cost_bus' disabled
+                                                            <input type="number" wire:model='disel_cost_bus'
+                                                                disabled
                                                                 class="pl-7 pr-12 block w-full rounded-md text-white placeholder-white bg-gray-400 text border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-white sm:text-sm"
@@ -1352,7 +1945,8 @@
                                                             </div>
                                                             <input type="number" wire:model='salary_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1376,7 +1970,8 @@
                                                             </div>
                                                             <input type="number" wire:model='per_diem_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1397,7 +1992,8 @@
                                                             </div>
                                                             <input type="number" wire:model='hotel_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1417,9 +2013,11 @@
                                                                 class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                                                 <span class="text-white sm:text-sm">$</span>
                                                             </div>
-                                                            <input type="number" disabled wire:model='tax_burden_bus'
+                                                            <input type="number" disabled
+                                                                wire:model='tax_burden_bus'
                                                                 class="block w-full rounded-md  bg-gray-400 text-white border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-white sm:text-sm"
@@ -1445,7 +2043,8 @@
                                                             </div>
                                                             <input type="number" wire:model='flor_rigth_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1466,7 +2065,8 @@
                                                             </div>
                                                             <input type="number" wire:model='booths_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1486,7 +2086,8 @@
                                                             </div>
                                                             <input type="number" wire:model='maintenance_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1509,7 +2110,8 @@
                                                             </div>
                                                             <input type="number" wire:model='amenities_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1530,7 +2132,8 @@
                                                             </div>
                                                             <input type="number" wire:model='sublet_bus'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1555,7 +2158,8 @@
                                                             </div>
                                                             <div type="number" wire:model='total_cost_bus'
                                                                 class="block w-full text-white bg-gray-400 rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                                 {{ number_format($total_cost_bus, 2) }}
                                                                 <div
                                                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -1575,7 +2179,8 @@
                                                             utilidad</label>
                                                         <div class="relative mt-1 rounded-md shadow-sm">
 
-                                                            <input type="number" wire:model='utility_percentage_bus'
+                                                            <input type="number"
+                                                                wire:model='utility_percentage_bus'
                                                                 class="block w-full text-gray-900 rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 placeholder="Ingrese un número"
                                                                 aria-describedby="price-currency">
@@ -2048,71 +2653,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </form>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
-                                <div class="sm:col-span-2">
-                                    <div>
-                                        <div class="flex justify-between">
-                                            <label for="email"
-                                                class="block text-sm font-medium text-gray-700 uppercase">tarifa
-                                                neta</label>
-                                        </div>
-                                        <div class="mt-1">
-                                            <div type="text" wire:model='net_rate'
-                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                aria-describedby="1">$ <span
-                                                    class="pl-3">{{ number_format($net_rate, 2) }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="sm:col-span-2">
-                                    <div>
-                                        <div class="flex justify-between">
-                                            <label for="email"
-                                                class="block text-sm font-medium text-gray-700 uppercase">impuestos
-                                                (IVA)</label>
-                                        </div>
-                                        <div class="mt-1">
-                                            <div type="text" wire:model='tax'
-                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                aria-describedby="1">$ <span
-                                                    class="pl-3">{{ number_format($tax, 2) }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="sm:col-span-2">
-                                    <div>
-                                        <div class="flex justify-between">
-                                            <label for="email"
-                                                class="block text-sm font-medium text-gray-700 uppercase">Total</label>
-                                        </div>
-                                        <div class="mt-1">
-                                            <div type="text" wire:model='total'
-                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                aria-describedby="1">$ <span
-                                                    class="pl-3">{{ number_format($total, 2) }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="flex flex-shrink-0 justify-end px-4 py-4 mt-7 border-t bg-white">
-                                {{-- <button type="button" wire:click="addBudget(0)"
+                            {{-- <div class="flex flex-shrink-0 justify-end px-4 py-4 mt-7 border-t bg-white">
+                                <button type="button" wire:click="addBudget(0)"
                                 class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Crear
-                                borrador</button> --}}
+                                borrador</button>
                                 <button type="button" wire:click="addBudget(0)"
                                     class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-blue-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finalizar
                                     presupuesto</button>
-                            </div>
+                            </div> --}}
 
 
                             <div class="hidden">
