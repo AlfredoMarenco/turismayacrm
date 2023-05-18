@@ -24,6 +24,11 @@ class Budget extends Model
         return $this->hasOne(Payment::class);
     }
 
+    public function discount(): HasOne
+    {
+        return $this->hasOne(Discount::class);
+    }
+
     public function vouchers(): HasMany
     {
         return $this->hasMany(Voucher::class);
@@ -34,9 +39,53 @@ class Budget extends Model
         return $this->hasOne(Availability::class);
     }
 
-    public function concepts(): HasMany
+    public function vehicles(): HasMany
     {
-        return $this->hasMany(Concept::class);
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function totalPax(){
+        $totalPax = 0;
+        $vehicles = Vehicle::where('budget_id',$this->id)->get();
+
+        foreach ($vehicles as $vehicle) {
+            $totalPax = $totalPax + $vehicle->pax;
+        }
+
+        return $totalPax;
+    }
+
+    public function totalWithOutTax(){
+        $totalWithOutTax = 0;
+        $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalWithOutTax = $totalWithOutTax+$concept->net_rate;
+            }
+        }
+        return $totalWithOutTax;
+    }
+
+    public function totalWithTax(){
+        $totalWithTax = 0;
+        $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalWithTax = $totalWithTax+$concept->total;
+            }
+        }
+        return $totalWithTax;
+    }
+
+    public function totaltax(){
+        $totalTax = 0;
+        $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalTax = $totalTax+$concept->tax;
+            }
+        }
+        return $totalTax;
     }
 
 }

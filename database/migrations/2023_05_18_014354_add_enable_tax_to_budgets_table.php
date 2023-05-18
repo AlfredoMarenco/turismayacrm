@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->date('date');
-            $table->string('status')->default(0);
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
-            $table->timestamps();
+        Schema::table('budgets', function (Blueprint $table) {
+            $table->boolean('enable_tax')->after('status')->default(1);
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::table('budgets', function (Blueprint $table) {
+            //
+        });
     }
 };
