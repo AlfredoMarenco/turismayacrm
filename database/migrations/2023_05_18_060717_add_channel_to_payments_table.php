@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('availabilities', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->date('start');
-            $table->text('comment');
-            $table->timestamps();
+        Schema::table('payments', function (Blueprint $table) {
+            $table->integer('channel');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('availabilities');
+        Schema::table('payments', function (Blueprint $table) {
+            //
+        });
     }
 };

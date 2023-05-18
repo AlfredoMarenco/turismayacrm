@@ -16,6 +16,7 @@ class Payments extends Component
     public $end_date;
     public $description;
     public $amount = 0;
+    public $channel = 1;
 
     public $editForm = [
         'description' => null,
@@ -47,13 +48,13 @@ class Payments extends Component
 
     public function updatedBudget($budget){
         $budget_select = Budget::find($budget);
-        $this->start_date = $budget_select->start_date;
-        $this->end_date = $budget_select->end_date;
+        $this->start_date = $budget_select->date;
     }
 
     public function addPayment(){
         Payment::create([
-            'budget_id' => $this->budget
+            'budget_id' => $this->budget,
+            'channel' => $this->channel
         ]);
         $this->reset('client','budget','start_date','end_date','budgets','add_pay_modal');
     }

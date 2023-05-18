@@ -511,10 +511,14 @@ class Clients extends Component
 
     public function createVoucher(Budget $budget){
         $this->budget = $budget;
-        $this->vouchers = $budget->vouchers;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        /* $this->concepts = Concept::where('vehicles_id',$this->budget->id)->get(); */
+        $this->detailsClient=false;
+        $this->createBudget = true;
+        /* $this->vouchers = $budget->vouchers;
         $this->budget_comment = $budget->comment;
         $this->createVoucher = true;
-        $this->detailsClient = false;
+        $this->detailsClient = false; */
     }
 
     public function addVoucher(){

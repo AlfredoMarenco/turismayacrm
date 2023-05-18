@@ -113,6 +113,9 @@
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                                             PAGOS</th>
+                                                        <th scope="col"
+                                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                            CANAL DE PAGO</th>
                                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                                             <span class="sr-only">Ver más</span>
                                                         </th>
@@ -133,6 +136,22 @@
                                                             <td
                                                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                                 {{ $payment->splits->count() }}</td>
+                                                            <td
+                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
+                                                                @switch($payment->channel)
+                                                                    @case(1)
+                                                                            Canal 1
+                                                                        @break
+                                                                    @case(2)
+                                                                            Canal 2
+                                                                        @break
+                                                                    @case(3)
+                                                                            Canal 3
+                                                                        @break
+                                                                    @default
+
+                                                                @endswitch
+                                                            </td>
                                                             <td
                                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                                 <div>
@@ -269,7 +288,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="sm:col-span-6">
+                                                    {{-- <div class="sm:col-span-6">
                                                         <div>
                                                             <label for="price"
                                                                 class="block text-sm font-medium text-gray-700 ">Fecha
@@ -293,6 +312,23 @@
                                                                         </svg>
                                                                     </span>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+
+                                                    <div class="sm:col-span-6">
+                                                        <div>
+                                                            <label for="price"
+                                                                class="block text-sm font-medium text-gray-700 ">Canal
+                                                                de pago</label>
+                                                            <div class="relative mt-1 rounded-md shadow-sm">
+                                                                <select
+                                                                    class="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                    wire:model="channel">
+                                                                    <option value="1">Canal 1</option>
+                                                                    <option value="2">Canal 2</option>
+                                                                    <option value="3">Canal 3</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>

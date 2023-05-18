@@ -52,13 +52,8 @@
                                     <time datetime="2022-01-19" class="w-28 flex-none">{{ $loop->iteration }}</time>
                                     <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
                                         {{ $availability->title }}</p>
-                                    <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
-                                        {{ $availability->unit->model }} - {{ $availability->unit->id_unit }}</p>
-                                    <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
-                                        {{ $availability->driver->name }}</p>
                                     <p class="flex-none sm:ml-6">
                                         <time>{{ $availability->start }}</time> -
-                                        <time>{{ $availability->end }}</time>
                                     </p>
                                 </li>
                             @empty
@@ -155,7 +150,7 @@
                                                                 de
                                                                 inicio</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="date" wire:model="start_date" disabled
+                                                                <input type="date" wire:model="date" disabled
                                                                     class="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="0.00"
                                                                     aria-describedby="price-currency">
@@ -176,7 +171,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="sm:col-span-6">
+                                                    {{-- <div class="sm:col-span-6">
                                                         <div>
                                                             <label for="price"
                                                                 class="block text-sm font-medium text-gray-700 ">Fecha
@@ -221,7 +216,6 @@
                                                                     @endif
                                                                 @endforeach
                                                                 <option value="0">Subarriendo</option>
-                                                                {{-- Esta opción debe mantenerse estática, al seleccionarla el chofer cambiará a "proveedor" --}}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -238,10 +232,9 @@
                                                                         {{ $driver->name }}</option>
                                                                 @endforeach
                                                                 <option value="0">Proveedor</option>
-                                                                {{-- Esta opción debe mantenerse estática, deberá marcarse cuando el usuario seleccione "subarriendo" --}}
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="sm:col-span-6">
                                                         <label for="rfc"
                                                             class="block text-sm font-medium text-gray-700">Comentario</label>
