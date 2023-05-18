@@ -944,7 +944,7 @@
                                                                             <div class="ml-2 flex flex-shrink-0">
                                                                                 <button type="button"
                                                                                     wire:click="createVoucher({{ $budget }})"
-                                                                                    class="inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                                                    class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                                                     <!-- Heroicon name: mini/envelope -->
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         fill="none"
@@ -1416,7 +1416,7 @@
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 <a wire:click="modalCreateVoucher({{ $vehicle }})"
-                                                    class="inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                    class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     Crear Voucher</a>
                                             </td>
                                         @else
@@ -2529,6 +2529,63 @@
                                     Cancelar
                                 </x-jet-danger-button>
                                 <x-jet-button wire:click="updateConcept">Actualizar
+                                </x-jet-button>
+                            </x-slot>
+                        </x-jet-dialog-modal>
+                        <x-jet-dialog-modal wire:model="modal_create_voucher">
+                            <x-slot name="title">
+                                Crear voucher
+                            </x-slot>
+                            <x-slot name="content">
+                                <div>
+                                    <x-jet-label value="Arrendamiento" />
+                                    <select wire:model="voucherType"
+                                        class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <option value="0">No</option>
+                                        <option value="1">Sí</option>
+                                    </select>
+                                    @switch($voucher_type_selected)
+                                        @case(0)
+                                            <x-jet-label value="Unidad" />
+                                            <x-jet-input class="w-full" type="text" wire:model='unit'/>
+
+                                            <x-jet-label value="Chofer" />
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_name'/>
+
+                                            <x-jet-label value="Telefono" />
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_phone'/>
+                                        @break
+
+                                        @case(1)
+                                            <x-jet-label value="Unidad" />
+                                            <select wire:model="unit_id"
+                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option value="" selected disabled>Selecciona una opcion</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->id_unit }}
+                                                        {{ $unit->plate }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            <x-jet-label value="Chofer" />
+                                            <select wire:model="driver_id"
+                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option value="" selected disabled>Selecciona una opcion</option>
+                                                @foreach ($drivers as $driver)
+                                                    <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        @break
+                                    @endswitch
+                                    <x-jet-label value="Observaciones" />
+                                    <textarea class="w-full" wire:model='observations'></textarea>
+                                </div>
+                            </x-slot>
+                            <x-slot name="footer">
+                                <x-jet-danger-button class="mx-2" wire:click="$set('modal_create_voucher',false)">
+                                    Cancelar
+                                </x-jet-danger-button>
+                                <x-jet-button wire:click="addVoucher()">Crear
                                 </x-jet-button>
                             </x-slot>
                         </x-jet-dialog-modal>

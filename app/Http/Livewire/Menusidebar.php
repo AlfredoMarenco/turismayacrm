@@ -11,7 +11,7 @@ class Menusidebar extends Component
 
     public function mount(Request $request,){
         if ($request->session()->get('itemSelect') == 2) {
-            $this->itemSelect = 2;
+            $this->itemSelect = 1;
         }else{
             $this->itemSelect = 1;
         }

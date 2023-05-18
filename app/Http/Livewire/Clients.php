@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Budget;
 use App\Models\Concept;
 use App\Models\Discount;
+use App\Models\Driver;
+use App\Models\Unit;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Voucher;
@@ -88,6 +90,17 @@ class Clients extends Component
 
     public $amount=0;
 
+
+    public $voucherType=0;
+    public $voucher_type_selected;
+
+    public $unit_id;
+    public $driver_id;
+    public $driver_name;
+    public $driver_phone;
+    public $unit;
+    public $observations;
+
     public $editVehicleForm = [
         'vehicle_type' => null,
         'vehicle_pax' => null
@@ -129,6 +142,8 @@ class Clients extends Component
     public $concepts=[];
     public $vouchers=[];
     public $vehicles=[];
+    public $drivers=[];
+    public $units=[];
 
     public $name_search='';
     public $email_search='';
@@ -150,6 +165,7 @@ class Clients extends Component
     public $modal_edit_concept=false;
     public $modal_create_discount=false;
     public $modal_edit_discount=false;
+    public $modal_create_voucher=false;
     public $modal_confirm_vehicle_delete=false;
 
 
@@ -521,18 +537,40 @@ class Clients extends Component
         $this->detailsClient = false; */
     }
 
-    public function addVoucher(){
-        Voucher::create([
-            'date' => $this->voucher_date,
-            'time' => $this->voucher_time,
-            'vehicle' => $this->voucher_vehicle,
-            'service' => $this->voucher_service,
-            'note' => $this->voucher_note,
-            'budget_id' => $this->budget->id,
-        ]);
+    public function modalCreateVoucher(Vehicle $vehicle){
+        $this->modal_create_voucher = true;
+        $this->vehicle = $vehicle;
 
-        $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
-        $this->reset('voucher_date','voucher_time','voucher_vehicle','voucher_service','voucher_note');
+    }
+
+    public function updatedVoucherType($voucherType){
+        if ($voucherType == 1) {
+            $this->drivers = Driver::all();
+            $this->units = Unit::where('status','1')->get();
+        }
+        $this->voucher_type_selected = $voucherType;
+    }
+
+    public function addVoucher(){
+        if ($this->voucher_type_selected == 0) {
+            Voucher::create([
+                'type' => $this->voucher_type_selected,
+                'driver_name' => $this->driver_name,
+                'driver_phone' => $this->driver_phone,
+                'unit' => $this->unit,
+                'observations' => $this->observations
+
+            ]);
+        }else{
+            Voucher::create([
+                'type' => $this->voucher_type_selected,
+                'driver_name' => $this->driver_name,
+                'driver_id' => $this->driver_id,
+                'unit_id' => $this->unit_id,
+                'observations' => $this->observations
+            ]);
+        }
+
     }
 
     public function addCommentBudget(){

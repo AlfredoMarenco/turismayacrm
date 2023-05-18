@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('type');
             $table->string('driver_name')->nullable();
             $table->string('driver_phone')->nullable();
-            $table->string('unit');
+            $table->string('unit')->nullable();
             $table->text('observations')->nullable();
             $table->foreignId('driver_id')->constrained('drivers')->nullable();
             $table->foreignId('unit_id')->constrained('units')->nullable();
