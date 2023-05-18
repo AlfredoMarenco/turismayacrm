@@ -1139,7 +1139,7 @@
                                         Aplicar descuento
                                     </button>
                                 @else
-                                    <button type="button" wire:click="$set('modal_create_discount',true)"
+                                    <button type="button" wire:click="editDiscount()"
                                         class="inline-flex items-center rounded-md border border-transparent bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
                                         <!-- Heroicon name: mini/check -->
                                         <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
@@ -1246,6 +1246,25 @@
                                             wire:click="$set('modal_create_discount',false)">Cancelar
                                         </x-jet-danger-button>
                                         <x-jet-button wire:click="createDiscount()">Crear</x-jet-button>
+                                    </x-slot>
+                                </x-jet-dialog-modal>
+                                <x-jet-dialog-modal wire:model="modal_edit_discount">
+                                    <x-slot name="title">
+                                        Editar descuento
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        <div>
+                                            <x-jet-label value="Cantidad" />
+                                            <x-jet-input
+                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                type="number" wire:model='editDiscountForm.amount' />
+                                        </div>
+                                    </x-slot>
+                                    <x-slot name="footer">
+                                        <x-jet-danger-button class="mx-2"
+                                            wire:click="$set('modal_edit_discount',false)">Cancelar
+                                        </x-jet-danger-button>
+                                        <x-jet-button wire:click="updateDiscount()">Actualizar</x-jet-button>
                                     </x-slot>
                                 </x-jet-dialog-modal>
                             </div>
@@ -1411,6 +1430,53 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if ($budget->discount)
+                                        <tr>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 font-bold">
+                                                Descuento</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                            <td colspan="2"
+                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                <table class="table-fixed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col"
+                                                                class="w-2/4 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="w-1/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="w-1/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="w-1/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="divide-y divide-gray-200 bg-white">
+                                                        <tr>
+                                                            <td
+                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+                                                            </td>
+                                                            <td
+                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+                                                            </td>
+                                                            <td
+                                                                class="text-red-500 relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+                                                                -${{ number_format($budget->discount->amount,2)  }}
+                                                            </td>
+                                                            <td
+                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 font-bold">Total
                                             global</td>
@@ -1444,7 +1510,7 @@
                                                             ${{ number_format($budget->totalWithOutTax(), 2) }}
                                                         </td>
                                                         <td
-                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6 @if (!$budget->enable_tax) line-through  @endif">
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
                                                             ${{ number_format($budget->totalTax(), 2) }}</td>
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
@@ -1721,7 +1787,8 @@
                                                             </div>
                                                             <input type="number" wire:model='flor_rigth'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1742,7 +1809,8 @@
                                                             </div>
                                                             <input type="number" wire:model='booths'
                                                                 class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-gray-500 sm:text-sm"
@@ -1762,7 +1830,8 @@
                                                             </div>
                                                             <input type="number" disable wire:model='maintenance'
                                                                 class="block w-full rounded-md  bg-gray-400 text-white border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="0.00" aria-describedby="price-currency">
+                                                                placeholder="0.00"
+                                                                aria-describedby="price-currency">
                                                             <div
                                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                 <span class="text-white sm:text-sm"

@@ -121,6 +121,10 @@ class Clients extends Component
         'total' => null
     ];
 
+    public $editDiscountForm = [
+        'amount' => null
+    ];
+
     public $budgets=[];
     public $concepts=[];
     public $vouchers=[];
@@ -145,6 +149,7 @@ class Clients extends Component
     public $modal_create_concept=false;
     public $modal_edit_concept=false;
     public $modal_create_discount=false;
+    public $modal_edit_discount=false;
     public $modal_confirm_vehicle_delete=false;
 
 
@@ -386,6 +391,18 @@ class Clients extends Component
         Discount::create([
             'amount' => $this->amount,
             'budget_id' => $this->budget->id
+        ]);
+    }
+
+    public function editDiscount(){
+        $this->modal_edit_discount = true;
+        $this->editDiscountForm['amount'] = $this->budget->discount->amount;
+    }
+
+    public function updateDiscount(){
+        $this->modal_edit_discount = false;
+        $this->budget->discount->update([
+            'amount' => $this->editDiscountForm['amount'],
         ]);
     }
 

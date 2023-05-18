@@ -58,10 +58,17 @@ class Budget extends Model
     public function totalWithOutTax(){
         $totalWithOutTax = 0;
         $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        $discount = Discount::where('budget_id',$this->id)->get();
         foreach ($vehicles as $vehicle) {
             foreach ($vehicle->concepts as $concept) {
                 $totalWithOutTax = $totalWithOutTax+$concept->net_rate;
             }
+        }
+        
+        if ($this->discount) {
+            $totalWithOutTax = $totalWithOutTax - $this->discount->amount;
+        }else{
+
         }
         return $totalWithOutTax;
     }
@@ -69,11 +76,19 @@ class Budget extends Model
     public function totalWithTax(){
         $totalWithTax = 0;
         $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        $discount = Discount::where('budget_id',$this->id)->get();
         foreach ($vehicles as $vehicle) {
             foreach ($vehicle->concepts as $concept) {
                 $totalWithTax = $totalWithTax+$concept->total;
             }
         }
+
+        if ($this->discount) {
+            $totalWithTax = $totalWithTax - $this->discount->amount;
+        }else{
+
+        }
+
         return $totalWithTax;
     }
 
