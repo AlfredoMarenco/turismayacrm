@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('driver_phone')->nullable();
             $table->string('unit')->nullable();
             $table->text('observations')->nullable();
-            $table->foreignId('driver_id')->constrained('drivers')->nullable();
-            $table->foreignId('unit_id')->constrained('units')->nullable();
+            $table->foreignId('driver_id')->nullable()->constrained('drivers');
+            $table->foreignId('unit_id')->nullable()->constrained('units');
             $table->foreignId('vehicle_id')->constrained('vehicles');
             $table->timestamps();
         });

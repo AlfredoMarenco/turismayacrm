@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Concept;
 use App\Models\Discount;
 use App\Models\Driver;
+use App\Models\Itinerary;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -91,7 +92,7 @@ class Clients extends Component
     public $amount=0;
 
 
-    public $voucherType=0;
+    public $voucherType="";
     public $voucher_type_selected;
 
     public $unit_id;
@@ -553,24 +554,35 @@ class Clients extends Component
 
     public function addVoucher(){
         if ($this->voucher_type_selected == 0) {
-            Voucher::create([
+            $voucher = Voucher::create([
                 'type' => $this->voucher_type_selected,
                 'driver_name' => $this->driver_name,
                 'driver_phone' => $this->driver_phone,
+                'vehicle_id' => $this->vehicle->id,
                 'unit' => $this->unit,
                 'observations' => $this->observations
 
             ]);
         }else{
-            Voucher::create([
+            $voucher = Voucher::create([
                 'type' => $this->voucher_type_selected,
                 'driver_name' => $this->driver_name,
+                'vehicle_id' => $this->vehicle->id,
                 'driver_id' => $this->driver_id,
                 'unit_id' => $this->unit_id,
                 'observations' => $this->observations
             ]);
         }
 
+        foreach ($this->vehicle->concepts as $concept) {
+            Itinerary::create([
+                'date' => $concept->date,
+                'description' => $concept->description,
+                'voucher_id' => $voucher->id
+            ]);
+        }
+        $this->modal_create_voucher = false;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
     }
 
     public function addCommentBudget(){

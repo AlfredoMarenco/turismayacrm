@@ -2541,6 +2541,7 @@
                                     <x-jet-label value="Arrendamiento" />
                                     <select wire:model="voucherType"
                                         class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <option value="" selected disabled>Seleccionar una opcion</option>
                                         <option value="0">No</option>
                                         <option value="1">Sí</option>
                                     </select>
