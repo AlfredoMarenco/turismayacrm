@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->text('description')->nullable();
             $table->double('km')->nullable();
+            $table->double('admin_expense')->nullable();
             $table->double('laps')->nullable();
             $table->double('performance')->nullable();
             $table->double('liters')->nullable();
@@ -58,7 +59,7 @@ return new class extends Migration
             $table->double('net_rate')->nullable();
             $table->double('tax')->nullable();
             $table->double('total')->nullable();
-            $table->foreignId('vehicle_id')->constrained('vehicles');
+            $table->foreignId('vehicle_id')->constrained('vehicles')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

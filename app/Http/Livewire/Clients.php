@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Budget;
 use App\Models\Concept;
+use App\Models\Discount;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Voucher;
@@ -29,6 +30,8 @@ class Clients extends Component
     public $comment;
     public $client;
     public $budget;
+    public $concept;
+    public $discount;
 
     public $voucher_date;
     public $voucher_time;
@@ -55,53 +58,69 @@ class Clients extends Component
     public $budget_date;
     public $vehicle_type=1;
     public $vehicle_pax=0;
-
+    public $vehicle;
     public $budget_name;
-    public $start_date;
-    public $end_date;
-    public $qty_bus = 1;
-    public $km_bus = 0;
-    public $passangers_bus = 1;
-    public $laps_bus = 0;
-    public $performance_bus = 1;
-    public $liters_bus = 0;
-    public $disel_price_bus = 0;
-    public $disel_cost_bus = 0;
-    public $salary_bus = 0;
-    public $per_diem_bus = 0;
-    public $hotel_bus = 0;
-    public $tax_burden_bus = 0;
-    public $flor_rigth_bus = 0;
-    public $booths_bus = 0;
-    public $maintenance_bus = 0;
-    public $amenities_bus = 0;
-    public $sublet_bus = 0;
-    public $total_cost_bus = 0;
-    public $utility_percentage_bus = 1;
-    public $utility_bus = 0;
-    public $qty_pickup = 1;
-    public $km_pickup = 0;
-    public $passangers_pickup = 1;
-    public $laps_pickup = 0;
-    public $performance_pickup = 1;
-    public $liters_pickup = 0;
-    public $disel_price_pickup = 0;
-    public $disel_cost_pickup = 0;
-    public $salary_pickup = 0;
-    public $per_diem_pickup = 0;
-    public $hotel_pickup = 0;
-    public $tax_burden_pickup = 0;
-    public $flor_rigth_pickup = 0;
-    public $booths_pickup = 0;
-    public $maintenance_pickup = 0;
-    public $amenities_pickup = 0;
-    public $sublet_pickup = 0;
-    public $total_cost_pickup = 0;
-    public $utility_percentage_pickup = 1;
-    public $utility_pickup = 0;
+
+    public $date;
+    public $description;
+    public $km = 0;
+    public $admin_expense = 550;
+    public $laps = 0;
+    public $performance = 1;
+    public $liters = 0;
+    public $disel_price = 0;
+    public $disel_cost = 0;
+    public $salary = 0;
+    public $per_diem = 0;
+    public $hotel = 0;
+    public $tax_burden = 79.23;
+    public $flor_rigth = 0;
+    public $booths = 0;
+    public $maintenance = 272.82;
+    public $amenities = 0;
+    public $sublet = 0;
+    public $total_cost = 0;
+    public $utility_percentage = 1;
+    public $utility = 0;
     public $net_rate = 0;
     public $tax = 0;
     public $total = 0;
+
+    public $amount=0;
+
+    public $editVehicleForm = [
+        'vehicle_type' => null,
+        'vehicle_pax' => null
+    ];
+
+
+    public $editConceptForm = [
+        'date' => null,
+        'description' => null,
+        'km' => null,
+        'admin_expense' => null,
+        'laps' => null,
+        'performance' => null,
+        'liters' => null,
+        'disel_price' => null,
+        'disel_cost' => null,
+        'salary' => null,
+        'per_diem' => null,
+        'hotel' => null,
+        'tax_burden' => null,
+        'flor_rigth' => null,
+        'booths' => null,
+        'maintenance' => null,
+        'amenities' => null,
+        'sublet' => null,
+        'total_cost' => null,
+        'utility_percentage' => null,
+        'utility' => null,
+        'net_rate' => null,
+        'tax' => null,
+        'total' => null
+    ];
+
     public $budgets=[];
     public $concepts=[];
     public $vouchers=[];
@@ -122,7 +141,11 @@ class Clients extends Component
     public $formBudget=false;
     public $modal_create_budget=false;
     public $modal_create_vehicle=false;
+    public $modal_edit_vehicle=false;
     public $modal_create_concept=false;
+    public $modal_edit_concept=false;
+    public $modal_create_discount=false;
+    public $modal_confirm_vehicle_delete=false;
 
 
     protected $listeners = [
@@ -161,6 +184,13 @@ class Clients extends Component
         $this->createBudget = true;
     }
 
+    public function changeEnableTax($value){
+        $this->budget->update([
+            'enable_tax' => $value
+        ]);
+        $this->budget = Budget::find($this->budget->id);
+    }
+
     public function createVehicle(){
         Vehicle::create([
             'type' => $this->vehicle_type,
@@ -169,6 +199,75 @@ class Clients extends Component
         ]);
         $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
         $this->modal_create_vehicle = false;
+    }
+
+    public function editVehicle(Vehicle $vehicle){
+        $this->modal_edit_vehicle = true;
+        $this->vehicle = $vehicle;
+        $this->editVehicleForm['vehicle_type'] = $vehicle->type;
+        $this->editVehicleForm['vehicle_pax'] = $vehicle->pax;
+
+    }
+
+    public function updateVehicle(){
+        $this->vehicle->update([
+            'type' => $this->editVehicleForm['vehicle_type'],
+            'pax' => $this->editVehicleForm['vehicle_pax'],
+        ]);
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        $this->modal_edit_vehicle = false;
+    }
+
+    public function modalDeleteVehicle(Vehicle $vehicle){
+        $this->modal_confirm_vehicle_delete = true;
+        $this->vehicle = $vehicle;
+    }
+
+    public function deleteVehicle(){
+        $this->vehicle->delete();
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        $this->modal_confirm_vehicle_delete = false;
+    }
+
+    public function copyVehicle(Vehicle $vehicle){
+
+        $newVehicle = Vehicle::create([
+            'type' => $vehicle->type,
+            'pax' => $vehicle->pax,
+            'budget_id' => $this->budget->id,
+        ]);
+
+        foreach ($vehicle->concepts as $concept) {
+            Concept::create([
+                'date' => $concept->date,
+                'description' => $concept->description,
+                'admin_expense' => $concept->admin_expense,
+                'vehicle_id' => $newVehicle->id,
+                'km' => $concept->km,
+                'laps' => $concept->laps,
+                'performance' => $concept->performance,
+                'liters' => $concept->liters,
+                'disel_price' => $concept->disel_price,
+                'disel_cost' => $concept->disel_cost,
+                'salary' => $concept->salary,
+                'per_diem' => $concept->per_diem,
+                'hotel' => $concept->hotel,
+                'tax_burden' => $concept->tax_burden,
+                'flor_rigth' => $concept->flor_rigth,
+                'booths' => $concept->booths,
+                'maintenance' => $concept->maintenance,
+                'amenities' => $concept->amenities,
+                'sublet' => $concept->sublet,
+                'total_cost' => $concept->total_cost,
+                'utility_percentage' => $concept->utility_percentage,
+                'utility' => $concept->utility,
+                'net_rate' => $concept->net_rate,
+                'tax' => $concept->tax,
+                'total' => $concept->total
+            ]);
+        }
+
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
     }
 
     public function editBudget(Budget $budget){
@@ -180,18 +279,17 @@ class Clients extends Component
     }
 
     public function modalCreateConcept(Vehicle $vehicle){
+        $this->vehicle = $vehicle;
         $this->modal_create_concept = true;
     }
 
-    public function addConcept(Vehicle $vehicle){
+    public function addConcept(){
         Concept::create([
-            'name' => $this->travel_name,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'budget_id' => $this->budget->id,
-            'qty' => $this->qty,
+            'date' => $this->date,
+            'description' => $this->description,
+            'admin_expense' => $this->admin_expense,
+            'vehicle_id' => $this->vehicle->id,
             'km' => $this->km,
-            'passangers' => $this->passangers,
             'laps' => $this->laps,
             'performance' => $this->performance,
             'liters' => $this->liters,
@@ -213,99 +311,109 @@ class Clients extends Component
             'tax' => $this->tax,
             'total' => $this->total
         ]);
-        $this->concepts = Concept::where('vehicle_id',$vehicle->id)->get();
-        // $this->detailsClient=true;
-        $this->formBudget = false;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        $this->concepts = Concept::where('vehicle_id',$this->vehicle->id)->get();
+        $this->modal_create_concept = false;
+    }
+    public function editConcept(Concept $concept){
+        $this->reset('editConceptForm');
+        $this->concept = $concept;
+        $this->modal_edit_concept = true;
+        $this->editConceptForm['date'] = $concept->date;
+        $this->editConceptForm['description'] = $concept->description;
+        $this->editConceptForm['admin_expense'] = $concept->admin_expense;
+        $this->editConceptForm['vehicle_id'] = $concept->vehicle->id;
+        $this->editConceptForm['km'] = $concept->km;
+        $this->editConceptForm['laps'] = $concept->laps;
+        $this->editConceptForm['performance'] = $concept->performance;
+        $this->editConceptForm['liters'] = $concept->liters;
+        $this->editConceptForm['disel_price'] = $concept->disel_price;
+        $this->editConceptForm['disel_cost'] = $concept->disel_cost;
+        $this->editConceptForm['salary'] = $concept->salary;
+        $this->editConceptForm['per_diem'] = $concept->per_diem;
+        $this->editConceptForm['hotel'] = $concept->hotel;
+        $this->editConceptForm['tax_burden'] = $concept->tax_burden;
+        $this->editConceptForm['flor_rigth'] = $concept->flor_rigth;
+        $this->editConceptForm['booths'] = $concept->booths;
+        $this->editConceptForm['maintenance'] = $concept->maintenance;
+        $this->editConceptForm['amenities'] = $concept->amenities;
+        $this->editConceptForm['sublet'] = $concept->sublet;
+        $this->editConceptForm['total_cost'] = $concept->total_cost;
+        $this->editConceptForm['utility_percentage'] = $concept->utility_percentage;
+        $this->editConceptForm['utility'] = $concept->utility;
+        $this->editConceptForm['net_rate'] = $concept->net_rate;
+        $this->editConceptForm['tax'] = $concept->tax;
+        $this->editConceptForm['total'] = $concept->total;
+    }
+
+    public function updateConcept(){
+        $this->concept->update([
+        'date' => $this->editConceptForm['date'],
+        'description' => $this->editConceptForm['description'],
+        'admin_expense' => $this->editConceptForm['admin_expense'],
+        'km' => $this->editConceptForm['km'],
+        'laps' => $this->editConceptForm['laps'],
+        'performance' => $this->editConceptForm['performance'],
+        'liters' => $this->editConceptForm['liters'],
+        'disel_price' => $this->editConceptForm['disel_price'],
+        'disel_cost' => $this->editConceptForm['disel_cost'],
+        'salary' => $this->editConceptForm['salary'],
+        'per_diem' => $this->editConceptForm['per_diem'],
+        'hotel' => $this->editConceptForm['hotel'],
+        'tax_burden' => $this->editConceptForm['tax_burden'],
+        'flor_rigth' => $this->editConceptForm['flor_rigth'],
+        'booths' => $this->editConceptForm['booths'],
+        'maintenance' => $this->editConceptForm['maintenance'],
+        'amenities' => $this->editConceptForm['amenities'],
+        'sublet' => $this->editConceptForm['sublet'],
+        'total_cost' => $this->editConceptForm['total_cost'],
+        'utility_percentage' => $this->editConceptForm['utility_percentage'],
+        'utility' => $this->editConceptForm['utility'],
+        'net_rate' => $this->editConceptForm['net_rate'],
+        'tax' => $this->editConceptForm['tax'],
+        'total' => $this->editConceptForm['total'],
+        ]);
+        $this->modal_edit_concept = false;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+    }
+
+    public function deleteConcept(Concept $concept){
+        $concept->delete();
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+    }
+
+    public function createDiscount(){
+        Discount::create([
+            'amount' => $this->amount,
+            'budget_id' => $this->budget->id
+        ]);
     }
 
     //Calculo de los costos
     public function updated(){
         //Calculo para los autobuses
         try {
-            if ($this->km_bus != 0) {
-                $this->maintenance_bus = 66.25;
-                $this->tax_burden_bus = 40;
-            }
-
-            if ($this->km_pickup != 0) {
-                $this->maintenance_pickup = 66.25;
-                $this->tax_burden_pickup = 40;
-            }
-
-
-            $this->liters_bus = ($this->km_bus * $this->laps_bus)/($this->performance_bus);
-            $this->disel_cost_bus = $this->disel_price_bus*$this->liters_bus;
-            $this->total_cost_bus = $this->disel_cost_bus + $this->salary_bus + $this->per_diem_bus + $this->hotel_bus + $this->tax_burden_bus + $this->flor_rigth_bus + $this->booths_bus + $this->amenities_bus + $this->sublet_bus + $this->maintenance_bus;
-            $this->utility_bus = $this->total_cost_bus * ($this->utility_percentage_bus/100);
-            //Calculo para las camionetas
-            $this->liters_pickup = ($this->km_pickup * $this->laps_pickup)/($this->performance_pickup);
-            $this->disel_cost_pickup = $this->disel_price_pickup*$this->liters_pickup;
-            $this->total_cost_pickup = $this->disel_cost_pickup + $this->salary_pickup + $this->per_diem_pickup + $this->hotel_pickup + $this->tax_burden_pickup + $this->flor_rigth_pickup + $this->booths_pickup + $this->amenities_pickup + $this->sublet_pickup + $this->maintenance_pickup;
-            $this->utility_pickup = $this->total_cost_pickup * ($this->utility_percentage_pickup/100);
-
-            $this->net_rate = (($this->qty_bus)*($this->utility_bus + $this->total_cost_bus)) + (($this->qty_pickup)*($this->utility_pickup + $this->total_cost_pickup));
+            $this->liters = ($this->km * $this->laps)/($this->performance);
+            $this->disel_cost = $this->disel_price*$this->liters;
+            $this->total_cost = $this->disel_cost + $this->salary + $this->per_diem + $this->hotel + $this->tax_burden + $this->flor_rigth + $this->booths + $this->amenities + $this->sublet + $this->maintenance + $this->admin_expense;
+            $this->utility = $this->total_cost * ($this->utility_percentage/100);
+            $this->net_rate = (($this->utility + $this->total_cost));
             $this->tax = $this->net_rate *.16;
             $this->total = $this->tax + $this->net_rate;
+
+
+            if ($this->modal_edit_concept) {
+                $this->editConceptForm['liters'] = ($this->editConceptForm['km'] * $this->editConceptForm['laps'])/($this->editConceptForm['performance']);
+                $this->editConceptForm['disel_cost'] = $this->editConceptForm['disel_price']*$this->editConceptForm['liters'];
+                $this->editConceptForm['total_cost'] = $this->editConceptForm['disel_cost'] + $this->editConceptForm['salary'] + $this->editConceptForm['per_diem'] + $this->editConceptForm['hotel'] + $this->editConceptForm['tax_burden'] + $this->editConceptForm['flor_rigth'] + $this->editConceptForm['booths'] + $this->editConceptForm['amenities'] + $this->editConceptForm['sublet'] + $this->editConceptForm['maintenance'] + $this->editConceptForm['admin_expense'];
+                $this->editConceptForm['utility'] = $this->editConceptForm['total_cost'] * ($this->editConceptForm['utility_percentage']/100);
+                $this->editConceptForm['net_rate'] = (($this->editConceptForm['utility'] + $this->editConceptForm['total_cost']));
+                $this->editConceptForm['tax'] = $this->editConceptForm['net_rate'] *.16;
+                $this->editConceptForm['total'] = $this->editConceptForm['tax'] + $this->editConceptForm['net_rate'];
+            }
         } catch (\Throwable $th) {
 
         }
-    }
-
-    //Creacion de cotizaciones
-
-    public function addBudget(){
-        Concept::create([
-            'name' => $this->travel_name,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'budget_id' => $this->budget->id,
-            'qty_bus' => $this->qty_bus,
-            'km_bus' => $this->km_bus,
-            'passangers_bus' => $this->passangers_bus,
-            'laps_bus' => $this->laps_bus,
-            'performance_bus' => $this->performance_bus,
-            'liters_bus' => $this->liters_bus,
-            'disel_price_bus' => $this->disel_price_bus,
-            'disel_cost_bus' => $this->disel_cost_bus,
-            'salary_bus' => $this->salary_bus,
-            'per_diem_bus' => $this->per_diem_bus,
-            'hotel_bus' => $this->hotel_bus,
-            'tax_burden_bus' => $this->tax_burden_bus,
-            'flor_rigth_bus' => $this->flor_rigth_bus,
-            'booths_bus' => $this->booths_bus,
-            'maintenance_bus' => $this->maintenance_bus,
-            'amenities_bus' => $this->amenities_bus,
-            'sublet_bus' => $this->sublet_bus,
-            'total_cost_bus' => $this->total_cost_bus,
-            'utility_percentage_bus' => $this->utility_percentage_bus,
-            'utility_bus' => $this->utility_bus,
-            'qty_pickup' => $this->qty_pickup,
-            'km_pickup' => $this->km_pickup,
-            'passangers_pickup' => $this->passangers_pickup,
-            'laps_pickup' => $this->laps_pickup,
-            'performance_pickup' => $this->performance_pickup,
-            'liters_pickup' => $this->liters_pickup,
-            'disel_price_pickup' => $this->disel_price_pickup,
-            'disel_cost_pickup' => $this->disel_cost_pickup,
-            'salary_pickup' => $this->salary_pickup,
-            'per_diem_pickup' => $this->per_diem_pickup,
-            'hotel_pickup' => $this->hotel_pickup,
-            'tax_burden_pickup' => $this->tax_burden_pickup,
-            'flor_rigth_pickup' => $this->flor_rigth_pickup,
-            'booths_pickup' => $this->booths_pickup,
-            'maintenance_pickup' => $this->maintenance_pickup,
-            'amenities_pickup' => $this->amenities_pickup,
-            'sublet_pickup' => $this->sublet_pickup,
-            'total_cost_pickup' => $this->total_cost_pickup,
-            'utility_percentage_pickup' => $this->utility_percentage_pickup,
-            'utility_pickup' => $this->utility_pickup,
-            'net_rate' => $this->net_rate,
-            'tax' => $this->tax,
-            'total' => $this->total
-        ]);
-        $this->concepts = Concept::where('budget_id',$this->budget->id)->get();
-        // $this->detailsClient=true;
-        $this->formBudget = false;
     }
 
     public function addClient(){
@@ -371,7 +479,6 @@ class Clients extends Component
         $this->editing = false;
     }
 
-
     public function deletingClient(User $client){
         $this->client = $client;
         $this->modalDeleting = true;
@@ -384,7 +491,6 @@ class Clients extends Component
         $this->modalDeleting = false;
         $this->emit('render');
     }
-
 
     public function createVoucher(Budget $budget){
         $this->budget = $budget;

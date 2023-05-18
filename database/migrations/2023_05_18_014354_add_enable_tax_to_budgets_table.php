@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles', function (Blueprint $table) {
-            $table->id();
-            $table->integer('type');
-            $table->integer('pax');
-            $table->foreignId('budget_id')->constrained('vehicles')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('budgets', function (Blueprint $table) {
+            $table->boolean('enable_tax')->after('status')->default(1);
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicles');
+        Schema::table('budgets', function (Blueprint $table) {
+            //
+        });
     }
 };

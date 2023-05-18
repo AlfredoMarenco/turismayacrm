@@ -29,5 +29,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'dev@agenciavandu.com',
             'password' => Hash::make('marencos6359:D'),
         ]);
+        User::create([
+            'name' => 'Alvar Buenfil',
+            'email' => 'ab@agenciavandu.com',
+            'password' => Hash::make('password'),
+        ]);
     }
 }
