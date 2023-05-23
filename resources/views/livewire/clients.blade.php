@@ -959,6 +959,23 @@
                                                                                     Crear Voucher
                                                                                 </button>
                                                                             </div>
+                                                                        @else
+                                                                            <button type="button"
+                                                                                wire:click="downloadReceipt({{ $budget }})"
+                                                                                class="cursor-pointer mx-2 inline-flex items-center rounded-md border border-transparent bg-gray-400 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                                                <!-- Heroicon name: mini/envelope -->
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="-ml-0.5 mr-2 h-4 w-4">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                                                                </svg>
+                                                                                Descargar presupuesto
+                                                                                {{ $budget->id }}
+                                                                            </button>
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -1417,14 +1434,11 @@
                                                 <td
                                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                     <a wire:click="modalEditVoucher({{ $vehicle }})"
-                                                        class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
+                                                        class="cursor-pointer rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                                                         Editar voucher</a>
-                                                </td>
-                                                <td
-                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-                                                    <a wire:click="modalEditVoucher({{ $vehicle }})"
-                                                        class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
-                                                        Editar voucher</a>
+                                                    <a wire:click="downloadVoucher({{ $vehicle }})"
+                                                        class="cursor-pointer rounded-md border border-transparent bg-gray-500 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
+                                                        Descargar voucher</a>
                                                 </td>
                                             @else
                                                 <td
@@ -2633,7 +2647,7 @@
                                                         <tbody class="divide-y divide-gray-200">
                                                             @if ($voucher)
                                                                 @foreach ($itineraries as $itinerary)
-                                                                    <tr>
+                                                                    <tr wire:ignore>
                                                                         <td
                                                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                                                             {{ $itinerary->date }}
@@ -2644,7 +2658,8 @@
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             <x-jet-label value="Comentario" />
-                                                                            <x-jet-input type="text" wire:model="array_itineraries.comments.{{ $itinerary->id }}" />
+                                                                            <x-jet-input type="text"
+                                                                                wire:model="array_itineraries.comments.{{ $itinerary->id }}" />
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -2658,7 +2673,8 @@
                                 </div>
                             </x-slot>
                             <x-slot name="footer">
-                                <x-jet-danger-button class="mx-2" wire:click="$set('modal_view_itineraries',false)">
+                                <x-jet-danger-button class="mx-2"
+                                    wire:click="$set('modal_view_itineraries',false)">
                                     Cancelar
                                 </x-jet-danger-button>
                                 <x-jet-button wire:click="updateAllItineraries()">Siguiente

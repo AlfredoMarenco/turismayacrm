@@ -602,8 +602,7 @@ class Clients extends Component
         $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
     }
 
-    public function modalEditVoucher(Vehicle $vehicle)
-    {
+    public function modalEditVoucher(Vehicle $vehicle){
         $this->reset('array_itineraries');
         $this->voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
         $this->itineraries = Itinerary::where('voucher_id',$this->voucher->id)->get();
@@ -613,7 +612,6 @@ class Clients extends Component
         $this->modal_view_itineraries = true;
     }
 
-
     public function updateAllItineraries(){
         foreach ($this->itineraries as $itinerary) {
             /* dd($this->array_itineraries["comments"][$itinerary->id]); */
@@ -622,7 +620,7 @@ class Clients extends Component
             ]);
         }
 
-        $this->reset('array_itineraries');
+        //$this->reset('array_itineraries');
         $this->modal_view_itineraries = false;
     }
 
@@ -633,8 +631,17 @@ class Clients extends Component
         $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
     }
 
-    public function render()
-    {
+    public function downloadReceipt(Budget $budget){
+
+        return redirect()->route('download.receipt',compact('budget'));
+    }
+
+    public function downloadVoucher(Vehicle $vehicle){
+
+        return redirect()->route('download.voucher',compact('vehicle'));
+    }
+
+    public function render(){
         if ($this->name_search != '') {
             $clients = User::where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
         }else{
