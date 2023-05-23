@@ -64,7 +64,7 @@ class Budget extends Model
                 $totalWithOutTax = $totalWithOutTax+$concept->net_rate;
             }
         }
-        
+
         if ($this->discount) {
             $totalWithOutTax = $totalWithOutTax - $this->discount->amount;
         }else{

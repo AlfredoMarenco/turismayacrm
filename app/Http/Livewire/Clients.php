@@ -35,6 +35,7 @@ class Clients extends Component
     public $budget;
     public $concept;
     public $discount;
+    public $voucher;
 
     public $voucher_date;
     public $voucher_time;
@@ -56,6 +57,7 @@ class Clients extends Component
         'comment' => null,
     ];
 
+    public $formEditItineraries = [];
 
     public $paginate = 5;
     public $budget_date;
@@ -145,6 +147,8 @@ class Clients extends Component
     public $vehicles=[];
     public $drivers=[];
     public $units=[];
+    public $itineraries=[];
+    public $array_itineraries=[];
 
     public $name_search='';
     public $email_search='';
@@ -168,6 +172,7 @@ class Clients extends Component
     public $modal_edit_discount=false;
     public $modal_create_voucher=false;
     public $modal_confirm_vehicle_delete=false;
+    public $modal_view_itineraries=false;
 
 
     protected $listeners = [
@@ -553,6 +558,7 @@ class Clients extends Component
     }
 
     public function addVoucher(){
+
         if ($this->voucher_type_selected == 0) {
             $voucher = Voucher::create([
                 'type' => $this->voucher_type_selected,
@@ -582,7 +588,42 @@ class Clients extends Component
             ]);
         }
         $this->modal_create_voucher = false;
+
+        $this->modalEditVoucher($this->vehicle);
+        /* $this->itineraries = Itinerary::where('voucher_id',$voucher->id)->get();
+        foreach ($this->itineraries as $itinerary) {
+            $this->array_itineraries += ["comments.$itinerary->id" => $itinerary->comments,];
+            $this->array_itineraries += ["id.$itinerary->id" => $itinerary->id];
+        }
+        $this->modal_view_itineraries = true; */
+
+        /* $this->itineraries = $voucher->itineraries; */
+
         $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+    }
+
+    public function modalEditVoucher(Vehicle $vehicle)
+    {
+        $this->reset('array_itineraries');
+        $this->voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
+        $this->itineraries = Itinerary::where('voucher_id',$this->voucher->id)->get();
+        foreach ($this->itineraries as $itinerary) {
+            $this->array_itineraries += ["comments.$itinerary->id" => $itinerary->comments,];
+        }
+        $this->modal_view_itineraries = true;
+    }
+
+
+    public function updateAllItineraries(){
+        foreach ($this->itineraries as $itinerary) {
+            /* dd($this->array_itineraries["comments"][$itinerary->id]); */
+            $itinerary->update([
+                'comments' => $this->array_itineraries["comments"][$itinerary->id]
+            ]);
+        }
+
+        $this->reset('array_itineraries');
+        $this->modal_view_itineraries = false;
     }
 
     public function addCommentBudget(){

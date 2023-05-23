@@ -1413,12 +1413,27 @@
                                             </td>
                                         @endif
                                         @if ($budget->status != 0)
-                                            <td
-                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-                                                <a wire:click="modalCreateVoucher({{ $vehicle }})"
-                                                    class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                    Crear Voucher</a>
-                                            </td>
+                                            @if ($vehicle->countVoucher())
+                                                <td
+                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                    <a wire:click="modalEditVoucher({{ $vehicle }})"
+                                                        class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
+                                                        Editar voucher</a>
+                                                </td>
+                                                <td
+                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                    <a wire:click="modalEditVoucher({{ $vehicle }})"
+                                                        class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
+                                                        Editar voucher</a>
+                                                </td>
+                                            @else
+                                                <td
+                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                    <a wire:click="modalCreateVoucher({{ $vehicle }})"
+                                                        class="cursor-pointer inline-flex items-center rounded-md border border-transparent bg-lime-350 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                        Crear Voucher</a>
+                                                </td>
+                                            @endif
                                         @else
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
@@ -2548,13 +2563,13 @@
                                     @switch($voucher_type_selected)
                                         @case(0)
                                             <x-jet-label value="Unidad" />
-                                            <x-jet-input class="w-full" type="text" wire:model='unit'/>
+                                            <x-jet-input class="w-full" type="text" wire:model='unit' />
 
                                             <x-jet-label value="Chofer" />
-                                            <x-jet-input class="w-full" type="text" wire:model='driver_name'/>
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_name' />
 
                                             <x-jet-label value="Telefono" />
-                                            <x-jet-input class="w-full" type="text" wire:model='driver_phone'/>
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_phone' />
                                         @break
 
                                         @case(1)
@@ -2587,6 +2602,66 @@
                                     Cancelar
                                 </x-jet-danger-button>
                                 <x-jet-button wire:click="addVoucher()">Crear
+                                </x-jet-button>
+                            </x-slot>
+                        </x-jet-dialog-modal>
+                        <x-jet-dialog-modal wire:model="modal_view_itineraries">
+                            <x-slot name="title">
+                                Completar Voucher
+                            </x-slot>
+                            <x-slot name="content">
+                                <div>
+                                    <div class="px-4 sm:px-6 lg:px-8">
+                                        <div class="mt-8 flow-root">
+                                            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                <div
+                                                    class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                    <table class="min-w-full divide-y divide-gray-300">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                                                    Date</th>
+                                                                <th scope="col"
+                                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                    Descripción</th>
+                                                                <th scope="col"
+                                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                    Comentario</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="divide-y divide-gray-200">
+                                                            @if ($voucher)
+                                                                @foreach ($itineraries as $itinerary)
+                                                                    <tr>
+                                                                        <td
+                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                            {{ $itinerary->date }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $itinerary->description }}</td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            <x-jet-label value="Comentario" />
+                                                                            <x-jet-input type="text" wire:model="array_itineraries.comments.{{ $itinerary->id }}" />
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </x-slot>
+                            <x-slot name="footer">
+                                <x-jet-danger-button class="mx-2" wire:click="$set('modal_view_itineraries',false)">
+                                    Cancelar
+                                </x-jet-danger-button>
+                                <x-jet-button wire:click="updateAllItineraries()">Siguiente
                                 </x-jet-button>
                             </x-slot>
                         </x-jet-dialog-modal>

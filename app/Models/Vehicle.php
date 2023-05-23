@@ -23,6 +23,15 @@ class Vehicle extends Model
         return $this->hasMany(Concept::class);
     }
 
+    public function vouchers(): HasMany
+    {
+        return $this->hasMany(Voucher::class);
+    }
+
+    public function countVoucher(){
+        return Voucher::where('vehicle_id',$this->id)->count();
+    }
+
     public function totalWithOutTax(){
         $totalWithOutTax = 0;
         $concepts = Concept::where('vehicle_id',$this->id)->get();
