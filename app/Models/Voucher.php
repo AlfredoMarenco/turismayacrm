@@ -28,4 +28,14 @@ class Voucher extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo((Unit::class));
+    }
+
+    public function driver():BelongsTo
+    {
+        return $this->belongsTo(Driver::class);
+    }
 }
