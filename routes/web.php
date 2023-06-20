@@ -41,3 +41,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
+Route::get('/perfil', function () {
+    return view('usuario.perfil');
+});
