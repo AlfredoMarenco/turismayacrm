@@ -51,10 +51,28 @@
           
       </div>
     </header>
+
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
-        
+        <div class="hidden">{{-- cotizaciones --}}
+            @livewire('partidas', key('partidas'))
+        </div>
+        <div class="hidden"> {{-- detalle de pagos --}}
+            @livewire('pagos', key('pagos'))
+        </div>
+        <div class="hidden">{{-- checkout stripe --}}
+            @livewire('checkout-usuario', key('checkout-usuario'))
+        </div>
+        <div class="hidden"> 
+            @livewire('pago-exitoso', key('pago-exitoso'))
+        </div>
+        <div class="hidden">{{-- en caso de error de la plataforma --}}
+            @livewire('pago-fallido', key('pago-fallido'))
+        </div>
+        <div>{{-- en caso de que sea rechazado por el banco --}}
+            @livewire('pago-rechazado', key('pago-rechazado'))
+        </div>
       </div>
     </main>
   </div>

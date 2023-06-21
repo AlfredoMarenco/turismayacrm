@@ -14,10 +14,30 @@
     @livewireStyles
     
 </head>
-<body>
-    <main>
-        @yield('content')
-    </main>
+<body class="font-sans antialiased">
+    <x-jet-banner />
+
+    <div class="min-h-screen bg-white">
+        {{--  @livewire('navigation-menu') --}}
+
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main>
+            {{-- {{ $slot }} --}}
+            @yield('content')
+        </main>
+    </div>
+
+    @stack('modals')
+    @stack('js')
 
     @livewireScripts
 </body>
