@@ -498,7 +498,7 @@ class Clients extends Component
         $this->formEdit['name'] = $this->client->name;
         $this->formEdit['phone'] = $this->client->phone;
         $this->formEdit['email'] = $this->client->email;
-        $this->formEdit['password'] = '';
+        $this->formEdit['password'] = $this->client->password;
         $this->formEdit['company'] = $this->client->company;
         $this->formEdit['city'] = $this->client->city;
         $this->formEdit['comment'] = $this->client->comment;
@@ -623,7 +623,7 @@ class Clients extends Component
             ]);
         }
 
-        //$this->reset('array_itineraries');
+        $this->reset('array_itineraries');
         $this->modal_view_itineraries = false;
     }
 

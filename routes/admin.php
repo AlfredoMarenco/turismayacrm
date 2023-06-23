@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Menusidebar::class)->name('admin.index');
+Route::middleware(['role:Admin'])->get('/', Menusidebar::class)->name('admin.index');
 /* Route::get('disponibilities',Disponibilities::class)->name('disponibilities'); */
 
 Route::get('/download/receipt/{budget}', function (Budget $budget) {
@@ -41,7 +41,7 @@ Route::get('/download/voucher/{vehicle}', function (Vehicle $vehicle) {
         return view('voucher',compact('voucher','vehicle','unit','driver'));
     }else{
         $pdf = PDF::loadView('voucher',compact('voucher','vehicle'));
-    }  
+    }
     /* return $pdf->download('voucher.pdf'); */
 })->name('download.voucher');
 

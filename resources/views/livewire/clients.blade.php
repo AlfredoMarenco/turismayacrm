@@ -633,7 +633,7 @@
                                                                             Contraseña</td>
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            <x-jet-input type="text"
+                                                                            <x-jet-input type="password"
                                                                                 wire:model="formEdit.password" />
                                                                         </td>
 

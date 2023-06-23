@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="text-sm">
-                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">¿Olvidaste tu
+                            <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500">¿Olvidaste tu
                                 contraseña?</a>
                         </div>
                     </div>

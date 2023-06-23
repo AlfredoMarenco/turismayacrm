@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Split;
 use Illuminate\Http\Request;
 use Error;
@@ -26,11 +27,15 @@ class CheckoutController extends Controller
                 'status' => 2
             ]);
         }
+        $payment = $split->payment;
+        $payment->budget->update([
+            'status' => '1'
+        ]);
         return view('success',compact('sessionId'));
     }
 
     public function cancel(){
-        
+
     }
 
 }
