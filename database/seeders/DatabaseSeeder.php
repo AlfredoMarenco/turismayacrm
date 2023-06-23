@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Concept;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,5 +44,18 @@ class DatabaseSeeder extends Seeder
             'email' => 'cliente@agenciavandu.com',
             'password' => Hash::make('password'),
         ])->assignRole('User');
+
+        $this->call(BudgetSeeder::class);
+        $this->call(UnitSeeder::class);
+        $this->call(DriverSeeder::class);
+        $this->call(AvailabilitySeeder::class);
+        $this->call(VehicleSeeder::class);
+        $this->call(ConceptSeeder::class);
+        $this->call(PaymentSeeder::class);
+        $this->call(SplitSeeder::class);
+        $this->call(DiscountSeeder::class);
+        $this->call(VoucherSeeder::class);
+        $this->call(ItinerarySeeder::class);
+
     }
 }
