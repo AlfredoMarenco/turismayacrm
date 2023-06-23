@@ -61,7 +61,8 @@ class Disponibilities extends Component
         Availability::create([
             'title' => $this->budget_selected->name,
             'start' => $this->date,
-            'comment' => $this->comment
+            'comment' => $this->comment,
+            'budget_id' => $this->budget_selected->id
         ]);
         $this->saveDate = false;
     }

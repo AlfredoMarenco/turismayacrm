@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Voucher;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -476,6 +477,8 @@ class Clients extends Component
             'comment' => $this->comment
         ]);
 
+        $this->client->assignRole('User');
+
         $this->reset('name','last_name','email','city','password','phone','company','rfc','cif','comment');
         $this->addClient=false;
     }
@@ -643,9 +646,13 @@ class Clients extends Component
 
     public function render(){
         if ($this->name_search != '') {
-            $clients = User::where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
         }else{
-            $clients = User::orderBy('id','desc')->paginate($this->paginate);
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->orderBy('id','desc')->paginate($this->paginate);
         }
 
         return view('livewire.clients',[

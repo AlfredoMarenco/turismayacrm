@@ -113,9 +113,9 @@
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                                             PAGOS</th>
-                                                        <th scope="col"
+                                                        {{-- <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                            CANAL DE PAGO</th>
+                                                            CANAL DE PAGO</th> --}}
                                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                                             <span class="sr-only">Ver más</span>
                                                         </th>
@@ -136,7 +136,7 @@
                                                             <td
                                                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                                 {{ $payment->splits->count() }}</td>
-                                                            <td
+                                                           {{--  <td
                                                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                                 @switch($payment->channel)
                                                                     @case(1)
@@ -151,7 +151,7 @@
                                                                     @default
 
                                                                 @endswitch
-                                                            </td>
+                                                            </td> --}}
                                                             <td
                                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                                 <div>
@@ -228,6 +228,7 @@
                                                                 class="block text-sm font-medium text-gray-700">Selecciona
                                                                 un
                                                                 cliente</label>
+                                                                {{ var_dump($client) }}
                                                             <select wire:model="client"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                                                 <option value="" selected disabled>Selecciona una
@@ -537,9 +538,9 @@
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
                                                             Estado</th>
-                                                        <th scope="col"
+                                                        {{-- <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
-                                                            Metodo de Pago</th>
+                                                            Metodo de Pago</th> --}}
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
                                                             Comentario</th>
@@ -577,7 +578,7 @@
                                                                             Procesando
                                                                     @endswitch
                                                                 </td>
-                                                                <td
+                                                                {{-- <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                     @switch($split->payment_type)
                                                                         @case(3)
@@ -600,7 +601,7 @@
                                                                             <p class="font-semibold">Licitacion</p>
                                                                         @break
                                                                     @endswitch
-                                                                </td>
+                                                                </td> --}}
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                     {{ $split->comment }}

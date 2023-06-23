@@ -6,6 +6,7 @@ use App\Models\Budget;
 use App\Models\Payment;
 use App\Models\Split;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class Payments extends Component
@@ -43,7 +44,7 @@ class Payments extends Component
 
 
     public function updatedClient($client){
-        $this->budgets = Budget::where('user_id',$client)->get();
+        $this->budgets = Budget::where('user_id','=',$client)->doesntHave('payment')->get();
     }
 
     public function updatedBudget($budget){
@@ -115,7 +116,9 @@ class Payments extends Component
     public function render()
     {
         return view('livewire.payments',[
-            'users' => User::all(),
+            'users' => User::whereHas('roles', function (Builder $query){
+                            $query->where('name','LIKE','User');
+                        })->get(),
             'budgets' => $this->budgets,
             'payments' => Payment::paginate(10),
         ]);
