@@ -131,8 +131,14 @@
                                             crédito o débito.</p>
                                     </div>
                                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                                        <button type="button" wire:click="paySplits()"
-                                            class="block rounded-md bg-blue-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Pagar
+                                        <button type="button" wire:click="paySplits()" @if ($splitSelected==null)
+                                            disabled
+                                        @endif
+                                            class="@if ($splitSelected==null)
+                                            block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600
+                                            @else
+                                            block rounded-md bg-blue-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+                                            @endif">Pagar
                                             conceptos</button>
                                     </div>
                                 </div>

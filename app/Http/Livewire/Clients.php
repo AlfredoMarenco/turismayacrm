@@ -510,13 +510,13 @@ class Clients extends Component
             'name' => $this->formEdit['name'],
             'phone' => $this->formEdit['phone'],
             'email' => $this->formEdit['email'],
-            'password' => $this->formEdit['password'],
+            'password' => Hash::make($this->formEdit['password']),
             'company' => $this->formEdit['company'],
             'city' => $this->formEdit['city'],
             'comment' => $this->formEdit['comment']
         ]);
 
-        $this->client = User::find($client);
+        $this->client = User::find($this->client->id);
         $this->reset('formEdit');
         $this->editing = false;
     }

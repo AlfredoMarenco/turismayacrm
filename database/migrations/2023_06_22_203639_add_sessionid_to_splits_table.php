@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('splits', function (Blueprint $table) {
-            $table->string('stripe_id')->after('payment_id');
+            $table->string('stripe_id')->nullable()->after('payment_id');
         });
     }
 
