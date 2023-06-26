@@ -8,9 +8,12 @@ use App\Models\Split;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Payments extends Component
 {
+    use WithPagination;
+    
     public $client = '';
     public $budget = '';
     public $start_date;

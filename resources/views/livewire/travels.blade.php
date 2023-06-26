@@ -402,6 +402,9 @@
                                                 class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 placeholder="Escribe un mensaje"></textarea>
                                         </div>
+                                        @error('message')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="mt-3">

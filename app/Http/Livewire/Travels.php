@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Budget;
+use App\Models\Cancelation;
 use App\Models\Payment;
 use App\Models\Settlement;
 use App\Models\Split;
@@ -159,6 +160,15 @@ class Travels extends Component
 
 
     public function cancelBudget(){
+        $this->validate([
+            'message' => 'required'
+        ]);
+        Cancelation::create([
+            'message' => $this->message,
+            'percentage_refund' => $this->percentage_refund/100,
+            'refund' => $this->refund,
+            'budget_id' => $this->budget->id
+        ]);
         $this->budget->update([
             'status' => 5,
         ]);

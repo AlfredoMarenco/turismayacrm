@@ -136,22 +136,6 @@
                                                             <td
                                                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
                                                                 {{ $payment->splits->count() }}</td>
-                                                           {{--  <td
-                                                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-items-center">
-                                                                @switch($payment->channel)
-                                                                    @case(1)
-                                                                            Canal 1
-                                                                        @break
-                                                                    @case(2)
-                                                                            Canal 2
-                                                                        @break
-                                                                    @case(3)
-                                                                            Canal 3
-                                                                        @break
-                                                                    @default
-
-                                                                @endswitch
-                                                            </td> --}}
                                                             <td
                                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                                 <div>
@@ -170,6 +154,9 @@
                                                     <!-- More people... -->
                                                 </tbody>
                                             </table>
+                                            <div class="p-2">
+                                                {{ $payments->links() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
