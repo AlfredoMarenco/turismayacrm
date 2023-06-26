@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->float('percentage_refund')->nullable();
             $table->string('refund')->nullable();
+            $table->foreignId('budget_id')->constrained('budgets');
             $table->timestamps();
         });
     }

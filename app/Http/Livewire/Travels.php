@@ -3,7 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Budget;
+use App\Models\Payment;
 use App\Models\Settlement;
+use App\Models\Split;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -29,9 +31,9 @@ class Travels extends Component
     public $balance=0;
 
     public $message;
-    public $percentage_refund ;
-    public $refund;
-    public $total_paid;
+    public $percentage_refund=0;
+    public $refund = 0;
+    public $total_paid = 0;
     public $modal_liquidate_travel = false;
     public $modal_edit_settlement = false;
     public $modal_delete_settlement = false;
@@ -132,10 +134,27 @@ class Travels extends Component
         $this->table_travels = true;
     }
 
-    public function deleteBudget(Budget $budget){
+    public function modalCancelBudget(Budget $budget){
         $this->budget = $budget;
         $this->modal_cancel_travel = true;
+        $payment = Payment::where('budget_id',$budget->id)->first();
+        $splits = Split::where('payment_id',$payment->id)->where('status','2')->get();
 
+        foreach ($splits as $split) {
+            $this->total_paid = $this->total_paid+$split->amount;
+        }
+
+    }
+
+    public function updatedPercentageRefund(){
+        try {
+            if (!$this->percentage_refund) {
+                $this->refund = 0;
+            }
+            $this->refund = $this->total_paid*($this->percentage_refund/100);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
 
@@ -143,6 +162,7 @@ class Travels extends Component
         $this->budget->update([
             'status' => 5,
         ]);
+
         $this->modal_cancel_travel = false;
         $this->table_travels = true;
     }
