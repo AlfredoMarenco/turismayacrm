@@ -92,7 +92,7 @@
                                                     d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
                                             </svg>
                                         </div>
-                                        <input type="email" name="email" id="email"
+                                        <input type="text" wire:model="email_search"
                                             class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="you@example.com">
                                     </div>
@@ -550,15 +550,15 @@
                                                     </div>
                                                 </li>
 
-                                                <li class="flex">
-                                                    <div class="flex items-center">
+                                                <li class="flex" wire:click="navBar(1)">
+                                                    <div class="flex items-center cursor-pointer">
                                                         <svg class="h-full w-6 flex-shrink-0 text-gray-200"
                                                             viewBox="0 0 24 44" preserveAspectRatio="none"
                                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                                             aria-hidden="true">
                                                             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                         </svg>
-                                                        <a href="#"
+                                                        <a
                                                             class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Clientes</a>
                                                     </div>
                                                 </li>
@@ -571,8 +571,8 @@
                                                             aria-hidden="true">
                                                             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                         </svg>
-                                                        <a href="#"
-                                                            class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                                        <a
+                                                            class="ml-4 bg- text-sm font-medium text-gray-500 underline  hover:text-gray-700"
                                                             aria-current="page">Detalle Cliente</a>
                                                     </div>
                                                 </li>
@@ -913,9 +913,9 @@
                                                                             Total: <time datetime="2022-15-09"
                                                                                 class="pl-1">
                                                                                 @if ($budget->enable_tax)
-                                                                                    ${{ number_format($budget->totalWithTax(), 2) }}
-                                                                                @else
                                                                                     ${{ number_format($budget->totalWithOutTax(), 2) }}
+                                                                                @else
+                                                                                    ${{ number_format($budget->totalWithTax(), 2) }}
                                                                                 @endif
                                                                             </time>
                                                                         </p>

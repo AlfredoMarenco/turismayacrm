@@ -19,8 +19,8 @@ class BudgetFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'date' => $this->faker->date(),
-            'status' => $this->faker->numberBetween(0,1),
+            'date' => $this->faker->dateTimeThisMonth('+60 days'),
+            'status' => 0,
             'enable_tax' => $this->faker->numberBetween(0,1),
             'user_id' => User::all()->random()->id ,
             'comment' => $this->faker->paragraph() ,

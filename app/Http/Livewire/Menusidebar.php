@@ -13,7 +13,7 @@ class Menusidebar extends Component
         if ($request->session()->get('itemSelect') == 1) {
             $this->itemSelect = 1;
         }else{
-            $this->itemSelect = 2;
+            $this->itemSelect = 3;
         }
     }
 

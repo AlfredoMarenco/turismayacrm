@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Budget;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BudgetSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,12 @@ class BudgetSeeder extends Seeder
      */
     public function run()
     {
-        Budget::factory(100)->create();
+        User::factory(30)->create();
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->assignRole('User');
+        }
     }
 }

@@ -183,7 +183,20 @@ class Clients extends Component
 
 
     public function mount(){
-            $this->date = Carbon::now()->format('D M Y');
+            $this->date = Carbon::now()->toFormattedDateString();
+    }
+
+    public function navBar($value)
+    {
+        switch ($value) {
+            case '1':
+                $this->reset('detailsClient','tableClients');
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     public function updatingPaginate(){
@@ -504,7 +517,6 @@ class Clients extends Component
         $this->formEdit['comment'] = $this->client->comment;
     }
 
-
     public function updateClient(){
         $client = $this->client->update([
             'name' => $this->formEdit['name'],
@@ -644,11 +656,29 @@ class Clients extends Component
         return redirect()->route('download.voucher',compact('vehicle'));
     }
 
+    public function updatingNameSearch()
+    {
+        $this->reset('email_search');
+        $this->resetPage();
+    }
+
+    public function updatingEmailSearch()
+    {
+        $this->reset('name_search');
+        $this->resetPage();
+    }
+
     public function render(){
         if ($this->name_search != '') {
+
             $clients = User::whereHas('roles', function (Builder $query){
                 $query->where('name','LIKE','User');
-            })->where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
+            })->where('name','LIKE','%'.$this->name_search.'%')->orderBy('id','asc')->paginate($this->paginate);
+        }else if ($this->email_search != '') {
+
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('email','LIKE','%'.$this->email_search.'%')->orderBy('id','asc')->paginate($this->paginate);
         }else{
             $clients = User::whereHas('roles', function (Builder $query){
                 $query->where('name','LIKE','User');

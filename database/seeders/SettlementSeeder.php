@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Budget;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BudgetSeeder extends Seeder
+class SettlementSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class BudgetSeeder extends Seeder
      */
     public function run()
     {
-        Budget::factory(100)->create();
+        //
     }
 }

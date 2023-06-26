@@ -27,24 +27,15 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RoleSeeder::class);
 
-        User::create([
-            'name' => 'Alfredo Gonzalez Marenco',
-            'email' => 'dev@agenciavandu.com',
-            'password' => Hash::make('marencos6359:D'),
-        ])->assignRole('Admin');
 
-        User::create([
-            'name' => 'Alvar Buenfil',
-            'email' => 'ab@agenciavandu.com',
-            'password' => Hash::make('password'),
-        ])->assignRole('Admin');
 
         User::create([
             'name' => 'Cliente Prueba',
             'email' => 'cliente@agenciavandu.com',
             'password' => Hash::make('password'),
         ])->assignRole('User');
-
+        
+        $this->call(UserSeeder::class);
         $this->call(BudgetSeeder::class);
         $this->call(UnitSeeder::class);
         $this->call(DriverSeeder::class);
@@ -56,6 +47,18 @@ class DatabaseSeeder extends Seeder
         $this->call(DiscountSeeder::class);
         $this->call(VoucherSeeder::class);
         $this->call(ItinerarySeeder::class);
+
+        User::create([
+            'name' => 'Alfredo Gonzalez Marenco',
+            'email' => 'dev@agenciavandu.com',
+            'password' => Hash::make('marencos6359:D'),
+        ])->assignRole('Admin');
+
+        User::create([
+            'name' => 'Alvar Buenfil',
+            'email' => 'ab@agenciavandu.com',
+            'password' => Hash::make('password'),
+        ])->assignRole('Admin');
 
     }
 }

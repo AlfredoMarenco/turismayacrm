@@ -44,6 +44,11 @@ class Budget extends Model
         return $this->hasMany(Vehicle::class);
     }
 
+    public function settlements(): HasMany
+    {
+        return $this->hasMany(Settlement::class);
+    }
+
     public function totalPax(){
         $totalPax = 0;
         $vehicles = Vehicle::where('budget_id',$this->id)->get();
@@ -101,6 +106,16 @@ class Budget extends Model
             }
         }
         return $totalTax;
+    }
+
+    public function totalSettlement()
+    {
+        $total = 0;
+        $settlements = Settlement::where('budget_id',$this->id)->get();
+        foreach ($settlements as $settlement) {
+            $total=$total+$settlement->value;
+        }
+        return $total;
     }
 
 }
