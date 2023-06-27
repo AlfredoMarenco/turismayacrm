@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('driver_phone')->nullable();
             $table->string('unit')->nullable();
             $table->text('observations')->nullable();
-            $table->foreignId('driver_id')->nullable()->constrained('drivers');
-            $table->foreignId('unit_id')->nullable()->constrained('units');
-            $table->foreignId('vehicle_id')->constrained('vehicles');
+            $table->foreignId('driver_id')->nullable()->constrained('drivers')->onDelete('cascade');
+            $table->foreignId('unit_id')->nullable()->constrained('units')->onDelete('cascade');
+            $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
     }

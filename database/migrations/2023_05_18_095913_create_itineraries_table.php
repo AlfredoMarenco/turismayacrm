@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->text('description');
             $table->text('comments')->nullable();
-            $table->foreignId('voucher_id')->constrained();
+            $table->foreignId('voucher_id')->constrained('vouchers')->onDelete('cascade');
             $table->timestamps();
         });
     }

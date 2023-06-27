@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('type',[Settlement::SALARIOS,Settlement::VIATICOS,Settlement::CASETAS,Settlement::HOSPEDAJES,Settlement::LIMPIEZA,Settlement::COMBUSTIBLES,Settlement::TALLER,Settlement::EXTRAS]);
             $table->double('value');
             $table->string('description')->nullable();
-            $table->foreignId('budget_id')->constrained('budgets');
+            $table->foreignId('budget_id')->constrained('budgets')->onDelete('cascade');
             $table->timestamps();
         });
     }

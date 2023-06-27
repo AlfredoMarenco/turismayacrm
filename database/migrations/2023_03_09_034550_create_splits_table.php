@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status',[Split::PENDIENTE,Split::PAGADO])->default(Split::PENDIENTE);
             $table->enum('payment_type',[Split::EFECTIVO,Split::TRANSFERENCIA,Split::CREDITO,Split::PAYPAL,Split::LICITACION])->default(Split::PAYPAL);
             $table->text('comment')->nullable();
-            $table->foreignId('payment_id')->constrained('payments');
+            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }

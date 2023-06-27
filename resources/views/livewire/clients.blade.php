@@ -338,7 +338,7 @@
                                                             <label for="password"
                                                                 class="block text-sm font-medium text-gray-700">Contraseña</label>
                                                             <div class="mt-1">
-                                                                <input type="text" wire:model="password"
+                                                                <input type="password" wire:model="password"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                                 @error('password')
                                                                     <span
@@ -669,25 +669,13 @@
                                                                             <x-jet-input type="text"
                                                                                 wire:model="formEdit.comment" />
                                                                         </td>
-
                                                                     </tr>
-                                                                    <tr class="bg-white">
-                                                                        <td
-                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                            Contrato</td>
-                                                                        <td
-                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            Descargar</td>
-
-                                                                    </tr>
-                                                                    <tr>
                                                                         <td
                                                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                                                             CIF</td>
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             Cargar</td>
-
                                                                     </tr>
                                                                     <!-- More people... -->
                                                                 </tbody>
@@ -757,15 +745,6 @@
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             {{ $client->comment }}</td>
-
-                                                                    </tr>
-                                                                    <tr class="bg-white">
-                                                                        <td
-                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                            Contrato</td>
-                                                                        <td
-                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            Descargar</td>
 
                                                                     </tr>
                                                                     <tr>
