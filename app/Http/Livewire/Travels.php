@@ -8,12 +8,17 @@ use App\Models\Payment;
 use App\Models\Settlement;
 use App\Models\Split;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Travels extends Component
 {
     use WithPagination;
+
+    public $paginate = 10;
+    public $name_search;
+    public $status_search='';
     public $dates;
     public $budget;
 
@@ -179,8 +184,21 @@ class Travels extends Component
 
     public function render()
     {
+        if ($this->name_search != '') {
+            $travels = Budget::whereHas('user', function (Builder $query){
+                $query->where('name','LIKE','%'.$this->name_search.'%');
+            })->has('availability','>=',1)->paginate($this->paginate);
+        }else if($this->status_search != ''){
+            $travels = Budget::where('status','=',$this->status_search)/* ->has('availability','>=',1) */->paginate($this->paginate);
+        }
+        else{
+            $travels = Budget::has('availability','>=',1)->paginate($this->paginate);
+        }
+
+
+
         return view('livewire.travels',[
-            'travels' => Budget::has('availability','>=',1)->paginate(10),
+            'travels' => $travels,
         ]);
     }
 }

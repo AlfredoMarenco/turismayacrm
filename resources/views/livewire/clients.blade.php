@@ -102,7 +102,7 @@
                                     <label for="tel"
                                         class="block text-sm font-medium text-gray-700">Teléfono</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-                                        <input type="tel" name="tel" id="phone"
+                                        <input type="text" wire:model="phone_search"
                                             class="block w-full rounded-md border-gray-300 pl-4 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="(999) 955 2316">
                                     </div>
@@ -571,8 +571,7 @@
                                                             aria-hidden="true">
                                                             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                         </svg>
-                                                        <a
-                                                            class="ml-4 bg- text-sm font-medium text-gray-500 underline  hover:text-gray-700"
+                                                        <a class="ml-4 bg- text-sm font-medium text-gray-500 underline  hover:text-gray-700"
                                                             aria-current="page">Detalle Cliente</a>
                                                     </div>
                                                 </li>
@@ -670,12 +669,12 @@
                                                                                 wire:model="formEdit.comment" />
                                                                         </td>
                                                                     </tr>
-                                                                        <td
-                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                                            CIF</td>
-                                                                        <td
-                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            Cargar</td>
+                                                                    <td
+                                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                        CIF</td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                        Cargar</td>
                                                                     </tr>
                                                                     <!-- More people... -->
                                                                 </tbody>
@@ -981,10 +980,20 @@
                                         <x-jet-label value="Nombre descriptivo" />
                                         <x-jet-input class="w-full" type="text" wire:model='budget_name'
                                             placeholder="Merida - Cancún" />
+                                        <div>
+                                            @error('budget_name')
+                                                <span class="text-sm text-red-500">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div>
                                         <x-jet-label value="Fecha" />
                                         <x-jet-input class="w-full" type="date" wire:model='budget_date' />
+                                        <div>
+                                            @error('budget_date')
+                                                <span class="text-sm text-red-500">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </x-slot>
                                 <x-slot name="footer">
@@ -1044,7 +1053,7 @@
                                             </div>
                                         </li>
 
-                                        <li class="flex">
+                                        <li class="flex cursor-pointer" wire:click="navBar(1)">
                                             <div class="flex items-center">
                                                 <svg class="h-full w-6 flex-shrink-0 text-gray-200"
                                                     viewBox="0 0 24 44" preserveAspectRatio="none"
@@ -1052,12 +1061,12 @@
                                                     aria-hidden="true">
                                                     <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                 </svg>
-                                                <a href="#"
+                                                <a
                                                     class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Clientes</a>
                                             </div>
                                         </li>
 
-                                        <li class="flex">
+                                        <li class="flex cursor-pointer" wire:click="navBar(2)">
                                             <div class="flex items-center">
                                                 <svg class="h-full w-6 flex-shrink-0 text-gray-200"
                                                     viewBox="0 0 24 44" preserveAspectRatio="none"
@@ -1065,8 +1074,7 @@
                                                     aria-hidden="true">
                                                     <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                 </svg>
-                                                <a href="#"
-                                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Detalle
+                                                <a class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Detalle
                                                     cliente</a>
                                             </div>
                                         </li>
@@ -1078,8 +1086,8 @@
                                                     aria-hidden="true">
                                                     <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                                                 </svg>
-                                                <a href="#"
-                                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Crear
+                                                <a
+                                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 underline">Crear
                                                     presupuesto</a>
                                             </div>
                                         </li>
@@ -1088,11 +1096,11 @@
                             </div>
                             @if ($budget->status != 0)
                             @else
-                                <div class="col-span-6">
+                                <div class="col-span-6 flex justify-end space-x-2">
                                     <button type="button" wire:click="$set('modal_create_vehicle',true)"
-                                        class="inline-flex items-center rounded-md border border-transparent bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                        class="inline-flex mx-2 items-center rounded-md border border-transparent bg-blue-900 px-2 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                         <!-- Heroicon name: mini/check -->
-                                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                        <svg class="-ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path fill-rule="evenodd"
                                                 d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -1102,9 +1110,9 @@
                                     </button>
                                     @if ($budget->enable_tax)
                                         <button type="button" wire:click="changeEnableTax('0')"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                                            class="inline-flex mx-2 items-center rounded-md border border-transparent bg-orange-500 px-2 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                                             <!-- Heroicon name: mini/check -->
-                                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            <svg class="-ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd"
                                                     d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -1114,9 +1122,9 @@
                                         </button>
                                     @else
                                         <button type="button" wire:click="changeEnableTax('1')"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                            class="inline-flex mx-2 items-center rounded-md border border-transparent bg-green-500 px-2 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                                             <!-- Heroicon name: mini/check -->
-                                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            <svg class="-ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd"
                                                     d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -1127,9 +1135,9 @@
                                     @endif
                                     @if (!$budget->discount)
                                         <button type="button" wire:click="$set('modal_create_discount',true)"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+                                            class="inline-flex mx-2 items-center rounded-md border border-transparent bg-pink-500 px-2 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
                                             <!-- Heroicon name: mini/check -->
-                                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            <svg class="-ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd"
                                                     d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -1139,9 +1147,9 @@
                                         </button>
                                     @else
                                         <button type="button" wire:click="editDiscount()"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+                                            class="inline-flex mx-2 items-center rounded-md border border-transparent bg-pink-500 px-2 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
                                             <!-- Heroicon name: mini/check -->
-                                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            <svg class="-ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd"
                                                     d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -1235,10 +1243,10 @@
                                 </x-slot>
                                 <x-slot name="content">
                                     <div>
-                                        <x-jet-label value="Cantidad" />
+                                        <x-jet-label value="Porcentaje de descuento" />
                                         <x-jet-input
                                             class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            type="number" wire:model='amount' />
+                                            type="number" wire:model='amount' min="0" max="100" />
                                     </div>
                                 </x-slot>
                                 <x-slot name="footer">
@@ -1445,10 +1453,10 @@
                                                         class="text-pink-500 hover:text-pink-700 cursor-pointer">Copiar
                                                         Vehiculo</a>
                                                 </div>
-                                                {{-- <div>
+                                                <div>
                                                     <a wire:click="modalDeleteVehicle({{ $vehicle }})"
                                                         class="text-red-500 hover:text-red-800 cursor-pointer">Eliminar</a>
-                                                </div> --}}
+                                                </div>
                                             </td>
                                         @endif
                                     </tr>
@@ -1486,7 +1494,12 @@
                                                         </td>
                                                         <td
                                                             class="text-red-500 relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
-                                                            -${{ number_format($budget->discount->amount, 2) }}
+                                                            @if ($budget->enable_tax)
+                                                                ${{ number_format((($budget->totalWithTax())*($budget->discount->amount*100)/100), 2) }}
+                                                            @else
+                                                                ${{ number_format((($budget->totalWithOutTax())*($budget->discount->amount*100)/100), 2) }}
+                                                            @endif
+                                                            ({{ number_format($budget->discount->amount * 100) }}%)
                                                         </td>
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
@@ -1548,16 +1561,15 @@
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                 </tr>
-                                <!-- More people... -->
                             </tbody>
                         </table>
+
                         <x-jet-dialog-modal wire:model="modal_create_concept">
                             <x-slot name="title">
                                 Crear nuevo concepto
                             </x-slot>
                             <x-slot name="content">
                                 <div class="col-span-10 md:col-span-10 lg:col-span-5">
-                                    {{-- form calculador de cotizacion --}}
                                     <form>
                                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 mt-3">
                                             <div class="sm:col-span-6">
@@ -2027,17 +2039,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </form>
-
                                 </div>
                             </x-slot>
                             <x-slot name="footer">
                                 <x-jet-danger-button class="mx-2" wire:click="$set('modal_create_concept',false)">
                                     Cancelar
                                 </x-jet-danger-button>
-                                <x-jet-button wire:click="addConcept">Siguiente
+                                <x-jet-button wire:click="addConcept">
+                                    Siguiente
                                 </x-jet-button>
                             </x-slot>
                         </x-jet-dialog-modal>

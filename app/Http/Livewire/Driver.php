@@ -4,16 +4,21 @@ namespace App\Http\Livewire;
 
 use App\Models\Driver as ModelsDriver;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Driver extends Component
 {
-
+    use WithPagination;
     public $name;
     public $age;
     public $phone;
     public $license_validity;
     public $psychometric;
     public $driver;
+
+    public $paginate=10;
+    public $name_search;
+    public $phone_search;
 
     public $formEdit = [
         'name' => null,
@@ -61,10 +66,26 @@ class Driver extends Component
 
     }
 
+    public function updatedNameSearch(){
+        $this->phone_search = '';
+    }
+
+    public function updatedPhoneSearch(){
+        $this->name_search = '';
+    }
+
     public function render()
     {
+        if ($this->name_search != '') {
+            $drivers = ModelsDriver::where('name','LIKE','%'.$this->name_search.'%')->orderBy('id','desc')->paginate($this->paginate);
+        }else if($this->phone_search != ''){
+            $drivers = ModelsDriver::where('phone','LIKE','%'.$this->phone_search.'%')->orderBy('id','desc')->paginate($this->paginate);
+        } else {
+            $drivers = ModelsDriver::orderBy('id','desc')->paginate($this->paginate);
+        }
+
         return view('livewire.driver',[
-            'drivers' => ModelsDriver::paginate(5),
+            'drivers' => $drivers,
         ]);
     }
 }

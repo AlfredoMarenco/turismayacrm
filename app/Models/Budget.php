@@ -71,7 +71,7 @@ class Budget extends Model
         }
 
         if ($this->discount) {
-            $totalWithOutTax = $totalWithOutTax - $this->discount->amount;
+            $totalWithOutTax = $totalWithOutTax - ($totalWithOutTax)*($this->discount->amount);
         }else{
 
         }
@@ -89,7 +89,7 @@ class Budget extends Model
         }
 
         if ($this->discount) {
-            $totalWithTax = $totalWithTax - $this->discount->amount;
+            $totalWithTax = $totalWithTax - ($totalWithTax)*($this->discount->amount);
         }else{
 
         }

@@ -13,7 +13,7 @@ use Livewire\WithPagination;
 class Payments extends Component
 {
     use WithPagination;
-    
+
     public $client = '';
     public $budget = '';
     public $start_date;
@@ -118,12 +118,13 @@ class Payments extends Component
 
     public function render()
     {
+        $payments = Payment::orderBy('id','desc')->paginate(10);
         return view('livewire.payments',[
             'users' => User::whereHas('roles', function (Builder $query){
                             $query->where('name','LIKE','User');
                         })->get(),
             'budgets' => $this->budgets,
-            'payments' => Payment::paginate(10),
+            'payments' => $payments,
         ]);
 
     }

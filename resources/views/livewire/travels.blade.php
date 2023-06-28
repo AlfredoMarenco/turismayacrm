@@ -35,11 +35,11 @@
                                 <div class="col-span-2">
                                     <label for="num"
                                         class="block text-sm font-medium text-gray-700">Mostrar</label>
-                                    <select id="num" name="num"
+                                    <select wire:model="paginate"
                                         class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                        <option selected>10</option>
-                                        <option>20</option>
-                                        <option>30</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
                                     </select>
                                 </div>
                                 <div class="col-span-4">
@@ -54,7 +54,7 @@
                                                     d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.818.818 0 01-.36.98A7.465 7.465 0 0114.5 16z" />
                                             </svg>
                                         </div>
-                                        <input type="text" name="text" id="name"
+                                        <input type="text" wire:model="name_search"
                                             class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="Jane Cooper">
                                     </div>
@@ -65,11 +65,12 @@
                                     <label for="tel"
                                         class="block text-sm font-medium text-gray-700">Estatus</label>
                                     <div class="col-span-2">
-                                        <select id="num" name="num"
+                                        <select wire:model="status_search"
                                             class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                            <option selected>Viaje iniciado</option>
-                                            <option>Viaje apartado</option>
-                                            <option>Viaje cancelado</option>
+                                            <option value="" selected>Todos</option>
+                                            <option value="1">Por liquidar</option>
+                                            <option value="4">Liquidado</option>
+                                            <option value="5">Cancelado</option>
                                         </select>
                                     </div>
                                 </div>

@@ -153,6 +153,8 @@ class Clients extends Component
 
     public $name_search='';
     public $email_search='';
+    public $phone_search='';
+
 
     public $createBudget = false;
     public $modal_added = false;
@@ -190,9 +192,12 @@ class Clients extends Component
     {
         switch ($value) {
             case '1':
-                $this->reset('detailsClient','tableClients');
+                $this->reset('detailsClient','tableClients','createBudget');
                 break;
-
+            case '2':
+                $this->detailsClient=true;
+                $this->reset('createBudget');
+                break;
             default:
                 # code...
                 break;
@@ -213,6 +218,10 @@ class Clients extends Component
     }
 
     public function createBudget(){
+        $this->validate([
+            'budget_name' => 'required',
+            'budget_date' => 'required'
+        ]);
         $this->budget = Budget::create([
             'name' =>  $this->budget_name,
             'date' => $this->budget_date,
@@ -425,20 +434,20 @@ class Clients extends Component
 
     public function createDiscount(){
         Discount::create([
-            'amount' => $this->amount,
+            'amount' => $this->amount/100,
             'budget_id' => $this->budget->id
         ]);
     }
 
     public function editDiscount(){
         $this->modal_edit_discount = true;
-        $this->editDiscountForm['amount'] = $this->budget->discount->amount;
+        $this->editDiscountForm['amount'] = $this->budget->discount->amount*100;
     }
 
     public function updateDiscount(){
         $this->modal_edit_discount = false;
         $this->budget->discount->update([
-            'amount' => $this->editDiscountForm['amount'],
+            'amount' => $this->editDiscountForm['amount']/100,
         ]);
     }
 
@@ -658,27 +667,35 @@ class Clients extends Component
 
     public function updatingNameSearch()
     {
-        $this->reset('email_search');
+        $this->reset('email_search','phone_search');
         $this->resetPage();
     }
 
     public function updatingEmailSearch()
     {
-        $this->reset('name_search');
+        $this->reset('name_search','phone_search');
+        $this->resetPage();
+    }
+
+    public function updatingPhoneSearch()
+    {
+        $this->reset('name_search','email_search');
         $this->resetPage();
     }
 
     public function render(){
         if ($this->name_search != '') {
-
             $clients = User::whereHas('roles', function (Builder $query){
                 $query->where('name','LIKE','User');
             })->where('name','LIKE','%'.$this->name_search.'%')->orderBy('id','asc')->paginate($this->paginate);
         }else if ($this->email_search != '') {
-
             $clients = User::whereHas('roles', function (Builder $query){
                 $query->where('name','LIKE','User');
             })->where('email','LIKE','%'.$this->email_search.'%')->orderBy('id','asc')->paginate($this->paginate);
+        }else if ($this->phone_search != '') {
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('phone','LIKE','%'.$this->phone_search.'%')->orderBy('id','asc')->paginate($this->paginate);
         }else{
             $clients = User::whereHas('roles', function (Builder $query){
                 $query->where('name','LIKE','User');

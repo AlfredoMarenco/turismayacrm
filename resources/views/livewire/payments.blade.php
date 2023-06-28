@@ -215,7 +215,6 @@
                                                                 class="block text-sm font-medium text-gray-700">Selecciona
                                                                 un
                                                                 cliente</label>
-                                                                {{ var_dump($client) }}
                                                             <select wire:model="client"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                                                 <option value="" selected disabled>Selecciona una
@@ -313,9 +312,7 @@
                                                                 <select
                                                                     class="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     wire:model="channel">
-                                                                    <option value="1">Canal 1</option>
-                                                                    <option value="2">Canal 2</option>
-                                                                    <option value="3">Canal 3</option>
+                                                                    <option value="1">Servicios Turísticos del Mayab</option>
                                                                 </select>
                                                             </div>
                                                         </div>
