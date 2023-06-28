@@ -29,7 +29,8 @@ Route::get('/clientes', function () {
 }); */
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');
-});
+})->name('password.reset');
+
 Route::get('/cuentas', function () {
     return view('usuario.cuentas');
 });

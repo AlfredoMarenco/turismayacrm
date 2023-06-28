@@ -638,9 +638,9 @@ class Clients extends Component
 
     public function updateAllItineraries(){
         foreach ($this->itineraries as $itinerary) {
-            /* dd($this->array_itineraries["comments"][$itinerary->id]); */
+            /* dd($this->array_itineraries["comments.".$itinerary->id]); */
             $itinerary->update([
-                'comments' => $this->array_itineraries["comments"][$itinerary->id]
+                'comments' => $this->array_itineraries["comments.".$itinerary->id]
             ]);
         }
 
