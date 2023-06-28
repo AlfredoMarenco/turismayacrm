@@ -70,6 +70,9 @@ class Perfil extends Component
 
     public function render()
     {
-        return view('livewire.perfil');
+        $budgets = Budget::has('payment')->where('user_id',auth()->user()->id)->get();
+        return view('livewire.perfil',[
+            'budgets' => $budgets,
+        ]);
     }
 }

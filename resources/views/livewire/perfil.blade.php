@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <ul role="list" class="divide-y divide-gray-100">
-                                @foreach ($user->budgets as $budget)
+                                @foreach ($budgets as $budget)
                                     <li wire:click='selectedBudget({{ $budget }})'
                                         class="relative flex justify-between gap-x-6 py-5">
                                         <div class="flex gap-x-4">
