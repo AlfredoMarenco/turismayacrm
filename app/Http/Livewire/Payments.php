@@ -26,9 +26,13 @@ class Payments extends Component
         'description' => null,
         'amount' => null,
         'status' => null,
-        'payment_type' => null,
+        'payment_type' => '',
         'comment' => null,
     ];
+
+    public $budget_of_payment;
+    public $totalBudget;
+    public $difference;
 
 
     public $budgets = null;
@@ -65,19 +69,53 @@ class Payments extends Component
 
     public function view_details_payments(Payment $payment){
         $this->payment = $payment;
+        $this->budget_of_payment = Budget::find($payment->budget_id);
+        if ($this->budget_of_payment->enable_tax) {
+            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
+        }else{
+            $this->totalBudget = $this->budget_of_payment->totalWithTax();
+        }
         $this->splits = Split::where('payment_id',$payment->id)->get();
         $this->view_payments=false;
         $this->view_details_payment = true;
     }
 
     public function addSplit(){
-        Split::create([
-            'description' => $this->description,
-            'amount' => $this->amount,
-            'payment_id' => $this->payment->id
+        $this->validate([
+            'description' => 'required',
+            'amount' => 'required'
         ]);
-        $this->add_split_modal = false;
-        $this->splits = Split::where('payment_id',$this->payment->id)->get();
+
+        if ($this->budget_of_payment->enable_tax) {
+            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
+        }else{
+            $this->totalBudget = $this->budget_of_payment->totalWithTax();
+        }
+
+        $total_splits = 0;
+
+        foreach ($this->splits as $split) {
+            $total_splits = $total_splits+$split->amount;
+        }
+
+        $this->difference = $this->totalBudget-($total_splits+$this->amount);
+
+
+        if ($this->amount > 0 && $this->difference >= 0) {
+            Split::create([
+                'description' => $this->description,
+                'amount' => $this->amount,
+                'payment_id' => $this->payment->id
+            ]);
+            $this->add_split_modal = false;
+            $this->splits = Split::where('payment_id',$this->payment->id)->get();
+        }else if($this->difference < 0){
+                session()->flash('message','La sumatoria de las solicitudes no puede ser mayor al total presupuestado');
+        }else
+        {
+            session()->flash('message','El valor debe ser mayor a 0');
+        }
+
     }
 
     public function editSplit(Split $split){

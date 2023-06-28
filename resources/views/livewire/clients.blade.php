@@ -1494,11 +1494,7 @@
                                                         </td>
                                                         <td
                                                             class="text-red-500 relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
-                                                            @if ($budget->enable_tax)
-                                                                ${{ number_format((($budget->totalWithTax())*($budget->discount->amount*100)/100), 2) }}
-                                                            @else
-                                                                ${{ number_format((($budget->totalWithOutTax())*($budget->discount->amount*100)/100), 2) }}
-                                                            @endif
+                                                            {{ $budget->totalDiscount() }}
                                                             ({{ number_format($budget->discount->amount * 100) }}%)
                                                         </td>
                                                         <td
