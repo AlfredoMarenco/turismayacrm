@@ -134,4 +134,25 @@ class Budget extends Model
         return $total;
     }
 
+    public function balanceSplits()
+    {
+        $balance = 0;
+        $total_splits=0;
+        $payment = Payment::where('budget_id',$this->id)->first();
+
+        foreach ($payment->splits as $split) {
+            if ($split->status == 2) {
+                $total_splits = $total_splits+$split->amount;
+            }
+        }
+
+        if ($this->enable_tax) {
+            $balance = $this->totalWithOutTax()-$total_splits;
+        }else{
+            $balance = $this->totalWithTax()-$total_splits;
+        }
+
+        return $balance;
+    }
+
 }

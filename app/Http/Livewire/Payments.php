@@ -81,11 +81,12 @@ class Payments extends Component
     }
 
     public function addSplit(){
+
         $this->validate([
             'description' => 'required',
             'amount' => 'required'
         ]);
-
+        $this->difference;
         if ($this->budget_of_payment->enable_tax) {
             $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
         }else{
@@ -109,12 +110,14 @@ class Payments extends Component
             ]);
             $this->add_split_modal = false;
             $this->splits = Split::where('payment_id',$this->payment->id)->get();
+            $this->reset('amount','description');
         }else if($this->difference < 0){
                 session()->flash('message','La sumatoria de las solicitudes no puede ser mayor al total presupuestado');
         }else
         {
             session()->flash('message','El valor debe ser mayor a 0');
         }
+
 
     }
 
@@ -125,19 +128,46 @@ class Payments extends Component
         $this->editForm['amount'] = $split->amount;
     }
 
+
+    public function updateSplit(){
+        $this->difference = 0;
+        if ($this->budget_of_payment->enable_tax) {
+            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
+        }else{
+            $this->totalBudget = $this->budget_of_payment->totalWithTax();
+        }
+
+        $total_splits = 0;
+
+        foreach ($this->splits as $split) {
+            $total_splits = $total_splits+$split->amount;
+        }
+
+        $this->difference = $this->totalBudget-($total_splits+$this->editForm['amount'] );
+
+
+        if ($this->editForm['amount'] > 0 && $this->difference >= 0) {
+            $this->split->update([
+                'description' => $this->editForm['description'],
+                'amount' => $this->editForm['amount']
+            ]);
+        $this->edit_split_modal = false;
+        $this->splits = Split::where('payment_id',$this->payment->id)->get();
+        }else if($this->difference < 0){
+            session()->flash('message2','La sumatoria de las solicitudes no puede ser mayor al total presupuestado');
+            /* $this->reset('difference'); */
+        }else{
+            session()->flash('message2','El valor debe ser mayor a 0');
+        }
+
+        $this->editForm['amount']=0;
+
+    }
+
     public function editStatusSplit(Split $split){
         $this->edit_status_split_modal = true;
         $this->split = $split;
 
-    }
-
-    public function updateSplit(){
-        $this->split->update([
-            'description' => $this->editForm['description'],
-            'amount' => $this->editForm['amount']
-        ]);
-        $this->edit_split_modal = false;
-        $this->splits = Split::where('payment_id',$this->payment->id)->get();
     }
 
     public function updateStatusSplit(){

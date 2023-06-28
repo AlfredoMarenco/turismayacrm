@@ -120,6 +120,7 @@
                                                                 @switch($travel->status)
                                                                     @case(1)
                                                                         Por liquidar
+                                                                        {{ number_format($travel->balanceSplits(), 2) }}
                                                                     @break
 
                                                                     @case(5)
@@ -135,8 +136,10 @@
                                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                                 @switch($travel->status)
                                                                     @case(1)
-                                                                        <a wire:click="selectedBudget({{ $travel }})"
-                                                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Liquidar</a>
+                                                                        @if ($travel->balanceSplits() == 0)
+                                                                            <a wire:click="selectedBudget({{ $travel }})"
+                                                                                class="text-blue-600 hover:text-indigo-900 cursor-pointer">Liquidar</a>
+                                                                        @endif
                                                                         <a wire:click="modalCancelBudget({{ $travel }})"
                                                                             class="text-red-600 hover:text-red-900 cursor-pointer">Cancelar</a>
                                                                     @break
@@ -166,7 +169,8 @@
                     <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithOutTax(), 2) }}
                     </p>
                 @else
-                    <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithTax(), 2) }}</p>
+                    <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithTax(), 2) }}
+                    </p>
                 @endif
                 <p class="text-lg font-semibold">Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}</p>
                 <p class="text-lg font-semibold {{ $balance > 0 ? 'text-green-500' : 'text-red-500' }}">Balance:

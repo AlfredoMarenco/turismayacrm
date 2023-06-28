@@ -457,7 +457,8 @@
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                     ${{ number_format($totalBudget, 2) }} MXN
-                                                                    <p>{{ $difference }}</p></td>
+                                                                    <p>{{ $difference }}</p>
+                                                                </td>
                                                             </tr>
                                                             <!-- More people... -->
                                                         </tbody>
@@ -738,6 +739,16 @@
                                                                     class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="0.00"
                                                                     aria-describedby="price-currency">
+
+                                                                @error('message2')
+                                                                    <span
+                                                                        class="text-sm text-red-500">{{ $message2 }}</span>
+                                                                @enderror
+                                                                @if (!session()->has('editForm.amount'))
+                                                                    <div class="text-sm text-red-500">
+                                                                        {{ session('message2') }}
+                                                                    </div>
+                                                                @endif
                                                                 <div
                                                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                     <span class="text-gray-500 sm:text-sm"
@@ -787,7 +798,8 @@
                                                                 pago</label>
                                                             <select wire:model="editForm.payment_type"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                                <option value="" selected disabled>-Selecciona una opción-</option>
+                                                                <option value="" selected disabled>-Selecciona
+                                                                    una opción-</option>
                                                                 <option value="3">Efectivo</option>
                                                                 <option value="4">Transferencia</option>
                                                                 <option value="5">Crédito</option>

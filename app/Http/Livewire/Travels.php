@@ -18,7 +18,7 @@ class Travels extends Component
 
     public $paginate = 10;
     public $name_search;
-    public $status_search='';
+    public $status_search=1;
     public $dates;
     public $budget;
 
@@ -189,7 +189,7 @@ class Travels extends Component
                 $query->where('name','LIKE','%'.$this->name_search.'%');
             })->has('availability','>=',1)->paginate($this->paginate);
         }else if($this->status_search != ''){
-            $travels = Budget::where('status','=',$this->status_search)/* ->has('availability','>=',1) */->paginate($this->paginate);
+            $travels = Budget::where('status','=',$this->status_search)->paginate($this->paginate);
         }
         else{
             $travels = Budget::has('availability','>=',1)->paginate($this->paginate);
