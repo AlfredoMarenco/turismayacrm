@@ -1320,7 +1320,7 @@
                                                     <thead class="bg-gray-50">
                                                         <tr>
                                                             <th scope="col"
-                                                                class="w-2/3 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
+                                                                class="w-4/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
                                                                 Descripcion</th>
                                                             <th scope="col"
                                                                 class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
