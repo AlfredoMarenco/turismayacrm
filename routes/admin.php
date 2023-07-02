@@ -3,6 +3,11 @@
 use App\Http\Livewire\Detailclient;
 use App\Http\Livewire\Disponibilities;
 use App\Http\Livewire\Menusidebar;
+use App\Models\Budget;
+use App\Models\Driver;
+use App\Models\Unit;
+use App\Models\Vehicle;
+use App\Models\Voucher;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Route;
 
@@ -17,14 +22,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Menusidebar::class)->name('admin.index');
+Route::middleware(['role:Admin'])->get('/', Menusidebar::class)->name('admin.index');
 /* Route::get('disponibilities',Disponibilities::class)->name('disponibilities'); */
 
-Route::get('/clientes', function () {
-    $pdf = PDF::loadView('voucher');
-    return $pdf->stream();
-    /* return view('voucher'); */
-});
+Route::get('/download/receipt/{budget}', function (Budget $budget) {
+    $vehicles = Vehicle::where('budget_id',$budget->id)->get();
+    $pdf = PDF::loadView('receipt',compact('vehicles','budget'));
+    return $pdf->download('receipt.pdf');
+    /* return view('receipt',compact('vehicles','budget')); */
+})->name('download.receipt');
+
+Route::get('/download/voucher/{vehicle}', function (Vehicle $vehicle) {
+    $voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
+    if ($voucher->type == 1) {
+        $unit = Unit::find($voucher->unit_id);
+        $driver = Driver::find($voucher->driver_id);
+        $pdf = PDF::loadView('voucher',compact('voucher','vehicle','unit','driver'));
+        return view('voucher',compact('voucher','vehicle','unit','driver'));
+    }else{
+        $pdf = PDF::loadView('voucher',compact('voucher','vehicle'));
+    }
+    /* return $pdf->download('voucher.pdf'); */
+})->name('download.voucher');
 
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');

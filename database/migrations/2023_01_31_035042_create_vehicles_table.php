@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('type');
             $table->integer('pax');
-            $table->foreignId('budget_id')->constrained('vehicles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('budget_id')->constrained('budgets')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

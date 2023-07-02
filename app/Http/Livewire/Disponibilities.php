@@ -13,14 +13,14 @@ class Disponibilities extends Component
 {
 
     public $saveDate=false;
-    public $start_date=null;
+    public $date=null;
     public $end_date=null;
     public $client = '';
     public $budget = '';
     public $unit = '';
     public $driver = '';
     public $budgets;
-    public $comment;
+    public $comment = '';
     public $budget_selected;
     public $selectedDate;
     /* public $availibities=[]; */
@@ -36,15 +36,14 @@ class Disponibilities extends Component
 
     public function updatedClient($client){
         $this->budgets = Budget::where('user_id',$client)->get();
-        $this->reset('budget','start_date','end_date');
+        $this->reset('budget','date','end_date');
     }
 
 
     public function updatedBudget($budget){
         $budget = Budget::find($budget);
         $this->budget_selected = $budget;
-        $this->start_date = $budget->start_date;
-        $this->end_date = $budget->end_date;
+        $this->date = $budget->date;
 
     }
 
@@ -61,12 +60,9 @@ class Disponibilities extends Component
     public function addAvailability(){
         Availability::create([
             'title' => $this->budget_selected->name,
-            'start' => $this->start_date,
-            'end' => $this->end_date,
-            'driver_id' => $this->driver,
-            'unit_id' => $this->unit,
-            'budget_id' => $this->budget_selected->id,
-            'comment' => $this->comment
+            'start' => $this->date,
+            'comment' => $this->comment,
+            'budget_id' => $this->budget_selected->id
         ]);
         $this->saveDate = false;
     }

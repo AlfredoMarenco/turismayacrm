@@ -44,6 +44,11 @@ class Budget extends Model
         return $this->hasMany(Vehicle::class);
     }
 
+    public function settlements(): HasMany
+    {
+        return $this->hasMany(Settlement::class);
+    }
+
     public function totalPax(){
         $totalPax = 0;
         $vehicles = Vehicle::where('budget_id',$this->id)->get();
@@ -63,6 +68,12 @@ class Budget extends Model
                 $totalWithOutTax = $totalWithOutTax+$concept->net_rate;
             }
         }
+
+        if ($this->discount) {
+            $totalWithOutTax = $totalWithOutTax - ($totalWithOutTax)*($this->discount->amount);
+        }else{
+
+        }
         return $totalWithOutTax;
     }
 
@@ -74,7 +85,32 @@ class Budget extends Model
                 $totalWithTax = $totalWithTax+$concept->total;
             }
         }
+
+        if ($this->discount) {
+            $totalWithTax = $totalWithTax - ($totalWithTax)*($this->discount->amount);
+        }else{
+
+        }
+
         return $totalWithTax;
+    }
+
+    public function totalDiscount(){
+        $discount = 0;
+        $vehicles = Vehicle::where('budget_id',$this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            if ($this->enable_tax) {
+                foreach ($vehicle->concepts as $concept) {
+                    $discount = $discount+$concept->total;
+                }
+            }else{
+                foreach ($vehicle->concepts as $concept) {
+                    $discount = $discount+$concept->net_rate;
+                }
+            }
+        }
+        $discount = ($discount)*($this->discount->amount);
+        return $discount;
     }
 
     public function totaltax(){
@@ -86,6 +122,37 @@ class Budget extends Model
             }
         }
         return $totalTax;
+    }
+
+    public function totalSettlement()
+    {
+        $total = 0;
+        $settlements = Settlement::where('budget_id',$this->id)->get();
+        foreach ($settlements as $settlement) {
+            $total=$total+$settlement->value;
+        }
+        return $total;
+    }
+
+    public function balanceSplits()
+    {
+        $balance = 0;
+        $total_splits=0;
+        $payment = Payment::where('budget_id',$this->id)->first();
+
+        foreach ($payment->splits as $split) {
+            if ($split->status == 2) {
+                $total_splits = $total_splits+$split->amount;
+            }
+        }
+
+        if ($this->enable_tax) {
+            $balance = $this->totalWithOutTax()-$total_splits;
+        }else{
+            $balance = $this->totalWithTax()-$total_splits;
+        }
+
+        return $balance;
     }
 
 }

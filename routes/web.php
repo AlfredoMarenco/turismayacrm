@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Livewire\Menusidebar;
+use App\Http\Livewire\Perfil;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +29,8 @@ Route::get('/clientes', function () {
 }); */
 Route::get('/restablecer-contrasena', function () {
     return view('usuario.reset-password');
-});
+})->name('password.reset');
+
 Route::get('/cuentas', function () {
     return view('usuario.cuentas');
 });
@@ -40,4 +44,10 @@ Route::middleware([
         return redirect('/admin');
     })->name('dashboard');
 });
+
+
+Route::get('/perfil', Perfil::class)->middleware('auth')->name('user.profile');
+Route::get('/checkout',[CheckoutController::class,'success'])->name('success');
+Route::any('/payment',[CheckoutController::class,'cancel'])->name('cancel');
+
 

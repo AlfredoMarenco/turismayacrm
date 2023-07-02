@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Vehicle extends Model
 {
@@ -21,6 +22,15 @@ class Vehicle extends Model
     public function concepts() : HasMany
     {
         return $this->hasMany(Concept::class);
+    }
+
+    public function voucher(): HasOne
+    {
+        return $this->hasOne(Voucher::class);
+    }
+
+    public function countVoucher(){
+        return Voucher::where('vehicle_id',$this->id)->count();
     }
 
     public function totalWithOutTax(){

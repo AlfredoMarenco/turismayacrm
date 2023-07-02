@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('availabilities', function (Blueprint $table) {
-            $table->foreignId('budget_id')->constrained('budgets')->after('total');
+            $table->foreignId('budget_id')->constrained('budgets')->after('total')->onDelete('cascade');
         });
     }
 

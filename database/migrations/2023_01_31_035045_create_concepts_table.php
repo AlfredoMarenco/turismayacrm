@@ -59,7 +59,7 @@ return new class extends Migration
             $table->double('net_rate')->nullable();
             $table->double('tax')->nullable();
             $table->double('total')->nullable();
-            $table->foreignId('vehicle_id')->constrained('vehicles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
     }

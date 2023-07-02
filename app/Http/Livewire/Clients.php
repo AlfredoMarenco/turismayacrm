@@ -5,10 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\Budget;
 use App\Models\Concept;
 use App\Models\Discount;
+use App\Models\Driver;
+use App\Models\Itinerary;
+use App\Models\Unit;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Voucher;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -32,6 +36,7 @@ class Clients extends Component
     public $budget;
     public $concept;
     public $discount;
+    public $voucher;
 
     public $voucher_date;
     public $voucher_time;
@@ -53,6 +58,7 @@ class Clients extends Component
         'comment' => null,
     ];
 
+    public $formEditItineraries = [];
 
     public $paginate = 5;
     public $budget_date;
@@ -88,6 +94,17 @@ class Clients extends Component
 
     public $amount=0;
 
+
+    public $voucherType="";
+    public $voucher_type_selected;
+
+    public $unit_id="";
+    public $driver_id="";
+    public $driver_name;
+    public $driver_phone;
+    public $unit;
+    public $observations;
+
     public $editVehicleForm = [
         'vehicle_type' => null,
         'vehicle_pax' => null
@@ -121,13 +138,23 @@ class Clients extends Component
         'total' => null
     ];
 
+    public $editDiscountForm = [
+        'amount' => null
+    ];
+
     public $budgets=[];
     public $concepts=[];
     public $vouchers=[];
     public $vehicles=[];
+    public $drivers=[];
+    public $units=[];
+    public $itineraries=[];
+    public $array_itineraries=[];
 
     public $name_search='';
     public $email_search='';
+    public $phone_search='';
+
 
     public $createBudget = false;
     public $modal_added = false;
@@ -145,7 +172,10 @@ class Clients extends Component
     public $modal_create_concept=false;
     public $modal_edit_concept=false;
     public $modal_create_discount=false;
+    public $modal_edit_discount=false;
+    public $modal_create_voucher=false;
     public $modal_confirm_vehicle_delete=false;
+    public $modal_view_itineraries=false;
 
 
     protected $listeners = [
@@ -155,7 +185,23 @@ class Clients extends Component
 
 
     public function mount(){
-            $this->date = Carbon::now()->format('D M Y');
+            $this->date = Carbon::now()->toFormattedDateString();
+    }
+
+    public function navBar($value)
+    {
+        switch ($value) {
+            case '1':
+                $this->reset('detailsClient','tableClients','createBudget');
+                break;
+            case '2':
+                $this->detailsClient=true;
+                $this->reset('createBudget');
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 
     public function updatingPaginate(){
@@ -172,6 +218,10 @@ class Clients extends Component
     }
 
     public function createBudget(){
+        $this->validate([
+            'budget_name' => 'required',
+            'budget_date' => 'required'
+        ]);
         $this->budget = Budget::create([
             'name' =>  $this->budget_name,
             'date' => $this->budget_date,
@@ -384,8 +434,20 @@ class Clients extends Component
 
     public function createDiscount(){
         Discount::create([
-            'amount' => $this->amount,
+            'amount' => $this->amount/100,
             'budget_id' => $this->budget->id
+        ]);
+    }
+
+    public function editDiscount(){
+        $this->modal_edit_discount = true;
+        $this->editDiscountForm['amount'] = $this->budget->discount->amount*100;
+    }
+
+    public function updateDiscount(){
+        $this->modal_edit_discount = false;
+        $this->budget->discount->update([
+            'amount' => $this->editDiscountForm['amount']/100,
         ]);
     }
 
@@ -437,6 +499,8 @@ class Clients extends Component
             'comment' => $this->comment
         ]);
 
+        $this->client->assignRole('User');
+
         $this->reset('name','last_name','email','city','password','phone','company','rfc','cif','comment');
         $this->addClient=false;
     }
@@ -456,25 +520,24 @@ class Clients extends Component
         $this->formEdit['name'] = $this->client->name;
         $this->formEdit['phone'] = $this->client->phone;
         $this->formEdit['email'] = $this->client->email;
-        $this->formEdit['password'] = '';
+        $this->formEdit['password'] = $this->client->password;
         $this->formEdit['company'] = $this->client->company;
         $this->formEdit['city'] = $this->client->city;
         $this->formEdit['comment'] = $this->client->comment;
     }
-
 
     public function updateClient(){
         $client = $this->client->update([
             'name' => $this->formEdit['name'],
             'phone' => $this->formEdit['phone'],
             'email' => $this->formEdit['email'],
-            'password' => $this->formEdit['password'],
+            'password' => Hash::make($this->formEdit['password']),
             'company' => $this->formEdit['company'],
             'city' => $this->formEdit['city'],
             'comment' => $this->formEdit['comment']
         ]);
 
-        $this->client = User::find($client);
+        $this->client = User::find($this->client->id);
         $this->reset('formEdit');
         $this->editing = false;
     }
@@ -494,24 +557,95 @@ class Clients extends Component
 
     public function createVoucher(Budget $budget){
         $this->budget = $budget;
-        $this->vouchers = $budget->vouchers;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        /* $this->concepts = Concept::where('vehicles_id',$this->budget->id)->get(); */
+        $this->detailsClient=false;
+        $this->createBudget = true;
+        /* $this->vouchers = $budget->vouchers;
         $this->budget_comment = $budget->comment;
         $this->createVoucher = true;
-        $this->detailsClient = false;
+        $this->detailsClient = false; */
+    }
+
+    public function modalCreateVoucher(Vehicle $vehicle){
+        $this->modal_create_voucher = true;
+        $this->vehicle = $vehicle;
+
+    }
+
+    public function updatedVoucherType($voucherType){
+        if ($voucherType == 1) {
+            $this->drivers = Driver::all();
+            $this->units = Unit::where('status','1')->get();
+        }
+        $this->voucher_type_selected = $voucherType;
     }
 
     public function addVoucher(){
-        Voucher::create([
-            'date' => $this->voucher_date,
-            'time' => $this->voucher_time,
-            'vehicle' => $this->voucher_vehicle,
-            'service' => $this->voucher_service,
-            'note' => $this->voucher_note,
-            'budget_id' => $this->budget->id,
-        ]);
 
-        $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
-        $this->reset('voucher_date','voucher_time','voucher_vehicle','voucher_service','voucher_note');
+        if ($this->voucher_type_selected == 0) {
+            $voucher = Voucher::create([
+                'type' => $this->voucher_type_selected,
+                'driver_name' => $this->driver_name,
+                'driver_phone' => $this->driver_phone,
+                'vehicle_id' => $this->vehicle->id,
+                'unit' => $this->unit,
+                'observations' => $this->observations
+
+            ]);
+        }else{
+            $voucher = Voucher::create([
+                'type' => $this->voucher_type_selected,
+                'driver_name' => $this->driver_name,
+                'vehicle_id' => $this->vehicle->id,
+                'driver_id' => $this->driver_id,
+                'unit_id' => $this->unit_id,
+                'observations' => $this->observations
+            ]);
+        }
+
+        foreach ($this->vehicle->concepts as $concept) {
+            Itinerary::create([
+                'date' => $concept->date,
+                'description' => $concept->description,
+                'voucher_id' => $voucher->id
+            ]);
+        }
+        $this->modal_create_voucher = false;
+
+        $this->modalEditVoucher($this->vehicle);
+        /* $this->itineraries = Itinerary::where('voucher_id',$voucher->id)->get();
+        foreach ($this->itineraries as $itinerary) {
+            $this->array_itineraries += ["comments.$itinerary->id" => $itinerary->comments,];
+            $this->array_itineraries += ["id.$itinerary->id" => $itinerary->id];
+        }
+        $this->modal_view_itineraries = true; */
+
+        /* $this->itineraries = $voucher->itineraries; */
+
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+    }
+
+    public function modalEditVoucher(Vehicle $vehicle){
+        $this->reset('array_itineraries');
+        $this->voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
+        $this->itineraries = Itinerary::where('voucher_id',$this->voucher->id)->get();
+        foreach ($this->itineraries as $itinerary) {
+            $this->array_itineraries += ["comments.$itinerary->id" => $itinerary->comments,];
+        }
+        $this->modal_view_itineraries = true;
+    }
+
+    public function updateAllItineraries(){
+        foreach ($this->itineraries as $itinerary) {
+            /* dd($this->array_itineraries["comments.".$itinerary->id]); */
+            $itinerary->update([
+                'comments' => $this->array_itineraries["comments.".$itinerary->id]
+            ]);
+        }
+
+        $this->reset('array_itineraries');
+        $this->modal_view_itineraries = false;
     }
 
     public function addCommentBudget(){
@@ -521,12 +655,51 @@ class Clients extends Component
         $this->vouchers = Voucher::where('budget_id',$this->budget->id)->get();
     }
 
-    public function render()
+    public function downloadReceipt(Budget $budget){
+
+        return redirect()->route('download.receipt',compact('budget'));
+    }
+
+    public function downloadVoucher(Vehicle $vehicle){
+
+        return redirect()->route('download.voucher',compact('vehicle'));
+    }
+
+    public function updatingNameSearch()
     {
+        $this->reset('email_search','phone_search');
+        $this->resetPage();
+    }
+
+    public function updatingEmailSearch()
+    {
+        $this->reset('name_search','phone_search');
+        $this->resetPage();
+    }
+
+    public function updatingPhoneSearch()
+    {
+        $this->reset('name_search','email_search');
+        $this->resetPage();
+    }
+
+    public function render(){
         if ($this->name_search != '') {
-            $clients = User::where('name',$this->name_search)->orderBy('id','asc')->paginate($this->paginate);
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('name','LIKE','%'.$this->name_search.'%')->orderBy('id','asc')->paginate($this->paginate);
+        }else if ($this->email_search != '') {
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('email','LIKE','%'.$this->email_search.'%')->orderBy('id','asc')->paginate($this->paginate);
+        }else if ($this->phone_search != '') {
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->where('phone','LIKE','%'.$this->phone_search.'%')->orderBy('id','asc')->paginate($this->paginate);
         }else{
-            $clients = User::orderBy('id','desc')->paginate($this->paginate);
+            $clients = User::whereHas('roles', function (Builder $query){
+                $query->where('name','LIKE','User');
+            })->orderBy('id','desc')->paginate($this->paginate);
         }
 
         return view('livewire.clients',[

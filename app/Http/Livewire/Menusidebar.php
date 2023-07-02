@@ -9,9 +9,9 @@ class Menusidebar extends Component
 {
     public $itemSelect;
 
-    public function mount(Request $request,){
+    public function mount(Request $request){
         if ($request->session()->get('itemSelect') == 2) {
-            $this->itemSelect = 1;
+            $this->itemSelect = 2;
         }else{
             $this->itemSelect = 1;
         }
@@ -23,6 +23,8 @@ class Menusidebar extends Component
             session(['itemSelect' => 2]);
             $this->itemSelect = 2;
             return redirect('/admin')->back();
+        }else{
+            session()->forget('itemSelect');
         }
     }
 

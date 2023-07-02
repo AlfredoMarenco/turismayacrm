@@ -49,7 +49,7 @@
                         <div class="grid grid-cols-10 gap-4">
                             <div class="col-span-2">
                                 <label for="num" class="block text-sm font-medium text-gray-700">Mostrar</label>
-                                <select id="num" name="num"
+                                <select wire:model="paginate"
                                     class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <option selected>10</option>
                                     <option>20</option>
@@ -59,17 +59,17 @@
                             <div class="col-span-5">
                                 <label for="email" class="block text-sm font-medium text-gray-700">Nombre</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
-                                    <input type="text" name="text" id="name"
+                                    <input type="text" wire:model="name_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Josué Gutierrez">
                                 </div>
 
                             </div>
                             <div class="col-span-3">
-                                <label for="email" class="block text-sm font-medium text-gray-700">INE</label>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Telefono</label>
                                 <div class="relative mt-1 rounded-md shadow-sm">
 
-                                    <input type="email" name="email" id="email"
+                                    <input type="email" wire:model="phone_search"
                                         class="block w-full rounded-md border-gray-300 pl-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Número de identificación">
                                 </div>
@@ -133,10 +133,11 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-
-                                                <!-- More people... -->
                                             </tbody>
                                         </table>
+                                        <div class="p-2">
+                                            {{ $drivers->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

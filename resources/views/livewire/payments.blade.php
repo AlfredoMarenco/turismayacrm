@@ -113,6 +113,9 @@
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                                             PAGOS</th>
+                                                        {{-- <th scope="col"
+                                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                            CANAL DE PAGO</th> --}}
                                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                                             <span class="sr-only">Ver más</span>
                                                         </th>
@@ -151,6 +154,9 @@
                                                     <!-- More people... -->
                                                 </tbody>
                                             </table>
+                                            <div class="p-2">
+                                                {{ $payments->links() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -272,27 +278,15 @@
                                                     <div class="sm:col-span-6">
                                                         <div>
                                                             <label for="price"
-                                                                class="block text-sm font-medium text-gray-700 ">Fecha
-                                                                de
-                                                                fin</label>
+                                                                class="block text-sm font-medium text-gray-700 ">Canal
+                                                                de pago</label>
                                                             <div class="relative mt-1 rounded-md shadow-sm">
-                                                                <input type="date" wire:model="end_date" disabled
+                                                                <select
                                                                     class="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                    aria-describedby="price-currency">
-                                                                <div
-                                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                                                    <span class="text-gray-500 sm:text-sm"
-                                                                        id="price-currency">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor"
-                                                                            class="w-6 h-6">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                                                        </svg>
-                                                                    </span>
-                                                                </div>
+                                                                    wire:model="channel">
+                                                                    <option value="1">Servicios Turísticos del
+                                                                        Mayab</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -340,7 +334,8 @@
                                         d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Fecha de hoy:<span class="pl-1"> 15 de Septiembre del 2022</span>
+                                Fecha de hoy:<span class="pl-1">
+                                    {{ \Carbon\Carbon::now()->toFormattedDateString() }}</span>
                             </div>
                         </div>
                     </div>
@@ -455,6 +450,16 @@
                                                                     {{ $payment->budget->user->city }}</td>
 
                                                             </tr>
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                    Presupuestado</td>
+                                                                <td
+                                                                    class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                    ${{ number_format($totalBudget, 2) }} MXN
+                                                                    <p>{{ $difference }}</p>
+                                                                </td>
+                                                            </tr>
                                                             <!-- More people... -->
                                                         </tbody>
                                                     </table>
@@ -501,9 +506,9 @@
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
                                                             Estado</th>
-                                                        <th scope="col"
+                                                        {{-- <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
-                                                            Metodo de Pago</th>
+                                                            Metodo de Pago</th> --}}
                                                         <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500 uppercase">
                                                             Comentario</th>
@@ -541,7 +546,7 @@
                                                                             Procesando
                                                                     @endswitch
                                                                 </td>
-                                                                <td
+                                                                {{-- <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                     @switch($split->payment_type)
                                                                         @case(3)
@@ -564,7 +569,7 @@
                                                                             <p class="font-semibold">Licitacion</p>
                                                                         @break
                                                                     @endswitch
-                                                                </td>
+                                                                </td> --}}
                                                                 <td
                                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                     {{ $split->comment }}
@@ -637,6 +642,10 @@
                                                                 <input type="text" wire:model="description"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="Escribe una descripción corta del pago">
+                                                                @error('description')
+                                                                    <span
+                                                                        class="text-sm text-red-500">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
@@ -653,6 +662,15 @@
                                                                     class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="0.00"
                                                                     aria-describedby="price-currency">
+                                                                @error('message')
+                                                                    <span
+                                                                        class="text-sm text-red-500">{{ $message }}</span>
+                                                                @enderror
+                                                                @if (!session()->has('amount'))
+                                                                    <div class="text-sm text-red-500">
+                                                                        {{ session('message') }}
+                                                                    </div>
+                                                                @endif
                                                                 <div
                                                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                     <span class="text-gray-500 sm:text-sm"
@@ -721,6 +739,16 @@
                                                                     class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                     placeholder="0.00"
                                                                     aria-describedby="price-currency">
+
+                                                                @error('message2')
+                                                                    <span
+                                                                        class="text-sm text-red-500">{{ $message2 }}</span>
+                                                                @enderror
+                                                                @if (!session()->has('editForm.amount'))
+                                                                    <div class="text-sm text-red-500">
+                                                                        {{ session('message2') }}
+                                                                    </div>
+                                                                @endif
                                                                 <div
                                                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                                     <span class="text-gray-500 sm:text-sm"
@@ -770,6 +798,8 @@
                                                                 pago</label>
                                                             <select wire:model="editForm.payment_type"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                                <option value="" selected disabled>-Selecciona
+                                                                    una opción-</option>
                                                                 <option value="3">Efectivo</option>
                                                                 <option value="4">Transferencia</option>
                                                                 <option value="5">Crédito</option>
