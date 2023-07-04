@@ -98,7 +98,7 @@ class Clients extends Component
 
 
     public $voucherType="";
-    public $voucher_type_selected;
+    public $voucher_type_selected="";
 
     public $unit_id="";
     public $driver_id="";

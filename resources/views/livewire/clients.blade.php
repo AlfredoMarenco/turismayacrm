@@ -746,7 +746,9 @@
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             @if ($client->cif != '')
-                                                                                <p class="cursor-pointer hover:underline" wire:click="downloadCIF({{ $client }})">Descargar CIF</p>
+                                                                                <p class="cursor-pointer hover:underline"
+                                                                                    wire:click="downloadCIF({{ $client }})">
+                                                                                    Descargar CIF</p>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
@@ -2559,17 +2561,6 @@
                                     @switch($voucher_type_selected)
                                         @case(0)
                                             <x-jet-label value="Unidad" />
-                                            <x-jet-input class="w-full" type="text" wire:model='unit' />
-
-                                            <x-jet-label value="Chofer" />
-                                            <x-jet-input class="w-full" type="text" wire:model='driver_name' />
-
-                                            <x-jet-label value="Telefono" />
-                                            <x-jet-input class="w-full" type="text" wire:model='driver_phone' />
-                                        @break
-
-                                        @case(1)
-                                            <x-jet-label value="Unidad" />
                                             <select wire:model="unit_id"
                                                 class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 <option value="" selected disabled>Selecciona una opcion</option>
@@ -2587,6 +2578,17 @@
                                                     <option value="{{ $driver->id }}">{{ $driver->name }}</option>
                                                 @endforeach
                                             </select>
+                                        @break
+
+                                        @case(1)
+                                            <x-jet-label value="Unidad" />
+                                            <x-jet-input class="w-full" type="text" wire:model='unit' />
+
+                                            <x-jet-label value="Chofer" />
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_name' />
+
+                                            <x-jet-label value="Telefono" />
+                                            <x-jet-input class="w-full" type="text" wire:model='driver_phone' />
                                         @break
                                     @endswitch
                                     <x-jet-label value="Observaciones" />
