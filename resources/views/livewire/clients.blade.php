@@ -886,9 +886,9 @@
                                                                             Total: <time datetime="2022-15-09"
                                                                                 class="pl-1">
                                                                                 @if ($budget->enable_tax)
-                                                                                    ${{ number_format($budget->totalWithOutTax(), 2) }}
-                                                                                @else
                                                                                     ${{ number_format($budget->totalWithTax(), 2) }}
+                                                                                @else
+                                                                                    ${{ number_format($budget->totalWithOutTax(), 2) }}
                                                                                 @endif
                                                                             </time>
                                                                         </p>

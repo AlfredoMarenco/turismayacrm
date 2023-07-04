@@ -71,9 +71,9 @@ class Payments extends Component
         $this->payment = $payment;
         $this->budget_of_payment = Budget::find($payment->budget_id);
         if ($this->budget_of_payment->enable_tax) {
-            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
-        }else{
             $this->totalBudget = $this->budget_of_payment->totalWithTax();
+        }else{
+            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
         }
         $this->splits = Split::where('payment_id',$payment->id)->get();
         $this->view_payments=false;
@@ -88,9 +88,9 @@ class Payments extends Component
         ]);
         $this->difference;
         if ($this->budget_of_payment->enable_tax) {
-            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
-        }else{
             $this->totalBudget = $this->budget_of_payment->totalWithTax();
+        }else{
+            $this->totalBudget = $this->budget_of_payment->totalWithOutTax();
         }
 
         $total_splits = 0;
