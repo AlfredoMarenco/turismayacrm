@@ -379,18 +379,9 @@
                                                             <label for="rfc"
                                                                 class="block text-sm font-medium text-gray-700 pr-5 my-auto">Agregar
                                                                 CIF</label>
-                                                            <button type="button"
+                                                            <input type="file" wire:model="cif"
                                                                 class="inline-flex items-center rounded-md border border-transparent bg-lime-350 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                                <!-- Heroicon name: mini/plus -->
-                                                                <svg class="-ml-1 mr-2 h-5 w-5"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    viewBox="0 0 20 20" fill="currentColor"
-                                                                    aria-hidden="true">
-                                                                    <path
-                                                                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                                                                </svg>
-                                                                Cargar archivo
-                                                            </button>
+                                                            </input>
                                                         </div>
                                                         <div class="sm:col-span-6">
                                                             <label for="rfc"
@@ -674,7 +665,9 @@
                                                                         CIF</td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        Cargar</td>
+                                                                        <input type="file"
+                                                                            wire:model="formEdit.cif">
+                                                                    </td>
                                                                     </tr>
                                                                     <!-- More people... -->
                                                                 </tbody>
@@ -752,8 +745,10 @@
                                                                             CIF</td>
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            Cargar</td>
-
+                                                                            @if ($client->cif != '')
+                                                                                <p class="cursor-pointer hover:underline" wire:click="downloadCIF({{ $client }})">Descargar CIF</p>
+                                                                            @endif
+                                                                        </td>
                                                                     </tr>
                                                                     <!-- More people... -->
                                                                 </tbody>
@@ -1314,8 +1309,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $vehicle->pax }}</td>
                                         @if ($vehicle->concepts->count())
-                                            <td colspan="2"
-                                                class="px-3 py-4 text-sm text-gray-500">
+                                            <td colspan="2" class="px-3 py-4 text-sm text-gray-500">
                                                 <table class="table-fixed">
                                                     <thead class="bg-gray-50">
                                                         <tr>
@@ -1342,7 +1336,9 @@
                                                                 <td
                                                                     class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
                                                                     {{ $concept->date }} <br>
-                                                                    <p class="text-justify">{{ $concept->description }}</p></td>
+                                                                    <p class="text-justify">
+                                                                        {{ $concept->description }}</p>
+                                                                </td>
                                                                 <td
                                                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
                                                                     ${{ number_format($concept->net_rate, 2) }}

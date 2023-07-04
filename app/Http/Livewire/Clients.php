@@ -14,13 +14,15 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Clients extends Component
 {
     use WithPagination;
-
+    use WithFileUploads;
 
     public $name;
     public $last_name;
@@ -54,8 +56,8 @@ class Clients extends Component
         'password' => null,
         'phone' => null,
         'company' => null,
-        'city' => null,
         'comment' => null,
+        'cif' => null,
     ];
 
     public $formEditItineraries = [];
@@ -486,6 +488,9 @@ class Clients extends Component
             'password' => 'required'
         ]);
 
+        $url = $this->cif->store('cifs');
+
+
         $this->client = User::create([
             'name'=> $this->name,
             'last_name'=> $this->last_name,
@@ -495,7 +500,7 @@ class Clients extends Component
             'phone'=> $this->phone,
             'company'=> $this->company,
             'rfc' => $this->rfc,
-            'cif' => $this->cif,
+            'cif' => $url,
             'comment' => $this->comment
         ]);
 
@@ -527,15 +532,29 @@ class Clients extends Component
     }
 
     public function updateClient(){
-        $client = $this->client->update([
-            'name' => $this->formEdit['name'],
-            'phone' => $this->formEdit['phone'],
-            'email' => $this->formEdit['email'],
-            'password' => Hash::make($this->formEdit['password']),
-            'company' => $this->formEdit['company'],
-            'city' => $this->formEdit['city'],
-            'comment' => $this->formEdit['comment']
-        ]);
+        if ($this->formEdit['cif']) {
+            $url = $this->formEdit['cif']->store('cifs');
+            $this->client->update([
+                'name' => $this->formEdit['name'],
+                'phone' => $this->formEdit['phone'],
+                'email' => $this->formEdit['email'],
+                'password' => Hash::make($this->formEdit['password']),
+                'company' => $this->formEdit['company'],
+                'city' => $this->formEdit['city'],
+                'comment' => $this->formEdit['comment'],
+                'cif' => $url
+            ]);
+        }else{
+            $this->client->update([
+                'name' => $this->formEdit['name'],
+                'phone' => $this->formEdit['phone'],
+                'email' => $this->formEdit['email'],
+                'password' => Hash::make($this->formEdit['password']),
+                'company' => $this->formEdit['company'],
+                'city' => $this->formEdit['city'],
+                'comment' => $this->formEdit['comment']
+            ]);
+        }
 
         $this->client = User::find($this->client->id);
         $this->reset('formEdit');
@@ -553,6 +572,11 @@ class Clients extends Component
         $this->resetPage();
         $this->modalDeleting = false;
         $this->emit('render');
+    }
+
+    public function downloadCIF(User $client)
+    {
+        return response()->download(storage_path('app/public/'.$client->cif));
     }
 
     public function createVoucher(Budget $budget){
