@@ -11,6 +11,7 @@ class Split extends Model
     use HasFactory;
 
     const PENDIENTE = 1, PAGADO = 2,EFECTIVO = 3,TRANSFERENCIA = 4,CREDITO = 5,PAYPAL= 6,LICITACION = 7;
+    
     protected $guarded = ['id'];
 
     public function payment(): BelongsTo
