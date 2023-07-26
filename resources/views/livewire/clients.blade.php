@@ -527,7 +527,7 @@
                                             <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
                                                 <li class="flex">
                                                     <div class="flex items-center">
-                                                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                                                        <a href="{{ route('admin.index') }}" class="text-gray-400 hover:text-gray-500">
                                                             <!-- Heroicon name: mini/home -->
                                                             <svg class="h-5 w-5 flex-shrink-0"
                                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -592,6 +592,17 @@
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             <x-jet-input type="text"
                                                                                 wire:model="formEdit.name" />
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td
+                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                            Apellidos</td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            <x-jet-input type="text"
+                                                                                wire:model="formEdit.last_name" />
                                                                         </td>
 
                                                                     </tr>
@@ -682,6 +693,15 @@
                                                                         <td
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             {{ $client->name }}</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td
+                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                                            Apellidos</td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $client->last_name }}</td>
 
                                                                     </tr>
                                                                     <tr class="bg-white">
@@ -1036,7 +1056,7 @@
                                     <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
                                         <li class="flex">
                                             <div class="flex items-center">
-                                                <a wire:click="goHome" class="text-gray-400 hover:text-gray-500">
+                                                <a href="{{ route('admin.index') }}" class="text-gray-400 hover:text-gray-500">
                                                     <!-- Heroicon name: mini/home -->
                                                     <svg class="h-5 w-5 flex-shrink-0"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

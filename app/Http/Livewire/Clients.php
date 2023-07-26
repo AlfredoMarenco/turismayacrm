@@ -488,7 +488,11 @@ class Clients extends Component
             'password' => 'required'
         ]);
 
-        $url = $this->cif->store('cifs');
+        if ($this->cif) {
+            $url = $this->cif->store('cifs');
+        }else{
+            $url = null;
+        }
 
 
         $this->client = User::create([
@@ -523,6 +527,7 @@ class Clients extends Component
     public function editClient(){
         $this->editing = true;
         $this->formEdit['name'] = $this->client->name;
+        $this->formEdit['last_name'] = $this->client->last_name;
         $this->formEdit['phone'] = $this->client->phone;
         $this->formEdit['email'] = $this->client->email;
         $this->formEdit['password'] = $this->client->password;
@@ -536,6 +541,7 @@ class Clients extends Component
             $url = $this->formEdit['cif']->store('cifs');
             $this->client->update([
                 'name' => $this->formEdit['name'],
+                'last_name' => $this->formEdit['last_name'],
                 'phone' => $this->formEdit['phone'],
                 'email' => $this->formEdit['email'],
                 'password' => Hash::make($this->formEdit['password']),
@@ -547,6 +553,7 @@ class Clients extends Component
         }else{
             $this->client->update([
                 'name' => $this->formEdit['name'],
+                'last_name' => $this->formEdit['last_name'],
                 'phone' => $this->formEdit['phone'],
                 'email' => $this->formEdit['email'],
                 'password' => Hash::make($this->formEdit['password']),
