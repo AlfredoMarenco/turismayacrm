@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function(){
-    return view('welcome');
+    return redirect()->route('admin.index');
 });
 
 Route::get('/clientes', function () {
@@ -49,5 +49,3 @@ Route::middleware([
 Route::get('/perfil', Perfil::class)->middleware('auth')->name('user.profile');
 Route::get('/checkout',[CheckoutController::class,'success'])->name('success');
 Route::any('/payment',[CheckoutController::class,'cancel'])->name('cancel');
-
-

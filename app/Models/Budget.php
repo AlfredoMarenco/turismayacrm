@@ -147,9 +147,9 @@ class Budget extends Model
         }
 
         if ($this->enable_tax) {
-            $balance = $this->totalWithOutTax()-$total_splits;
-        }else{
             $balance = $this->totalWithTax()-$total_splits;
+        }else{
+            $balance = $this->totalWithOutTax()-$total_splits;
         }
 
         return $balance;

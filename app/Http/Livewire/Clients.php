@@ -178,6 +178,7 @@ class Clients extends Component
     public $modal_create_voucher=false;
     public $modal_confirm_vehicle_delete=false;
     public $modal_view_itineraries=false;
+    public $show_pass=false;
 
 
     protected $listeners = [
