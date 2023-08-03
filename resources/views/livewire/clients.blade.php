@@ -338,18 +338,33 @@
                                                             <label for="password"
                                                                 class="block text-sm font-medium text-gray-700">Contraseña</label>
                                                             <div class="mt-1 flex items-center">
-                                                                <input type="{{ $show_pass ? 'text' : 'password'  }}" wire:model="password"
+                                                                <input type="{{ $show_pass ? 'text' : 'password' }}"
+                                                                    wire:model="password"
                                                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                                    @if ($show_pass)
-                                                                    <svg wire:click="$set('show_pass',false)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-1 cursor-pointer">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                                                @if ($show_pass)
+                                                                    <svg wire:click="$set('show_pass',false)"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-6 h-6 mx-1 cursor-pointer">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                                                                     </svg>
-                                                                    @else
-                                                                    <svg wire:click="$set('show_pass',true)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-1 cursor-pointer">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                @else
+                                                                    <svg wire:click="$set('show_pass',true)"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        class="w-6 h-6 mx-1 cursor-pointer">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                                     </svg>
-                                                                    @endif
+                                                                @endif
                                                                 @error('password')
                                                                     <span
                                                                         class="text-red-600 text-xs ">{{ $message }}</span>
@@ -537,7 +552,8 @@
                                             <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
                                                 <li class="flex">
                                                     <div class="flex items-center">
-                                                        <a href="{{ route('admin.index') }}" class="text-gray-400 hover:text-gray-500">
+                                                        <a href="{{ route('admin.index') }}"
+                                                            class="text-gray-400 hover:text-gray-500">
                                                             <!-- Heroicon name: mini/home -->
                                                             <svg class="h-5 w-5 flex-shrink-0"
                                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -646,12 +662,20 @@
                                                                             class="flex whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             <x-jet-input type="password"
                                                                                 wire:model="formEdit.password" />
-                                                                                <div class="cursor-pointer">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                                    </svg>
-                                                                                </div>
+                                                                            <div class="cursor-pointer">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="w-6 h-6">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                                </svg>
+                                                                            </div>
                                                                         </td>
 
                                                                     </tr>
@@ -1021,7 +1045,9 @@
                                     </div>
                                     <div>
                                         <x-jet-label value="Fecha" />
-                                        <x-jet-input class="w-full" type="date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" wire:model='budget_date' />
+                                        <x-jet-input class="w-full" type="date"
+                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                            wire:model='budget_date' />
                                         <div>
                                             @error('budget_date')
                                                 <span class="text-sm text-red-500">{{ $message }}</span>
@@ -1072,7 +1098,8 @@
                                     <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
                                         <li class="flex">
                                             <div class="flex items-center">
-                                                <a href="{{ route('admin.index') }}" class="text-gray-400 hover:text-gray-500">
+                                                <a href="{{ route('admin.index') }}"
+                                                    class="text-gray-400 hover:text-gray-500">
                                                     <!-- Heroicon name: mini/home -->
                                                     <svg class="h-5 w-5 flex-shrink-0"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -1127,6 +1154,7 @@
                                     </ol>
                                 </nav>
                             </div>
+
                             @if ($budget->status != 0)
                             @else
                                 <div class="col-span-6 flex justify-end space-x-2">
@@ -1192,6 +1220,7 @@
                                         </button>
                                     @endif
                             @endif
+
                             <x-jet-dialog-modal wire:model="modal_create_vehicle">
                                 <x-slot name="title">
                                     Agregar unidad al presupuesto
@@ -1310,6 +1339,76 @@
                             </x-jet-dialog-modal>
                         </div>
                     </div>
+                    <div class="flex space-x-4 items-center text-lg mt-4 ml-4">
+                        <p class="flex items-center text-sm text-gray-500">
+                            <!-- Heroicon name: mini/users -->
+                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ $budget->name }}
+                        </p>
+                        <p class="flex items-center text-sm text-gray-500">
+                            <!-- Heroicon name: mini/users -->
+                            <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Viajan el <time datetime="2022-15-09" class="pl-1">{{ $budget->date }}
+                            </time>
+                        </p>
+                        <p class="cursor-pointer">
+                            <svg wire:click="editInfoBudget()" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="w-4 h-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                        </p>
+                    </div>
+                    <x-jet-dialog-modal wire:model="modal_edit_info_budget">
+                        <x-slot name="title">
+                            Editar presupuesto
+                        </x-slot>
+                        <x-slot name="content">
+                            <div>
+                                <x-jet-label value="Ruta" />
+                                <x-jet-input
+                                    class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    type="text" wire:model='editInfoBudget.name' />
+                            </div>
+                            <div>
+                                <x-jet-label value="Fecha" />
+                                <x-jet-input type="date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                    class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    wire:model='editInfoBudget.date' />
+                            </div>
+                        </x-slot>
+                        <x-slot name="footer">
+                            <x-jet-danger-button class="mx-2"
+                                wire:click="$set('modal_edit_info_budget',false)">Cancelar
+                            </x-jet-danger-button>
+                            <x-jet-button wire:click="updateInfoBudget()">Actualizar</x-jet-button>
+                        </x-slot>
+                    </x-jet-dialog-modal>
+                    <x-jet-dialog-modal wire:model="confirm_disponibility">
+                        <x-slot name="title">
+                            Editar presupuesto
+                        </x-slot>
+                        <x-slot name="content">
+                            <p>La disponibilidad de este viaje ha sido eliminada, deseas volver a apartar la fecha con la informacion nueva?</p>
+                        </x-slot>
+                        <x-slot name="footer">
+                            <x-jet-danger-button class="mx-2"
+                                wire:click="$set('confirm_disponibility',false)">No
+                            </x-jet-danger-button>
+                            <x-jet-button wire:click="modalUpdateInfo()">Sí</x-jet-button>
+                        </x-slot>
+                    </x-jet-dialog-modal>
                     <div>
                         <table class="mt-4 min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-50">
@@ -1609,7 +1708,8 @@
                                                             class="block text-sm font-medium text-gray-700">Fecha</label>
                                                     </div>
                                                     <div class="mt-1">
-                                                        <input type="date" wire:model='date' min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                                        <input type="date" wire:model='date'
+                                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
                                                             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                     </div>
                                                 </div>
@@ -2098,7 +2198,8 @@
                                                             class="block text-sm font-medium text-gray-700">Fecha</label>
                                                     </div>
                                                     <div class="mt-1">
-                                                        <input type="date" wire:model='editConceptForm.date' min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                                        <input type="date" wire:model='editConceptForm.date'
+                                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
                                                             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                     </div>
                                                 </div>

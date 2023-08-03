@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Availability;
 use App\Models\Budget;
 use App\Models\Concept;
 use App\Models\Discount;
@@ -143,6 +144,10 @@ class Clients extends Component
     public $editDiscountForm = [
         'amount' => null
     ];
+    public $editInfoBudget = [
+        'name' => null,
+        'date' => null
+    ];
 
     public $budgets=[];
     public $concepts=[];
@@ -175,6 +180,9 @@ class Clients extends Component
     public $modal_edit_concept=false;
     public $modal_create_discount=false;
     public $modal_edit_discount=false;
+    public $modal_edit_info_budget=false;
+    public $modal_update_info_budget=false;
+    public $confirm_disponibility=false;
     public $modal_create_voucher=false;
     public $modal_confirm_vehicle_delete=false;
     public $modal_view_itineraries=false;
@@ -235,6 +243,37 @@ class Clients extends Component
         $this->modal_create_budget = false;
         $this->detailsClient=false;
         $this->createBudget = true;
+    }
+
+    public function editInfoBudget()
+    {
+        $this->modal_edit_info_budget = true;
+        $this->editInfoBudget['name'] = $this->budget->name;
+        $this->editInfoBudget['date'] = $this->budget->date;
+    }
+    public function modalUpdateInfo(){
+        Availability::create([
+            'title' => $this->editInfoBudget['name'].' - '. $this->budget->user->nameComplete(),
+            'start' => $this->editInfoBudget['date'],
+            'budget_id' => $this->budget->id
+        ]);
+        $this->confirm_disponibility = false;
+    }
+
+    public function updateInfoBudget()
+    {
+        $this->budget->update([
+            'name' => $this->editInfoBudget['name'],
+            'date' => $this->editInfoBudget['date']
+        ]);
+        if ($this->budget->availability) {
+            $this->budget->availability->delete();
+            $this->modal_edit_info_budget = false;
+            $this->confirm_disponibility = true;
+        }else{
+            $this->modal_edit_info_budget = false;
+        }
+
     }
 
     public function changeEnableTax($value){

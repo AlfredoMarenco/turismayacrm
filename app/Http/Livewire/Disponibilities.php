@@ -23,11 +23,17 @@ class Disponibilities extends Component
     public $comment = '';
     public $budget_selected;
     public $selectedDate;
+    public $availabilitiesAll;
     /* public $availibities=[]; */
     public $listeners = [
         'setSelectedDate',
         'render'
     ];
+
+    public function mount()
+    {
+        $this->availabilitiesAll = Availability::all();
+    }
 
 
     public function setSelectedDate($value){
@@ -59,12 +65,13 @@ class Disponibilities extends Component
 
     public function addAvailability(){
         Availability::create([
-            'title' => $this->budget_selected->name,
+            'title' => $this->budget_selected->name.' - '.$this->budget_selected->user->nameComplete(),
             'start' => $this->date,
             'comment' => $this->comment,
             'budget_id' => $this->budget_selected->id
         ]);
         $this->saveDate = false;
+        $this->availabilitiesAll = Availability::all();
     }
 
     public function render()
@@ -73,7 +80,7 @@ class Disponibilities extends Component
             'users' => User::all(),
             'units' => Unit::all(),
             'drivers' => Driver::all(),
-            'availabilitiesAll' => Availability::all(),
+            //'availabilitiesAll' => Availability::all(),
             'availabilities' => Availability::where('start',$this->selectedDate)->get()
         ]);
     }
