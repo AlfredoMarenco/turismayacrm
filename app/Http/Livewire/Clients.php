@@ -497,23 +497,23 @@ class Clients extends Component
     public function updated(){
         //Calculo para los autobuses
         try {
-            $this->liters = ($this->km * $this->laps)/($this->performance);
-            $this->disel_cost = $this->disel_price*$this->liters;
-            $this->total_cost = $this->disel_cost + $this->salary + $this->per_diem + $this->hotel + $this->tax_burden + $this->flor_rigth + $this->booths + $this->amenities + $this->sublet + $this->maintenance + $this->admin_expense;
-            $this->utility = $this->total_cost * ($this->utility_percentage/100);
-            $this->net_rate = (($this->utility + $this->total_cost));
-            $this->tax = $this->net_rate *.16;
-            $this->total = $this->tax + $this->net_rate;
+            $this->liters = round(($this->km * $this->laps)/($this->performance));
+            $this->disel_cost = round($this->disel_price*$this->liters);
+            $this->total_cost = round($this->disel_cost + $this->salary + $this->per_diem + $this->hotel + $this->tax_burden + $this->flor_rigth + $this->booths + $this->amenities + $this->sublet + $this->maintenance + $this->admin_expense);
+            $this->utility = round($this->total_cost * ($this->utility_percentage/100));
+            $this->net_rate = round((($this->utility + $this->total_cost)));
+            $this->tax = round($this->net_rate *.16);
+            $this->total = round($this->tax + $this->net_rate);
 
 
             if ($this->modal_edit_concept) {
-                $this->editConceptForm['liters'] = ($this->editConceptForm['km'] * $this->editConceptForm['laps'])/($this->editConceptForm['performance']);
-                $this->editConceptForm['disel_cost'] = $this->editConceptForm['disel_price']*$this->editConceptForm['liters'];
-                $this->editConceptForm['total_cost'] = $this->editConceptForm['disel_cost'] + $this->editConceptForm['salary'] + $this->editConceptForm['per_diem'] + $this->editConceptForm['hotel'] + $this->editConceptForm['tax_burden'] + $this->editConceptForm['flor_rigth'] + $this->editConceptForm['booths'] + $this->editConceptForm['amenities'] + $this->editConceptForm['sublet'] + $this->editConceptForm['maintenance'] + $this->editConceptForm['admin_expense'];
-                $this->editConceptForm['utility'] = $this->editConceptForm['total_cost'] * ($this->editConceptForm['utility_percentage']/100);
-                $this->editConceptForm['net_rate'] = (($this->editConceptForm['utility'] + $this->editConceptForm['total_cost']));
-                $this->editConceptForm['tax'] = $this->editConceptForm['net_rate'] *.16;
-                $this->editConceptForm['total'] = $this->editConceptForm['tax'] + $this->editConceptForm['net_rate'];
+                $this->editConceptForm['liters'] = round(($this->editConceptForm['km'] * $this->editConceptForm['laps'])/($this->editConceptForm['performance']));
+                $this->editConceptForm['disel_cost'] = round($this->editConceptForm['disel_price']*$this->editConceptForm['liters']);
+                $this->editConceptForm['total_cost'] = round($this->editConceptForm['disel_cost'] + $this->editConceptForm['salary'] + $this->editConceptForm['per_diem'] + $this->editConceptForm['hotel'] + $this->editConceptForm['tax_burden'] + $this->editConceptForm['flor_rigth'] + $this->editConceptForm['booths'] + $this->editConceptForm['amenities'] + $this->editConceptForm['sublet'] + $this->editConceptForm['maintenance'] + $this->editConceptForm['admin_expense']);
+                $this->editConceptForm['utility'] = round($this->editConceptForm['total_cost'] * ($this->editConceptForm['utility_percentage']/100));
+                $this->editConceptForm['net_rate'] = round((($this->editConceptForm['utility'] + $this->editConceptForm['total_cost'])));
+                $this->editConceptForm['tax'] = round($this->editConceptForm['net_rate'] *.16);
+                $this->editConceptForm['total'] = round($this->editConceptForm['tax'] + $this->editConceptForm['net_rate']);
             }
         } catch (\Throwable $th) {
 
@@ -640,12 +640,14 @@ class Clients extends Component
 
     public function modalCreateVoucher(Vehicle $vehicle){
         $this->modal_create_voucher = true;
+        $this->drivers = Driver::all();
+        $this->units = Unit::where('status','1')->get();
         $this->vehicle = $vehicle;
 
     }
 
     public function updatedVoucherType($voucherType){
-        if ($voucherType == 1) {
+        if ($voucherType == "1") {
             $this->drivers = Driver::all();
             $this->units = Unit::where('status','1')->get();
         }

@@ -118,7 +118,7 @@
                                                                 @foreach ($users as $user)
                                                                     <option value="{{ $user->id }}">
                                                                         {{ $user->id }}
-                                                                        - {{ $user->name }}</option>
+                                                                        - {{ $user->namecomplete() }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
