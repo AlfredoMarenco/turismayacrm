@@ -1362,9 +1362,8 @@
                             </time>
                         </p>
                         <p class="cursor-pointer">
-                            <svg wire:click="editInfoBudget()" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                class="w-4 h-4 mr-1">
+                            <svg wire:click="editInfoBudget()" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>
@@ -1400,11 +1399,11 @@
                             Editar presupuesto
                         </x-slot>
                         <x-slot name="content">
-                            <p>La disponibilidad de este viaje ha sido eliminada, deseas volver a apartar la fecha con la informacion nueva?</p>
+                            <p>La disponibilidad de este viaje ha sido eliminada, deseas volver a apartar la fecha con
+                                la informacion nueva?</p>
                         </x-slot>
                         <x-slot name="footer">
-                            <x-jet-danger-button class="mx-2"
-                                wire:click="$set('confirm_disponibility',false)">No
+                            <x-jet-danger-button class="mx-2" wire:click="$set('confirm_disponibility',false)">No
                             </x-jet-danger-button>
                             <x-jet-button wire:click="modalUpdateInfo()">Sí</x-jet-button>
                         </x-slot>
@@ -2751,7 +2750,7 @@
                                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                                 <div
                                                     class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                                    <table class="min-w-full divide-y divide-gray-300">
+                                                    <table class="min-w-full divide-y divide-gray-300 table-fixed">
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col"
@@ -2761,26 +2760,90 @@
                                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                                     Descripción</th>
                                                                 <th scope="col"
-                                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                    class="w-4/5 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                                     Comentario</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="divide-y divide-gray-200">
                                                             @if ($voucher)
-                                                                @foreach ($itineraries as $itinerary)
-                                                                    <tr wire:ignore>
+                                                                @foreach ($itineraries as $concept)
+                                                                    <tr class="bg-yellow-100">
                                                                         <td
                                                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                                                            {{ $itinerary->date }}
+                                                                            {{ $concept->date }}
                                                                         </td>
-                                                                        <td
+                                                                        <td colspan="2"
                                                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            {{ $itinerary->description }}</td>
-                                                                        <td
-                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                            <x-jet-label value="Comentario" />
-                                                                            <x-jet-input type="text"
-                                                                                wire:model="array_itineraries.comments.{{ $itinerary->id }}" />
+                                                                            {{ $concept->description }}</td>
+                                                                    </tr>
+                                                                    @if ($concept->itineraries)
+                                                                        @foreach ($concept->itineraries as $itinerary)
+                                                                            <tr>
+                                                                                <td
+                                                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                                    {{ $itinerary->time }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                                    {{ $itinerary->description }}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                                    {{ $itinerary->comments }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endif
+                                                                    <tr>
+                                                                        <td colspan="3" x-data="{ open: false }">
+                                                                            <div x-show="open">
+                                                                                <div
+                                                                                    class="flex items-center space-x-2">
+                                                                                    <div>
+                                                                                        <x-jet-label
+                                                                                            value="Horario" />
+                                                                                        <x-jet-input type="time"
+                                                                                            wire:model="itinerary_time" />
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <x-jet-label
+                                                                                            value="Descripcion" />
+                                                                                        <x-jet-input type="text"
+                                                                                            wire:model="itinerary_description" />
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <x-jet-label
+                                                                                            value="Comentario" />
+                                                                                        <x-jet-input type="text"
+                                                                                            wire:model="itinerary_comment" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="flex justify-end mt-2 mb-2 space-x-2">
+                                                                                    <x-jet-danger-button
+                                                                                        x-on:click="open = !open">Cancelar</x-jet-danger-button>
+                                                                                    <x-jet-button
+                                                                                        wire:click="storeItinerary({{ $concept }})">Agregar</x-jet-button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div x-on:click="open = !open"
+                                                                                x-show="!open"
+                                                                                class="flex items-center space-x-2 cursor-pointer">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="w-6 h-6 text-blue-600">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                                </svg>
+                                                                                <a
+                                                                                    class="text-sm text-blue-600 cursor-pointer">Agregar
+                                                                                    Itinerario a concepto del
+                                                                                    presupuesto</a>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -2798,7 +2861,7 @@
                                     wire:click="$set('modal_view_itineraries',false)">
                                     Cancelar
                                 </x-jet-danger-button>
-                                <x-jet-button wire:click="updateAllItineraries()">Siguiente
+                                <x-jet-button wire:click="$set('modal_view_itineraries',false)">Siguiente
                                 </x-jet-button>
                             </x-slot>
                         </x-jet-dialog-modal>

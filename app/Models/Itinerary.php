@@ -18,4 +18,9 @@ class Itinerary extends Model
         return $this->belongsTo(Voucher::class);
     }
 
+    public function concept():BelongsTo
+    {
+        return $this->belongsTo(Concept::class);
+    }
+
 }

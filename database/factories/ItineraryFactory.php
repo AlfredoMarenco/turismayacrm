@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Concept;
 use App\Models\Voucher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,10 +19,10 @@ class ItineraryFactory extends Factory
     public function definition()
     {
         return [
-            'date' => $this->faker->date('Y-m-d'),
+            'time' => $this->faker->time('H:i:s','now'),
             'description' => $this->faker->paragraph(),
             'comments' => $this->faker->paragraph(),
-            'voucher_id' => Voucher::all()->random()->id
+            'concept_id' => Concept::all()->random()->id
         ];
     }
 }

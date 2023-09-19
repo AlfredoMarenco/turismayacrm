@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->time('time');
             $table->text('description');
             $table->text('comments')->nullable();
-            $table->foreignId('voucher_id')->constrained('vouchers')->onDelete('cascade');
+            $table->foreignId('concept_id')->constrained('concepts')->onDelete('cascade');
             $table->timestamps();
         });
     }
