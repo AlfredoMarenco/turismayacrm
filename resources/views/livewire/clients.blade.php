@@ -1446,101 +1446,148 @@
                                             {{ $vehicle->pax }}</td>
                                         @if ($vehicle->concepts->count())
                                             <td colspan="2" class="px-3 py-4 text-sm text-gray-500">
-                                                <table class="table-fixed">
-                                                    <thead class="bg-gray-50">
-                                                        <tr>
-                                                            <th scope="col"
-                                                                class="w-4/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
-                                                                Descripcion</th>
-                                                            <th scope="col"
-                                                                class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                                Tarifa Neta</th>
-                                                            <th scope="col"
-                                                                class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                                IVA</th>
-                                                            <th scope="col"
-                                                                class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                                Total</th>
-                                                            <th scope="col"
-                                                                class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="divide-y divide-gray-200 bg-white">
-                                                        @foreach ($vehicle->concepts as $concept)
+                                                @if ($budget->status != 0)
+                                                    <table class="table-fixed">
+                                                        <thead class="bg-gray-50">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
+                                                                    Fecha / Hora</th>
+                                                                <th scope="col"
+                                                                    class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                    Descripcion</th>
+                                                                <th scope="col"
+                                                                    class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                    Commentario</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="divide-y divide-gray-200 bg-white">
+                                                            @foreach ($vehicle->concepts as $concept)
+                                                                <tr class="bg-yellow-100">
+                                                                    <td colspan="3"
+                                                                        class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                        <p class="text-justify">
+                                                                            {{ $concept->date }} - {{ $concept->description }}</p>
+                                                                    </td>
+                                                                </tr>
+                                                                @foreach ($concept->itineraries as $itinerary)
+                                                                    <tr>
+                                                                        <td
+                                                                            class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                            {{ $itinerary->time }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                            {{ $itinerary->description }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                            {{ $itinerary->comments }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @else
+                                                    <table class="table-fixed">
+                                                        <thead class="bg-gray-50">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="w-4/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
+                                                                    Descripcion</th>
+                                                                <th scope="col"
+                                                                    class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                    Tarifa Neta</th>
+                                                                <th scope="col"
+                                                                    class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                    IVA</th>
+                                                                <th scope="col"
+                                                                    class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                    Total</th>
+                                                                <th scope="col"
+                                                                    class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="divide-y divide-gray-200 bg-white">
+                                                            @foreach ($vehicle->concepts as $concept)
+                                                                <tr>
+                                                                    <td
+                                                                        class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                        {{ $concept->date }} <br>
+                                                                        <p class="text-justify">
+                                                                            {{ $concept->description }}</p>
+                                                                    </td>
+                                                                    <td
+                                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                        ${{ number_format($concept->net_rate, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
+                                                                        ${{ number_format($concept->tax, 2) }}</td>
+                                                                    <td
+                                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                        ${{ number_format($concept->total, 2) }}</td>
+                                                                    <td
+                                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
+                                                                        @if ($budget->status == 0)
+                                                                            <div class="flex items-center">
+                                                                                <div>
+                                                                                    <svg wire:click="editConcept({{ $concept }})"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        fill="none"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        stroke-width="1.5"
+                                                                                        stroke="currentColor"
+                                                                                        class="w-5 h-5 text-blue-500 cursor-pointer">
+                                                                                        <path stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                                    </svg>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <svg wire:click="deleteConcept({{ $concept }})"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        fill="none"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        stroke-width="1.5"
+                                                                                        stroke="currentColor"
+                                                                                        class="w-5 h-5 text-red-500 cursor-pointer">
+                                                                                        <path stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                                    </svg>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                             <tr>
                                                                 <td
-                                                                    class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                                    {{ $concept->date }} <br>
-                                                                    <p class="text-justify">
-                                                                        {{ $concept->description }}</p>
+                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-right font-bold sm:pr-6">
+                                                                    Subtotal</td>
+                                                                <td
+                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6">
+                                                                    ${{ number_format($vehicle->totalWithOutTax(), 2) }}
                                                                 </td>
                                                                 <td
-                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                                    ${{ number_format($concept->net_rate, 2) }}
+                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
+                                                                    ${{ number_format($vehicle->totalTax(), 2) }}
                                                                 </td>
                                                                 <td
-                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
-                                                                    ${{ number_format($concept->tax, 2) }}</td>
-                                                                <td
-                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                                    ${{ number_format($concept->total, 2) }}</td>
-                                                                <td
-                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                                    @if ($budget->status == 0)
-                                                                        <div class="flex items-center">
-                                                                            <div>
-                                                                                <svg wire:click="editConcept({{ $concept }})"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    fill="none" viewBox="0 0 24 24"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke="currentColor"
-                                                                                    class="w-5 h-5 text-blue-500 cursor-pointer">
-                                                                                    <path stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                                                </svg>
-                                                                            </div>
-                                                                            <div>
-                                                                                <svg wire:click="deleteConcept({{ $concept }})"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    fill="none" viewBox="0 0 24 24"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke="currentColor"
-                                                                                    class="w-5 h-5 text-red-500 cursor-pointer">
-                                                                                    <path stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                                                </svg>
-                                                                            </div>
-                                                                        </div>
+                                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6">
+                                                                    @if ($budget->enable_tax)
+                                                                        ${{ number_format($vehicle->totalWithTax(), 2) }}
+                                                                    @else
+                                                                        ${{ number_format($vehicle->totalWithOutTax(), 2) }}
                                                                     @endif
                                                                 </td>
                                                             </tr>
-                                                        @endforeach
-                                                        <tr>
-                                                            <td
-                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-right font-bold sm:pr-6">
-                                                                Subtotal</td>
-                                                            <td
-                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6">
-                                                                ${{ number_format($vehicle->totalWithOutTax(), 2) }}
-                                                            </td>
-                                                            <td
-                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
-                                                                ${{ number_format($vehicle->totalTax(), 2) }}
-                                                            </td>
-                                                            <td
-                                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-bold sm:pr-6">
-                                                                @if ($budget->enable_tax)
-                                                                    ${{ number_format($vehicle->totalWithTax(), 2) }}
-                                                                @else
-                                                                    ${{ number_format($vehicle->totalWithOutTax(), 2) }}
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                @endif
                                             </td>
                                         @else
                                             <td colspan="2"
@@ -1640,55 +1687,57 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                                     </tr>
                                 @endif
-                                <tr>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 font-bold">Total
-                                        global</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $budget->totalPax() }}</td>
-                                    <td colspan="2" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <table class="table-fixed">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"
-                                                        class="w-3/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
-                                                    </th>
-                                                    <th scope="col"
-                                                        class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                    </th>
-                                                    <th scope="col"
-                                                        class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                    </th>
-                                                    <th scope="col"
-                                                        class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="divide-y divide-gray-200 bg-white">
-                                                <tr>
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
-                                                    </td>
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
-                                                        ${{ number_format($budget->totalWithOutTax(), 2) }}
-                                                    </td>
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
-                                                        ${{ number_format($budget->totalTax(), 2) }}</td>
-                                                    <td
-                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
-                                                        @if ($budget->enable_tax)
-                                                            ${{ number_format($budget->totalWithTax(), 2) }}
-                                                        @else
+                                @if ($budget->status == 0)
+                                    <tr>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 font-bold">Total
+                                            global</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ $budget->totalPax() }}</td>
+                                        <td colspan="2" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <table class="table-fixed">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="w-3/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="w-2/4 px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-white">
+                                                    <tr>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+                                                        </td>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
                                                             ${{ number_format($budget->totalWithOutTax(), 2) }}
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
-                                </tr>
+                                                        </td>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
+                                                            ${{ number_format($budget->totalTax(), 2) }}</td>
+                                                        <td
+                                                            class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm text-center font-medium sm:pr-6">
+                                                            @if ($budget->enable_tax)
+                                                                ${{ number_format($budget->totalWithTax(), 2) }}
+                                                            @else
+                                                                ${{ number_format($budget->totalWithOutTax(), 2) }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
 
@@ -2789,7 +2838,45 @@
                                                                                 </td>
                                                                                 <td
                                                                                     class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                                                                    {{ $itinerary->comments }}
+                                                                                    <div class="flex items-center">
+                                                                                        <p>{{ $itinerary->comments }}
+                                                                                        </p>
+                                                                                        <p
+                                                                                            class="ml-4 cursor-pointer">
+                                                                                            <span
+                                                                                                wire:click="editItinerary({{ $itinerary }})"
+                                                                                                class="text-blue-600">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke-width="1.5"
+                                                                                                    stroke="currentColor"
+                                                                                                    class="w-5 h-5">
+                                                                                                    <path
+                                                                                                        stroke-linecap="round"
+                                                                                                        stroke-linejoin="round"
+                                                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                                                </svg>
+                                                                                            </span>
+                                                                                        </p>
+                                                                                        <p
+                                                                                            class="ml-4 cursor-pointer">
+                                                                                            <span class="text-red-600"
+                                                                                                wire:click="deleteItinerary({{ $itinerary }})">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke-width="1.5"
+                                                                                                    stroke="currentColor"
+                                                                                                    class="w-6 h-6">
+                                                                                                    <path
+                                                                                                        stroke-linecap="round"
+                                                                                                        stroke-linejoin="round"
+                                                                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                                                </svg>
+                                                                                            </span>
+                                                                                        </p>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
@@ -2862,6 +2949,33 @@
                                     Cancelar
                                 </x-jet-danger-button>
                                 <x-jet-button wire:click="$set('modal_view_itineraries',false)">Siguiente
+                                </x-jet-button>
+                            </x-slot>
+                        </x-jet-dialog-modal>
+
+                        <x-jet-dialog-modal wire:model="modal_edit_itinerary">
+                            <x-slot name="title">
+                                Editar Itinerario
+                            </x-slot>
+                            <x-slot name="content">
+                                <div>
+                                    <x-jet-label value="Horario" />
+                                    <x-jet-input type="time" wire:model="edit_itinerary_time" />
+                                </div>
+                                <div>
+                                    <x-jet-label value="Descripcion" />
+                                    <x-jet-input type="text" wire:model="edit_itinerary_description" />
+                                </div>
+                                <div>
+                                    <x-jet-label value="Comentario" />
+                                    <x-jet-input type="text" wire:model="edit_itinerary_comment" />
+                                </div>
+                            </x-slot>
+                            <x-slot name="footer">
+                                <x-jet-danger-button class="mx-2" wire:click="$set('modal_edit_itinerary',false)">
+                                    Cancelar
+                                </x-jet-danger-button>
+                                <x-jet-button wire:click="updateItinerary()">Actualizar
                                 </x-jet-button>
                             </x-slot>
                         </x-jet-dialog-modal>

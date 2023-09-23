@@ -40,6 +40,7 @@ class Clients extends Component
     public $concept;
     public $discount;
     public $voucher;
+    public $itinerary;
 
     public $voucher_date;
     public $voucher_time;
@@ -50,6 +51,9 @@ class Clients extends Component
     public $itinerary_time;
     public $itinerary_description;
     public $itinerary_comment;
+    public $edit_itinerary_time;
+    public $edit_itinerary_description;
+    public $edit_itinerary_comment;
 
 
     public $formEdit = [
@@ -191,6 +195,7 @@ class Clients extends Component
     public $modal_view_itineraries=false;
     public $show_pass=false;
     public $form_add_itinerary=false;
+    public $modal_edit_itinerary=false;
 
 
     protected $listeners = [
@@ -716,8 +721,32 @@ class Clients extends Component
         $this->itineraries = Concept::where('vehicle_id',$concept->vehicle_id)->get();
     }
 
-    public function updateAllItineraries(){
+    public function editItinerary(Itinerary $itinerary)
+    {
+        $this->itinerary = $itinerary;
+        $this->edit_itinerary_time = $itinerary->time;
+        $this->edit_itinerary_description = $itinerary->description;
+        $this->edit_itinerary_comment = $itinerary->comments;
+        $this->modal_edit_itinerary = true;
+    }
 
+    public function updateItinerary()
+    {
+        $this->itinerary->update([
+            'time' => $this->edit_itinerary_time,
+            'description' => $this->edit_itinerary_description,
+            'comments' => $this->edit_itinerary_comment,
+        ]);
+        $this->itineraries = Concept::where('vehicle_id',$this->itinerary->concept->vehicle_id)->get();
+
+        $this->modal_edit_itinerary = false;
+    }
+
+
+    public function deleteItinerary(Itinerary $itinerary)
+    {
+        $itinerary->delete();
+        $this->itineraries = Concept::where('vehicle_id',$itinerary->concept->vehicle_id)->get();
     }
 
     public function addCommentBudget(){
