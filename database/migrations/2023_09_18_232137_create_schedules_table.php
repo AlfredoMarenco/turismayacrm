@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('time');
             $table->string('description');
             $table->string('comment');
-            $table->foreign('itinerary_id')->constrained('itineraries');
+            $table->foreignId('itinerary_id')->constrained('itineraries');
             $table->timestamps();
         });
     }
