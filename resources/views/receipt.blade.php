@@ -169,9 +169,9 @@
                         <li style="width: 140px; text-align: right">
                             <b>$<span>
                             @if ($budget->enable_tax)
-                                {{ number_format($vehicle->totalWithTax(), 2) }}
+                                {{ number_format($budget->totalWithTax(), 2) }}
                             @else
-                                {{ number_format($vehicle->totalWithOutTax(), 2) }}
+                                {{ number_format($budget->totalWithOutTax(), 2) }}
                             @endif</span> MXN </b>
                         </li>
                     </div>
