@@ -38,7 +38,7 @@ Route::get('/download/voucher/{vehicle}', function (Vehicle $vehicle) {
         $driver = Driver::find($voucher->driver_id);
         $pdf = PDF::loadView('voucher',compact('voucher','vehicle','unit','driver'));
         //return view('voucher',compact('voucher','vehicle','unit','driver'));
-        return $pdf->download('voucher.pdf',compact('voucher','vehicle','unit','driver'));
+        return $pdf->setPaper('a4')->download('voucher.pdf',compact('voucher','vehicle','unit','driver'));
 })->name('download.voucher');
 
 Route::get('/restablecer-contrasena', function () {
