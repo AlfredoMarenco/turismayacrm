@@ -1,14 +1,14 @@
 <div>
     <div class="h-screen flex flex-1 flex-col md:pl-64">
-        <div class="pt-6">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        <div class="pt-6 ">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pb-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                             Panel de disponibilidad</h2>
-                        <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+                       <!--  <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
                             <div class="mt-2 flex items-center text-sm text-gray-500">
-                                <!-- Heroicon name: mini/calendar -->
+
                                 <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd"
@@ -17,7 +17,7 @@
                                 </svg>
                                 Fecha de hoy:<span class="pl-1"> 15 de Septiembre del 2022</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="mt-5 flex lg:mt-0 lg:ml-4">
                         <span class="md:pl-3 lg:pr-8 sm:ml-3">
@@ -45,7 +45,7 @@
                 {{-- {{ $selectedDate }} --}}
                 <div class="p-8">
                     <section class="mt-12">
-                        <h2 class="font-semibold text-gray-900">Upcoming events</h2>
+                        <h2 class="font-semibold text-gray-900">Próximos eventos</h2>
                         <ol class="mt-2 divide-y divide-gray-200 text-sm leading-6 text-gray-500">
                             @forelse ($availabilities as $availability)
                                 <li class="py-4 sm:flex">
