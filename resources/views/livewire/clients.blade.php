@@ -1602,7 +1602,7 @@
                                                     <a wire:click="modalEditVoucher({{ $vehicle }})"
                                                         class="cursor-pointer rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                                                         Editar voucher</a>
-                                                    <a wire:click="downloadVoucher({{ $vehicle }})"
+                                                    <a wire:click="downloadVoucher({{ $vehicle }})" target="_blank"
                                                         class="cursor-pointer rounded-md border border-transparent bg-gray-500 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                                                         Descargar voucher</a>
                                                 </td>

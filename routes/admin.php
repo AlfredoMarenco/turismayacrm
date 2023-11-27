@@ -28,21 +28,17 @@ Route::middleware(['role:Admin'])->get('/', Menusidebar::class)->name('admin.ind
 Route::get('/download/receipt/{budget}', function (Budget $budget) {
     $vehicles = Vehicle::where('budget_id',$budget->id)->get();
     $pdf = PDF::loadView('receipt',compact('vehicles','budget'));
-    return $pdf->download('receipt.pdf');
-    /* return view('receipt',compact('vehicles','budget')); */
+    return $pdf->download('receipt.pdf',compact('budget','vehicles'));
+    //return view('receipt',compact('vehicles','budget'));
 })->name('download.receipt');
 
 Route::get('/download/voucher/{vehicle}', function (Vehicle $vehicle) {
     $voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
-    if ($voucher->type == 1) {
         $unit = Unit::find($voucher->unit_id);
         $driver = Driver::find($voucher->driver_id);
         $pdf = PDF::loadView('voucher',compact('voucher','vehicle','unit','driver'));
-        return view('voucher',compact('voucher','vehicle','unit','driver'));
-    }else{
-        $pdf = PDF::loadView('voucher',compact('voucher','vehicle'));
-    }
-    /* return $pdf->download('voucher.pdf'); */
+        //return view('voucher',compact('voucher','vehicle','unit','driver'));
+        return $pdf->download('voucher.pdf',compact('voucher','vehicle','unit','driver'));
 })->name('download.voucher');
 
 Route::get('/restablecer-contrasena', function () {
