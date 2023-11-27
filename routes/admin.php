@@ -28,7 +28,7 @@ Route::middleware(['role:Admin'])->get('/', Menusidebar::class)->name('admin.ind
 Route::get('/download/receipt/{budget}', function (Budget $budget) {
     $vehicles = Vehicle::where('budget_id',$budget->id)->get();
     $pdf = PDF::loadView('receipt',compact('vehicles','budget'));
-    return $pdf->download('receipt.pdf');
+    return $pdf->stream('receipt.pdf');
     /* return view('receipt',compact('vehicles','budget')); */
 })->name('download.receipt');
 
