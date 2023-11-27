@@ -1,1 +1,0 @@
-Fecha de hoy:<span class="pl-1"> {{ $date }}</span>

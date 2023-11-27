@@ -16,14 +16,14 @@
         </nav>
 
         <header class="bg-white shadow">
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 ">
                 <div class="md:flex md:items-center md:justify-between md:space-x-5">
                     <div class="flex items-start space-x-5">
                         <div class="flex-shrink-0">
                             <div class="relative">
                                 <img class="h-16 w-16 rounded-full"
-                                    src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                                    alt="">
+                                    src="{{asset('/img/logo-turis.png')}}"
+                                    >
                                 <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <main>
+        <main style="min-height: 100vh;">
             <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                 <!-- Your content -->
                 @if ($show_payments)
