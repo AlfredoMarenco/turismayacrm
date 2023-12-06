@@ -165,7 +165,7 @@
                                     @if (!$budget->enable_tax)
                                         <span>0</span> MXN </b>
                                     @else
-                                        <span>{{ number_format($vehicle->totalTax(), 2) }}</span> MXN </b>
+                                        <span>{{ number_format($budget->totalTax(), 2) }}</span> MXN </b>
                                     @endif
                                 </td>
                             </tr>
