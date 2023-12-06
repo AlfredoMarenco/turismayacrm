@@ -1525,10 +1525,16 @@
                                                                     </td>
                                                                     <td
                                                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6 @if (!$budget->enable_tax) line-through @endif">
-                                                                        ${{ number_format($concept->tax, 2) }}</td>
+                                                                        ${{ number_format($concept->tax, 2) }}
+                                                                    </td>
                                                                     <td
                                                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                                                        ${{ number_format($concept->total, 2) }}</td>
+                                                                        @if (!$budget->enable_tax)
+                                                                            ${{ number_format($concept->total - $concept->tax, 2) }}
+                                                                        @else
+                                                                            ${{ number_format($concept->total, 2) }}
+                                                                        @endif
+                                                                    </td>
                                                                     <td
                                                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
                                                                         @if ($budget->status == 0)
