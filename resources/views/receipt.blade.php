@@ -36,7 +36,7 @@
 
         .nombre-cliente {
             padding-top: 4em;
-            color: #114589;
+            color: #000;
         }
 
         .green {
@@ -75,7 +75,7 @@
                         <span style="font-weight: bold;">Fecha:</span> <span> {{ $budget->date }}</span> <br>
 
                         <span style="font-weight: bold; color:#a8bd3a;">Referencia:</span> <span
-                            style="color:#a8bd3a;">COT-{{ $budget->id }}</span><br>
+                            style="font-weight: bold; color:#a8bd3a;">COT - {{ $budget->id }}</span><br>
                         <span style="font-weight: bold;">Servicio:</span> <span>Transporte</span>
                     </p>
                 </div>
@@ -156,12 +156,12 @@
                             <tr>
                                 <td><b>Subtotal</b></td>
                                 <td style="text-align: right;">
-                                    <span>{{ number_format($budget->totalWithOutTax(), 2) }}</span> MXN
+                                    $ <span>{{ number_format($budget->totalWithOutTax(), 2) }}</span> MXN
                                 </td>
                             </tr>
                             <tr>
                                 <td><b>Impuestos</b></td>
-                                <td style="text-align: right;">
+                                <td style="text-align: right;"> $
                                     @if (!$budget->enable_tax)
                                         <span>0</span> MXN </b>
                                     @else
@@ -170,9 +170,9 @@
                                 </td>
                             </tr>
                             <tr style="color: #a8bd3a; font-weight:bold;">
-                                <td><b>Subtotal</b></td>
+                                <td><b>Total</b></td>
 
-                                <td style="text-align: right;"> <span>
+                                <td style="text-align: right;">$<span>
                                         @if ($budget->enable_tax)
                                             {{ number_format($budget->totalWithTax(), 2) }}
                                         @else
@@ -224,15 +224,6 @@
                 </li>
             </ul>
             <b>Esperamos poder servirle</b>
-            <div style="text-align: center">
-                <h3 style="font-weight: bold; color: #000">
-                    Gustavo Martinez
-                    <br />
-                    <span style="font-size: 0.8em; color: #114589">
-                        Reservaciones
-                    </span>
-                </h3>
-            </div>
             <div id="politicas" style="line-height:18px;">
                 <div class="reservacion">
                     <!-- de reservación -->
