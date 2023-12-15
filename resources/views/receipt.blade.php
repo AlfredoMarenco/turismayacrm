@@ -122,7 +122,7 @@
                             <td
                                 style="min-height: 40px; display: flex; flex-direction: column; justify-content: center; padding-left: 15px; padding-top: 10px; padding-bottom: 10px;">
                                 @foreach ($vehicle->concepts as $concept)
-                                    <span><b>{{ \Carbon\Carbon::parse($concept->date)->toFormattedDayDateString() }}</b></span>
+                                    <span><b>{{ \Carbon\Carbon::parse($concept->date)->isoFormat('LL') }}</b></span>
                                     <ul>
                                         <li>
                                             {{ $concept->description }}
