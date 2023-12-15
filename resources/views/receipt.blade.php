@@ -135,12 +135,7 @@
                                 @foreach ($vehicle->concepts as $concept)
                                     <p
                                         style="height: 75px; display: flow;  padding-left: 15px; padding-top: 10px; padding-bottom: 10px; font-weight: bold;">
-                                        @if (!$budget->enable_tax)
-                                            <span>$</span>{{ number_format($concept->total - $concept->tax, 2) }}
-                                            <span>MXN</span>
-                                        @else
                                             <span>$</span>{{ number_format($concept->total, 2) }} <span>MXN</span>
-                                        @endif
                                     </p>
                                 @endforeach
                             </td>
