@@ -135,7 +135,7 @@
                                 @foreach ($vehicle->concepts as $concept)
                                     <p
                                         style="height: 75px; display: flow;  padding-left: 15px; padding-top: 10px; padding-bottom: 10px; font-weight: bold;">
-                                            <span>$</span>{{ number_format($concept->total, 2) }} <span>MXN</span>
+                                        <span>$</span>{{ number_format($concept->total - $concept->tax, 2) }} <span>MXN</span>
                                     </p>
                                 @endforeach
                             </td>
