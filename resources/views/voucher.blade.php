@@ -209,7 +209,7 @@
                 <div class="info-cliente__datos">
                     <span>Fecha</span>
                     <div>
-                        <p>{{ \Carbon\Carbon::parse($vehicle->budget->date)->toFormattedDayDateString() }}</p>
+                        <p>{{ \Carbon\Carbon::parse($vehicle->budget->date)->isoFormat('LL') }}</p>
                         <!-- Dato -->
                     </div>
                 </div>
