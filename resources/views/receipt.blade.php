@@ -72,7 +72,7 @@
             <div class="pos-container">
                 <div class="info-cabecera">
                     <p>
-                        <span style="font-weight: bold;">Fecha:</span> <span> {{ $budget->date }}</span> <br>
+                        <span style="font-weight: bold;">Fecha:</span> <span> {{ \Carbon\Carbon::today()->format("d-m-Y") }}</span> <br>
 
                         <span style="font-weight: bold; color:#a8bd3a;">Referencia:</span> <span
                             style="font-weight: bold; color:#a8bd3a;">COT - {{ $budget->id }}</span><br>
