@@ -50,7 +50,7 @@
                                 Disponibilidad
                             </a>
 
-                            <a href="#"
+                            <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/folder -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
@@ -62,7 +62,7 @@
                                 Viajes
                             </a>
 
-                            <a href="#"
+                            <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/calendar -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
@@ -74,7 +74,7 @@
                                 Pagos
                             </a>
 
-                            <a href="#"
+                            <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/inbox -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
@@ -86,7 +86,7 @@
                                 Unidades
                             </a>
 
-                            <a href="#"
+                            <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/users -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
@@ -98,7 +98,7 @@
                                 Choferes
                             </a>
 
-                            <a href="#"
+                            <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/chart-bar -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
@@ -216,7 +216,8 @@
                         <form class="w-full" action="{{ route('logout') }}" method="POST">
                             @csrf
                             @method('POST')
-                            <button class="block w-full {{ $itemSelect == 7 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
+                            <button
+                                class="block w-full {{ $itemSelect == 8 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
