@@ -133,9 +133,9 @@
                                 <select wire:model="client_id">
                                     <option value="">-Selecciona una opción</option>
                                     @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}">
-                                        {{ $client->id }} - {{ $client->name }}
-                                    </option>
+                                        <option value="{{ $client->id }}">
+                                            {{ $client->id }} - {{ $client->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <div class="px-4 sm:px-6 lg:px-8">
@@ -171,10 +171,23 @@
                                                                 <tr>
                                                                     <td
                                                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                                                        {{ $budget->id }}</td>
+                                                                        {{ $budget->date }}
+                                                                    </td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        {{ $budget->user->nameComplete() }} </td>
+                                                                        {{ $budget->id }}
+
+                                                                    </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                        @if ($budget->all_splits_paid() != 0)
+                                                                            {{ $budget->payment->id }}
+                                                                        @endif
+                                                                    </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
+                                                                    </td>
                                                                     <td
                                                                         class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                         @if ($budget->enable_tax)
@@ -189,13 +202,6 @@
                                                                             Sí
                                                                         @else
                                                                             No
-                                                                        @endif
-                                                                    </td>
-                                                                    <td
-                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        @if ($budget->status == 1)
-                                                                            {{ $budget->balanceSplits() }}
-                                                                        @else
                                                                         @endif
                                                                     </td>
                                                                 </tr>
