@@ -9,7 +9,7 @@
                         <!-- <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
 
                             <div class="mt-2 flex items-center text-sm text-gray-500">
-                                
+
                                 <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd"
@@ -168,17 +168,17 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-
-                                                <!-- More people... -->
                                             </tbody>
                                         </table>
+                                        <div class="p-3">
+                                            {{ $units->links()}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /End replace -->
             </div>
         </div>
 

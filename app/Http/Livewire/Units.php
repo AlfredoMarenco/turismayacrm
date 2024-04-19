@@ -99,15 +99,15 @@ class Units extends Component
     {   $units = Unit::paginate($this->paginate);
 
         if ($this->model_search) {
-            $units = Unit::where('model','like','%'.$this->model_search.'%')->get();
+            $units = Unit::where('model','like','%'.$this->model_search.'%')->paginate($this->paginate);
         }
 
         if ($this->plate_search) {
-            $units = Unit::where('plate','like','%'.$this->plate_search.'%')->get();
+            $units = Unit::where('plate','like','%'.$this->plate_search.'%')->paginate($this->paginate);
         }
 
         if ($this->id_unit_search) {
-            $units = Unit::where('id_unit','like','%'.$this->id_unit_search.'%')->get();
+            $units = Unit::where('id_unit','like','%'.$this->id_unit_search.'%')->paginate($this->paginate);
         }
 
         return view('livewire.units',[

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Budget;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 
@@ -12,8 +13,11 @@ class Reports extends Component
     public $reportSelected = 0;
     public $start_date='';
     public $end_date='';
+    public $start_date2='';
+    public $end_date2='';
     public $budgets=null;
     public $clients = [];
+    public $vouchers = [];
     public $client_id='';
 
     public function mount()
@@ -32,6 +36,12 @@ class Reports extends Component
     {
         $this->budgets = Budget::whereBetween('created_at', [$this->start_date, $this->end_date])->get();
     }
+
+    public function services_sheet()
+    {
+        $this->vouchers = Voucher::whereBetween('created_at', [$this->start_date2 , $this->end_date2])->get();
+    }
+
     public function render()
     {
         return view('livewire.reports')->layout('layouts.guest');

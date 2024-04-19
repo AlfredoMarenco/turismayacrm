@@ -215,6 +215,74 @@
                                 </div>
                             </div>
                         @endif
+                        @if ($reportSelected == 3)
+                            <div class="mt-8">
+                                <h2>Obtener reporte:</h2>
+                                <p class="mb-4">Establece el rango de fechas para generar el reporte</p>
+                                <label for="start_date">Fecha de Inicio</label>
+                                <input type="date" wire:model="start_date2">
+                                <label for="end_date">Fecha de Fin</label>
+                                <input type="date" wire:model="end_date2">
+                                <button wire:click="services_sheet()"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generar
+                                    Reporte</button>
+                                <div class="px-4 sm:px-6 lg:px-8">
+                                    <div class="mt-8 flow-root">
+                                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                <table class="min-w-full divide-y divide-gray-300">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col"
+                                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                                                Cotizacion</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Cliente</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Importe</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Contratado</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Pagado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="divide-y divide-gray-200">
+                                                        @if ($vouchers)
+                                                            @foreach ($vouchers as $voucher)
+                                                                <tr>
+                                                                    <td
+                                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                       </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                         </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
+                                                                    </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
+                                                                    </td>
+                                                                    <td
+                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                        
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
