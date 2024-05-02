@@ -3,13 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Models\Budget;
+use App\Models\Concept;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Reports extends Component
 {
+    use WithPagination;
+
     public $reportSelected = 0;
     public $start_date='';
     public $end_date='';
@@ -18,6 +22,7 @@ class Reports extends Component
     public $budgets=null;
     public $clients = [];
     public $vouchers = [];
+    public $concepts;
     public $client_id='';
 
     public function mount()
@@ -39,7 +44,7 @@ class Reports extends Component
 
     public function services_sheet()
     {
-        $this->vouchers = Voucher::whereBetween('created_at', [$this->start_date2 , $this->end_date2])->get();
+        $this->concepts = Concept::whereBetween('created_at', [$this->start_date2 , $this->end_date2])->get();
     }
 
     public function render()

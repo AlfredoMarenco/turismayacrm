@@ -219,9 +219,9 @@
                             <div class="mt-8">
                                 <h2>Obtener reporte:</h2>
                                 <p class="mb-4">Establece el rango de fechas para generar el reporte</p>
-                                <label for="start_date">Fecha de Inicio</label>
+                                <label for="start_date2">Fecha de Inicio</label>
                                 <input type="date" wire:model="start_date2">
-                                <label for="end_date">Fecha de Fin</label>
+                                <label for="end_date2">Fecha de Fin</label>
                                 <input type="date" wire:model="end_date2">
                                 <button wire:click="services_sheet()"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generar
@@ -235,49 +235,89 @@
                                                         <tr>
                                                             <th scope="col"
                                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                                                Cotizacion</th>
+                                                                Fecha</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Presupuesto</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Vehicle</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Operador</th>
                                                             <th scope="col"
                                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                                 Cliente</th>
                                                             <th scope="col"
                                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                                Importe</th>
+                                                                Sueldo</th>
                                                             <th scope="col"
                                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                                Contratado</th>
+                                                                Combustible</th>
                                                             <th scope="col"
                                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                                Pagado</th>
+                                                                Caseta</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Total Gastos</th>
+                                                            <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                                Utilidad</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="divide-y divide-gray-200">
-                                                        @if ($vouchers)
-                                                            @foreach ($vouchers as $voucher)
-                                                                <tr>
-                                                                    <td
-                                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                                                       </td>
-                                                                    <td
-                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                         </td>
-                                                                    <td
-                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-
-                                                                    </td>
-                                                                    <td
-                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-
-                                                                    </td>
-                                                                    <td
-                                                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                        
-                                                                    </td>
-                                                                </tr>
+                                                        @if ($concepts)
+                                                            @foreach ($concepts as $concept)
+                                                                @if ($concept->vehicle->voucher)
+                                                                    <tr>
+                                                                        <td
+                                                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                                                            {{ $concept->created_at }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $concept->vehicle->budget->id }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $concept->vehicle->id }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $concept->vehicle->voucher->driver->name }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            {{ $concept->vehicle->budget->user->nameComplete() }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            ${{ number_format($concept->salary,2) }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            ${{ number_format($concept->disel_cost,2) }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            ${{ number_format($concept->booths,2) }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            ${{ number_format($concept->total_cost,2) }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                                            ${{ number_format($concept->utility,2) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         @endif
                                                     </tbody>
                                                 </table>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

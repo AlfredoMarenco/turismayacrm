@@ -31,7 +31,7 @@ class Voucher extends Model
 
     public function unit(): BelongsTo
     {
-        return $this->belongsTo((Unit::class));
+        return $this->belongsTo(Unit::class);
     }
 
     public function driver():BelongsTo
