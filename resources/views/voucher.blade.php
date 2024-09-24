@@ -170,7 +170,7 @@
                 <div class="info-cliente__datos">
                     <span>Orden</span>
                     <div>
-                        <p>lorem80</p>
+                        <p>{{ $voucher->id }}</p>
                         <!-- Dato -->
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                 <div class="info-cliente__datos">
                     <span>Tel. Vendedor</span>
                     <div>
-                        <p>lorem80</p>
+                        <p></p>
                         <!-- Dato -->
                     </div>
                 </div>
@@ -256,8 +256,8 @@
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Hora</th>
                         <th>Vehículo</th>
+                        <th>Hora</th>
                         <th>Servicio</th>
                         <th>Nota</th>
                     </tr>
@@ -265,29 +265,38 @@
                 <tbody>
                     @foreach ($vehicle->concepts as $concept)
                         <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th style="font-size: 14px;">
+                                <strong>{{ $concept->description }}</strong>
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tr>
                             <th style="width: 100px;">
                                 <li>{{ $concept->date }}</li>
                             </th>
-                            <th style="width: 100px;">
-                                @foreach ($concept->itineraries as $itinerary)
-                                    <li>{{ $itinerary->time }}</li>
-                                @endforeach
-                            </th>
-                            <th>
+                            <th style="font-size: 12px;">
                                 @if ($concept->vehicle->type == 1)
                                     Autobus
                                 @else
                                     Camioneta
                                 @endif
                             </th>
-                            <th>
+                            <th style="width: 100px;">
+                                @foreach ($concept->itineraries as $itinerary)
+                                    <li>{{ $itinerary->time }}</li>
+                                @endforeach
+                            </th>
+                            <th style="font-size: 12px;">
                                 @foreach ($concept->itineraries as $itinerary)
                                     <li style="text-align: left; padding-left: 1em">
                                         {{ $itinerary->description }}
                                     </li>
                                 @endforeach
                             </th>
-                            <th>
+                            <th style="font-size: 12px;">
                                 @foreach ($concept->itineraries as $itinerary)
                                     <li>
                                         {{ $itinerary->comments }}
