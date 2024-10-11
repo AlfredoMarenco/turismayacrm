@@ -100,6 +100,18 @@
 
                             <a
                                 class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                                <!-- Heroicon name: outline/users -->
+                                <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                                </svg>
+                                Choferes
+                            </a>
+
+                            <a
+                                class="text-indigo-100 hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md">
                                 <!-- Heroicon name: outline/chart-bar -->
                                 <svg class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -201,7 +213,6 @@
 
                             Choferes
                         </a>
-
                         <a wire:click="$set('itemSelect','7')"
                             class="{{ $itemSelect == 7 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -213,11 +224,21 @@
 
                             Reportes
                         </a>
+                        <a wire:click="$set('itemSelect','8')"
+                            class="{{ $itemSelect == 8 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="w-5 h-5 mr-2">
+                                <path
+                                    d="M11 5a3 3 0 11-6 0 3 3 0 016 0zM2.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 018 18a9.953 9.953 0 01-5.385-1.572zM16.25 5.75a.75.75 0 00-1.5 0v2h-2a.75.75 0 000 1.5h2v2a.75.75 0 001.5 0v-2h2a.75.75 0 000-1.5h-2v-2z" />
+                            </svg>
+
+                            Usuarios de sistema
+                        </a>
                         <form class="w-full" action="{{ route('logout') }}" method="POST">
                             @csrf
                             @method('POST')
                             <button
-                                class="block w-full {{ $itemSelect == 8 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
+                                class="block w-full {{ $itemSelect == 9 ? 'bg-lime-350 text-white' : 'text-indigo-100' }} hover:bg-lime-100 hover:text-black group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -271,6 +292,12 @@
                 @case(6)
                     <div>
                         @livewire('driver', key('driver'))
+                    </div>
+                @break
+
+                @case(8)
+                    <div>
+                        @livewire('config', key('config'))
                     </div>
                 @break
 

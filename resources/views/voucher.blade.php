@@ -268,7 +268,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th style="font-size: 14px;">
+                            <th>
                                 <strong>{{ $concept->description }}</strong>
                             </th>
                             <th></th>
