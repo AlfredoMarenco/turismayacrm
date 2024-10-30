@@ -6,6 +6,7 @@ use App\Http\Livewire\Menusidebar;
 use App\Models\Budget;
 use App\Models\Driver;
 use App\Models\Unit;
+use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Voucher;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -33,12 +34,13 @@ Route::get('/download/receipt/{budget}', function (Budget $budget) {
 })->name('download.receipt');
 
 Route::get('/download/voucher/{vehicle}', function (Vehicle $vehicle) {
-    $voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
+        $voucher = Voucher::where('vehicle_id',$vehicle->id)->first();
         $unit = Unit::find($voucher->unit_id);
         $driver = Driver::find($voucher->driver_id);
-        $pdf = PDF::loadView('voucher',compact('voucher','vehicle','unit','driver'));
-        //return view('voucher',compact('voucher','vehicle','unit','driver'));
-        return $pdf->download('voucher.pdf',compact('voucher','vehicle','unit','driver'));
+        $user = User::find($voucher->id_seler);
+        $pdf = PDF::loadView('voucher',compact('voucher','vehicle','unit','driver','user'));
+        //return view('voucher',compact('voucher','vehicle','unit','driver','user'));
+        return $pdf->download('voucher.pdf',compact('voucher','vehicle','unit','driver','user'));
 })->name('download.voucher');
 
 Route::get('/restablecer-contrasena', function () {

@@ -2780,6 +2780,11 @@
 
                                             <x-jet-label value="Telefono" />
                                             <x-jet-input class="w-full" type="text" wire:model='driver_phone' />
+
+                                            <x-jet-input class="w-full" type="hidden" wire:model='vehicle_id' value="1" />
+                                            <x-jet-input class="w-full" type="hidden" wire:model='driver_id' value="1" />
+                                            <x-jet-input class="w-full" type="hidden" wire:model='unit_id' value="1" />
+
                                         @break
                                     @endswitch
                                     <x-jet-label value="Observaciones" />

@@ -671,8 +671,10 @@ class Clients extends Component
                 'driver_name' => $this->driver_name,
                 'driver_phone' => $this->driver_phone,
                 'vehicle_id' => $this->vehicle->id,
-                'unit' => $this->unit,
-                'observations' => $this->observations
+                'driver_id' => $this->driver_id,
+                'unit_id' => $this->unit_id,
+                'observations' => $this->observations,
+                'id_seler' => auth()->id()
 
             ]);
         }else{
@@ -680,9 +682,13 @@ class Clients extends Component
                 'type' => $this->voucher_type_selected,
                 'driver_name' => $this->driver_name,
                 'vehicle_id' => $this->vehicle->id,
-                'driver_id' => $this->driver_id,
-                'unit_id' => $this->unit_id,
-                'observations' => $this->observations
+                'driver_phone' => $this->driver_phone,
+                'vehicle_id' => 1,
+                'driver_id' => 1,
+                'unit_id' => 1,
+                'unit' => $this->unit,
+                'observations' => $this->observations,
+                'id_seler' => auth()->id()
             ]);
         }
 

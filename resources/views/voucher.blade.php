@@ -180,7 +180,11 @@
                 <div class="info-cliente__datos">
                     <span>Contacto</span>
                     <div>
-                        <p>{{ $vehicle->driver_phone }}</p>
+                        @if ($vehicle->voucher->type)
+                            <p>{{ $vehicle->voucher->driver_phone }}</p>
+                        @else
+                            <p>{{ $vehicle->voucher->driver->phone }}</p>
+                        @endif
                         <!-- Dato -->
                     </div>
                 </div>
@@ -198,11 +202,10 @@
                     <span>Operador</span>
                     <div>
                         @if ($vehicle->voucher->type)
-                            <p>{{ $vehicle->voucher->driver->name }}</p>
-                        @else
                             <p>{{ $vehicle->voucher->driver_name }}</p>
+                        @else
+                            <p>{{ $vehicle->voucher->driver->name }}</p>
                         @endif
-
                         <!-- Dato -->
                     </div>
                 </div>
@@ -220,9 +223,9 @@
                     <span>Tel. operador</span>
                     <div>
                         @if ($vehicle->voucher->type)
-                            <p>{{ $vehicle->voucher->driver->phone }}</p>
-                        @else
                             <p>{{ $vehicle->voucher->driver_phone }}</p>
+                        @else
+                            <p>{{ $vehicle->voucher->driver->phone }}</p>
                         @endif
                         <!-- Dato -->
                     </div>
@@ -230,8 +233,7 @@
                 <div class="info-cliente__datos">
                     <span>Tel. Vendedor</span>
                     <div>
-                        <p></p>
-                        <!-- Dato -->
+                        <p>{{ $user->phone }}</p>
                     </div>
                 </div>
             </div>
