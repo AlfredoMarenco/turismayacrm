@@ -21,6 +21,7 @@ class Travels extends Component
     public $status_search=1;
     public $dates;
     public $budget;
+    public $budget_id = '';
 
     public $type = '';
     public $value=0;
@@ -188,10 +189,11 @@ class Travels extends Component
             $travels = Budget::whereHas('user', function (Builder $query){
                 $query->where('name','LIKE','%'.$this->name_search.'%');
             })->has('availability','>=',1)->paginate($this->paginate);
+        }else if ($this->budget_id != '') {
+            $travels = Budget::where('id','LIKE',$this->budget_id)->where('status','=',$this->status_search)->paginate($this->paginate);
         }else if($this->status_search != ''){
             $travels = Budget::where('status','=',$this->status_search)->paginate($this->paginate);
-        }
-        else{
+        }else{
             $travels = Budget::has('availability','>=',1)->paginate($this->paginate);
         }
 

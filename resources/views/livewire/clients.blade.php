@@ -864,6 +864,15 @@
                                                                                 <p
                                                                                     class="inline-flex rounded-full bg-orange-100 px-2 text-xs font-semibold leading-5 text-orange-800">
                                                                                     Presupuesto con 1 o más pagos realizados</p>
+                                                                                <svg wire:click="editBudget({{ $budget }})"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5" stroke="currentColor"
+                                                                                    class="w-4 h-4 mr-1">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                                </svg>
                                                                             @break
 
                                                                             @default
@@ -994,6 +1003,22 @@
                                                                                     Crear Voucher
                                                                                 </button>
                                                                             </div>
+                                                                            <button type="button"
+                                                                                wire:click="downloadReceipt({{ $budget }})"
+                                                                                class="cursor-pointer mx-2 inline-flex items-center rounded-md border border-transparent bg-gray-400 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                                                <!-- Heroicon name: mini/envelope -->
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="-ml-0.5 mr-2 h-4 w-4">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                                                                </svg>
+                                                                                Descargar presupuesto
+                                                                                {{ $budget->id }}
+                                                                            </button>
                                                                         @else
                                                                             <button type="button"
                                                                                 wire:click="downloadReceipt({{ $budget }})"
@@ -1069,7 +1094,6 @@
         @endif
 
         @if ($createBudget)
-
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <div class="py-42 px-4 sm:px-6 lg:px-8">
                     <div class="pt-6">
@@ -1467,7 +1491,8 @@
                                                                     <td colspan="3"
                                                                         class="relative py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
                                                                         <p class="text-justify">
-                                                                            {{ $concept->date }} - {{ $concept->description }}</p>
+                                                                            {{ $concept->date }} -
+                                                                            {{ $concept->description }}</p>
                                                                     </td>
                                                                 </tr>
                                                                 @foreach ($concept->itineraries as $itinerary)
@@ -1608,7 +1633,8 @@
                                                     <a wire:click="modalEditVoucher({{ $vehicle }})"
                                                         class="cursor-pointer rounded-md border border-transparent bg-indigo-300 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                                                         Editar voucher</a>
-                                                    <a wire:click="downloadVoucher({{ $vehicle }})" target="_blank"
+                                                    <a wire:click="downloadVoucher({{ $vehicle }})"
+                                                        target="_blank"
                                                         class="cursor-pointer rounded-md border border-transparent bg-gray-500 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                                                         Descargar voucher</a>
                                                 </td>
@@ -1621,28 +1647,30 @@
                                                 </td>
                                             @endif
                                         @else
-                                            <td
-                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-                                                <div>
-                                                    <a wire:click="modalCreateConcept({{ $vehicle }})"
-                                                        class="text-blue-900 hover:text-indigo-900 cursor-pointer">Agregar
-                                                        nuevo concepto</a>
-                                                </div>
-                                                <div>
-                                                    <a wire:click="editVehicle({{ $vehicle }})"
-                                                        class="text-orange-500 hover:text-orange-700 cursor-pointer">Editar
-                                                        Vehiculo</a>
-                                                </div>
-                                                <div>
-                                                    <a wire:click="copyVehicle({{ $vehicle }})"
-                                                        class="text-pink-500 hover:text-pink-700 cursor-pointer">Copiar
-                                                        Vehiculo</a>
-                                                </div>
-                                                <div>
-                                                    <a wire:click="modalDeleteVehicle({{ $vehicle }})"
-                                                        class="text-red-500 hover:text-red-800 cursor-pointer">Eliminar</a>
-                                                </div>
-                                            </td>
+                                            @if ($budget->status == 0)
+                                                <td
+                                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                    <div>
+                                                        <a wire:click="modalCreateConcept({{ $vehicle }})"
+                                                            class="text-blue-900 hover:text-indigo-900 cursor-pointer">Agregar
+                                                            nuevo concepto</a>
+                                                    </div>
+                                                    <div>
+                                                        <a wire:click="editVehicle({{ $vehicle }})"
+                                                            class="text-orange-500 hover:text-orange-700 cursor-pointer">Editar
+                                                            Vehiculo</a>
+                                                    </div>
+                                                    <div>
+                                                        <a wire:click="copyVehicle({{ $vehicle }})"
+                                                            class="text-pink-500 hover:text-pink-700 cursor-pointer">Copiar
+                                                            Vehiculo</a>
+                                                    </div>
+                                                    <div>
+                                                        <a wire:click="modalDeleteVehicle({{ $vehicle }})"
+                                                            class="text-red-500 hover:text-red-800 cursor-pointer">Eliminar</a>
+                                                    </div>
+                                                </td>
+                                            @endif
                                         @endif
                                     </tr>
                                 @endforeach
@@ -2760,7 +2788,6 @@
                                                         {{ $unit->plate }}</option>
                                                 @endforeach
                                             </select>
-
                                             <x-jet-label value="Chofer" />
                                             <select wire:model="driver_id"
                                                 class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -2774,17 +2801,16 @@
                                         @case(1)
                                             <x-jet-label value="Unidad" />
                                             <x-jet-input class="w-full" type="text" wire:model='unit' />
-
                                             <x-jet-label value="Chofer" />
                                             <x-jet-input class="w-full" type="text" wire:model='driver_name' />
-
                                             <x-jet-label value="Telefono" />
                                             <x-jet-input class="w-full" type="text" wire:model='driver_phone' />
-
-                                            <x-jet-input class="w-full" type="hidden" wire:model='vehicle_id' value="1" />
-                                            <x-jet-input class="w-full" type="hidden" wire:model='driver_id' value="1" />
-                                            <x-jet-input class="w-full" type="hidden" wire:model='unit_id' value="1" />
-
+                                            <x-jet-input class="w-full" type="hidden" wire:model='vehicle_id'
+                                                value="1" />
+                                            <x-jet-input class="w-full" type="hidden" wire:model='driver_id'
+                                                value="1" />
+                                            <x-jet-input class="w-full" type="hidden" wire:model='unit_id'
+                                                value="1" />
                                         @break
                                     @endswitch
                                     <x-jet-label value="Observaciones" />
@@ -2806,7 +2832,124 @@
                             <x-slot name="content">
                                 <div>
                                     <div class="px-4 sm:px-6 lg:px-8">
-                                        <div class="mt-8 flow-root">
+                                        <div class="mt-8 flow-root mb-6">
+                                            @if ($voucher)
+                                                <div class="flex justify-around space-x-4 mb-4 items-center">
+                                                    @if ($edit_info_voucher)
+                                                        <div class="flex justify-around w-full">
+                                                            <div class="text-center">
+                                                                <x-jet-label value="Arrendamiento:" />
+                                                                <select wire:model="voucherTypeEdit"
+                                                                    class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                    <option value="0">No</option>
+                                                                    <option value="1">Sí</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="text-center flex space-x-4 justify-around items-center">
+                                                                @switch($voucherTypeEdit)
+                                                                    @case(0)
+                                                                        <div>
+                                                                            <x-jet-label value="Unidad" />
+                                                                            <select wire:model="editVoucher.unit_id"
+                                                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                                <option value="" selected disabled>
+                                                                                    Selecciona una opcion</option>
+                                                                                @foreach ($units as $unit)
+                                                                                    <option value="{{ $unit->id }}">
+                                                                                        {{ $unit->id_unit }}
+                                                                                        {{ $unit->plate }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div>
+                                                                            <x-jet-label value="Chofer" />
+                                                                            <select wire:model="editVoucher.driver_id"
+                                                                                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                                                <option value="" selected disabled>
+                                                                                    Selecciona una opcion</option>
+                                                                                @foreach ($drivers as $driver)
+                                                                                    <option value="{{ $driver->id }}">
+                                                                                        {{ $driver->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    @break
+                                                                    @case(1)
+                                                                        <x-jet-label value="Unidad" />
+                                                                        <x-jet-input class="w-full" type="text"
+                                                                            wire:model='editVoucher.unit' />
+                                                                        <x-jet-label value="Chofer" />
+                                                                        <x-jet-input class="w-full" type="text"
+                                                                            wire:model='editVoucher.driver_name' />
+                                                                        <x-jet-label value="Telefono" />
+                                                                        <x-jet-input class="w-full" type="text"
+                                                                            wire:model='editVoucher.driver_phone' />
+                                                                        <x-jet-input class="w-full" type="hidden"
+                                                                            wire:model='editVoucher.vehicle_id' value="1" />
+                                                                        <x-jet-input class="w-full" type="hidden"
+                                                                            wire:model='editVoucher.driver_id' value="1" />
+                                                                        <x-jet-input class="w-full" type="hidden"
+                                                                            wire:model='editVoucher.unit_id' value="1" />
+                                                                    @break
+                                                                @endswitch
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <x-jet-button wire:click="updateInfoVoucher()">Actualizar</x-jet-button>
+                                                        </div>
+                                                    @else
+                                                        <div class="flex w-full justify-around">
+                                                            <div class="text-center">
+                                                                <x-jet-label value="Arrendamiento:" />
+                                                                @if ($voucher->type)
+                                                                    <p><x-jet-label value="Si" /></p>
+                                                                @else
+                                                                    <p><x-jet-label value="No" /></p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <x-jet-label value="Operador:" />
+                                                                @if ($voucher->type)
+                                                                    <p><x-jet-label
+                                                                            value="{{ $voucher->driver_name }}" />
+                                                                    </p>
+                                                                @else
+                                                                    <p><x-jet-label
+                                                                            value="{{ $voucher->driver->name }}" />
+                                                                    </p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <x-jet-label value="Unidad:" />
+                                                                @if ($voucher->type)
+                                                                    <p><x-jet-label value="{{ $voucher->unit }}" />
+                                                                    </p>
+                                                                @else
+                                                                    <p><x-jet-label
+                                                                            value="{{ $voucher->unit_id }}" /></p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <x-jet-label value="Teléfono:" />
+                                                                @if ($voucher->type)
+                                                                    <p><x-jet-label
+                                                                            value="{{ $voucher->driver_phone }}" />
+                                                                    </p>
+                                                                @else
+                                                                    <p><x-jet-label
+                                                                            value="{{ $voucher->driver->phone }}" />
+                                                                    </p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <p class="cursor-pointer"
+                                                                wire:click="editFormVoucher()">Editar
+                                                            </p>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @endif
                                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                                 <div
                                                     class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -2999,9 +3142,6 @@
                 </div>
             </div>
 </div>
-
 @endif
-
-
 </main>
 </div>

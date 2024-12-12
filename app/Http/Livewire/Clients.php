@@ -106,7 +106,10 @@ class Clients extends Component
 
 
     public $voucherType="";
+    public $voucherTypeEdit="";
     public $voucher_type_selected="";
+    public $voucher_type_selected_edit="";
+
 
     public $unit_id="";
     public $driver_id="";
@@ -114,6 +117,15 @@ class Clients extends Component
     public $driver_phone;
     public $unit;
     public $observations;
+
+    public $editVoucher = [
+        'unit_id'=> null,
+        'driver_id' => null,
+        'driver_name' => null,
+        'driver_phone' => null,
+        'unit' => null,
+        'observations' => null,
+    ];
 
     public $editVehicleForm = [
         'vehicle_type' => null,
@@ -196,6 +208,7 @@ class Clients extends Component
     public $show_pass=false;
     public $form_add_itinerary=false;
     public $modal_edit_itinerary=false;
+    public $edit_info_voucher=false;
 
 
     protected $listeners = [
@@ -663,6 +676,43 @@ class Clients extends Component
         $this->voucher_type_selected = $voucherType;
     }
 
+    //Editar informacion del voucher
+    public function editFormVoucher(){
+        $this->edit_info_voucher = true;
+        $this->drivers = Driver::all();
+        $this->units = Unit::where('status','1')->get();
+        $this->voucherTypeEdit = $this->voucher->type;
+        $this->editVoucher['unit_id'] = $this->voucher->unit_id;
+        $this->editVoucher['driver_id'] = $this->voucher->driver_id;
+        $this->editVoucher['driver_name'] = $this->voucher->driver_name;
+        $this->editVoucher['driver_phone'] = $this->voucher->driver_phone;
+        $this->editVoucher['unit'] = $this->voucher->unit;
+        $this->editVoucher['observations'] = $this->voucher->observations;
+    }
+
+
+    public function updateInfoVoucher(){
+        if($this->voucherTypeEdit){
+            $this->voucher->update([
+                'type' =>$this->voucherTypeEdit ,
+                'unit_id' =>$this->editVoucher['unit_id'] ,
+                'driver_id' =>$this->editVoucher['driver_id'] ,
+                'driver_name' =>$this->editVoucher['driver_name'] ,
+                'driver_phone' =>$this->editVoucher['driver_phone'] ,
+                'unit' =>$this->editVoucher['unit'] ,
+            ]);
+        }else{
+            $this->voucher->update([
+                'type' =>$this->voucherTypeEdit ,
+                'unit_id' =>$this->editVoucher['unit_id'] ,
+                'driver_id' =>$this->editVoucher['driver_id'] ,
+                'driver_name' =>$this->editVoucher['driver_name'] ,
+                'driver_phone' =>$this->editVoucher['driver_phone'] ,
+                'unit' =>$this->editVoucher['unit'] ,
+            ]);
+        }
+        $this->edit_info_voucher = false;
+    }
     public function addVoucher(){
 
         if ($this->voucher_type_selected == 0) {

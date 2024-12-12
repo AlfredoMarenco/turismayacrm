@@ -18,7 +18,6 @@
                             </div>
                         </div> -->
                     </div>
-
                 </div>
 
             </div>
@@ -28,8 +27,26 @@
                     <div class="py-4">
                         <div class="py-42px-4 sm:px-6 lg:px-8">
                             <p class="font-bold py-2">Buscar Viaje por:</p>
-                            <div class="grid grid-cols-10 gap-4">
-                                <div class="col-span-2">
+                            <div class="grid grid-cols-4 gap-4">
+                                <div>
+                                    <label for="budget_id" class="block text-sm font-medium text-gray-700">#
+                                        Viaje</label>
+                                    <div class="relative mt-1 rounded-md shadow-sm">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <!-- Heroicon name: mini/envelope -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
+                                            </svg>
+                                        </div>
+                                        <input type="number" wire:model="budget_id"
+                                            class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    </div>
+
+                                </div>
+                                <div>
                                     <label for="num"
                                         class="block text-sm font-medium text-gray-700">Mostrar</label>
                                     <select wire:model="paginate"
@@ -39,7 +56,7 @@
                                         <option value="30">30</option>
                                     </select>
                                 </div>
-                                <div class="col-span-4">
+                                <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Nombre</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
                                         <div
@@ -55,10 +72,8 @@
                                             class="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="Jane Cooper">
                                     </div>
-
                                 </div>
-
-                                <div class="col-span-4">
+                                <div>
                                     <label for="tel"
                                         class="block text-sm font-medium text-gray-700">Estatus</label>
                                     <div class="col-span-2">
@@ -71,9 +86,7 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="mt-8 flex flex-col">
                                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -142,6 +155,7 @@
                                                                         <a wire:click="modalCancelBudget({{ $travel }})"
                                                                             class="text-red-600 hover:text-red-900 cursor-pointer">Cancelar</a>
                                                                     @break
+
                                                                     @case(4)
                                                                         @if ($travel->balanceSplits() == 0)
                                                                             <a wire:click="selectedBudget({{ $travel }})"
@@ -171,15 +185,18 @@
         </div>
         @if ($modal_liquidate_travel)
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                <p class="text-3xl font-semibold mb-2">Numero de servicio #{{ $budget->id }} - {{ $budget->name }}</p>
+                <p class="text-3xl font-semibold mb-2">Numero de servicio #{{ $budget->id }} - {{ $budget->name }}
+                </p>
                 @if ($budget->enable_tax)
-                    <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithOutTax(), 2) }}
+                    <p class="text-lg font-semibold">Presupuestado:
+                        ${{ number_format($budget->totalWithOutTax(), 2) }}
                     </p>
                 @else
                     <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithTax(), 2) }}
                     </p>
                 @endif
-                <p class="text-lg font-semibold">Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}</p>
+                <p class="text-lg font-semibold">Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}
+                </p>
                 <p class="text-lg font-semibold {{ $balance > 0 ? 'text-green-500' : 'text-red-500' }}">Balance:
                     ${{ number_format($balance, 2) }}</p>
                 <div class="flex justify-end">
