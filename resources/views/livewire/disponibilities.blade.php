@@ -6,7 +6,7 @@
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                             Panel de disponibilidad</h2>
-                       <!--  <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+                        <!--  <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
                             <div class="mt-2 flex items-center text-sm text-gray-500">
 
                                 <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -47,20 +47,37 @@
                     <section class="mt-12">
                         <h2 class="font-semibold text-gray-900">Próximos eventos</h2>
                         <ol class="mt-2 divide-y divide-gray-200 text-sm leading-6 text-gray-500">
-                            @forelse ($availabilities as $availability)
-                                <li class="py-4 sm:flex">
-                                    <time datetime="2022-01-19" class="w-28 flex-none">{{ $loop->iteration }}</time>
-                                    <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
-                                        {{ $availability->title }}</p>
-                                    <p class="flex-none sm:ml-6">
-                                        <time>{{ $availability->start }}</time> -
-                                    </p>
-                                </li>
-                            @empty
-                                <li class="py-4 sm:flex">
-                                    <p class="w-full flex-none">No se encontraron eventos para esta fecha</p>
-                                </li>
-                            @endforelse
+                            @if ($selectedDate)
+                                @forelse ($availabilities as $availability)
+                                    <li class="py-4 sm:flex">
+                                        <time datetime="2022-01-19" class="w-28 flex-none">{{ $loop->iteration }}</time>
+                                        <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
+                                            {{ $availability->title }}</p>
+                                        <p class="flex-none sm:ml-6">
+                                            <time>{{ $availability->start }}</time>
+                                        </p>
+                                    </li>
+                                @empty
+                                    <li class="py-4 sm:flex">
+                                        <p class="w-full flex-none">No se encontraron eventos para esta fecha</p>
+                                    </li>
+                                @endforelse
+                            @else
+                                @forelse ($availabilitiesAll as $availability)
+                                    <li class="py-4 sm:flex">
+                                        <time datetime="2022-01-19" class="w-28 flex-none">{{ $loop->iteration }}</time>
+                                        <p class="mt-2 flex-auto font-semibold text-gray-900 sm:mt-0">
+                                            {{ $availability->title }}</p>
+                                        <p class="flex-none sm:ml-6">
+                                            <time>{{ $availability->start }}</time> 
+                                        </p>
+                                    </li>
+                                @empty
+                                    <li class="py-4 sm:flex">
+                                        <p class="w-full flex-none">No se encontraron eventos para esta fecha</p>
+                                    </li>
+                                @endforelse
+                            @endif
                         </ol>
                     </section>
                 </div>

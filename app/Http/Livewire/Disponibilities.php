@@ -23,7 +23,7 @@ class Disponibilities extends Component
     public $comment = '';
     public $budget_selected;
     public $selectedDate;
-    public $availabilitiesAll;
+    public $availabilitiesAll = null;
     /* public $availibities=[]; */
     public $listeners = [
         'setSelectedDate',
@@ -80,7 +80,7 @@ class Disponibilities extends Component
             'users' => User::all(),
             'units' => Unit::all(),
             'drivers' => Driver::all(),
-            //'availabilitiesAll' => Availability::all(),
+            'availabilitiesAll' => Availability::all(),
             'availabilities' => Availability::where('start',$this->selectedDate)->get()
         ]);
     }

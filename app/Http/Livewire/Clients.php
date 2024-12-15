@@ -209,6 +209,7 @@ class Clients extends Component
     public $form_add_itinerary=false;
     public $modal_edit_itinerary=false;
     public $edit_info_voucher=false;
+    public $modal_details_budget=false;
 
 
     protected $listeners = [
@@ -838,6 +839,12 @@ class Clients extends Component
     {
         $this->reset('name_search','email_search');
         $this->resetPage();
+    }
+
+    public function showDetailsBudget(Budget $budget){
+        $this->budget = $budget;
+        $this->vehicles = Vehicle::where('budget_id',$this->budget->id)->get();
+        $this->modal_details_budget = true;
     }
 
     public function render(){

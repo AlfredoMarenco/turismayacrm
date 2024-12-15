@@ -221,7 +221,7 @@
                                                                     opcion</option>
                                                                 @foreach ($users as $user)
                                                                     <option value="{{ $user->id }}">
-                                                                        {{ $user->id }} - {{ $user->name }}
+                                                                        {{ $user->id }} - {{ $user->nameComplete() }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>

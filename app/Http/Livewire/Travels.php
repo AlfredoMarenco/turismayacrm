@@ -26,6 +26,28 @@ class Travels extends Component
     public $type = '';
     public $value=0;
     public $description;
+    public $description2;
+    public $description3;
+    public $description4;
+    public $description5;
+    public $description6;
+    public $description7;
+    public $description8;
+    public $description9;
+    public $description10;
+
+
+    public $disel_cost;
+    public $salary;
+    public $per_diem;
+    public $hotel;
+    public $tax_burden;
+    public $flor_rigth;
+    public $booths;
+    public $maintenance;
+    public $amenities;
+    public $sublet;
+
 
     public $editFormSettlement = [
         'type' => null,
@@ -162,6 +184,30 @@ class Travels extends Component
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+
+
+    public function addDiselCost()
+    {
+        $this->validate([
+            'disel_cost' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 6,
+            'value' => $this->disel_cost,
+            'description' => $this->description,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description');
     }
 
 

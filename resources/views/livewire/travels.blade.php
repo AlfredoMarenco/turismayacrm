@@ -7,23 +7,12 @@
                     <div class="md:pl-5 lg:pl-8 min-w-0 flex-1">
                         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                             Panel de Viajes</h2>
-                        <!--  <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-
-                            <div class="mt-2 flex items-center text-sm text-gray-500">
-
-                                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
-                                </svg>
-                                Fecha de hoy:<span class="pl-1"> 15 de Septiembre del 2022</span>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
             </div>
             @if ($table_travels)
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                    <!-- Replace with your content -->
                     <div class="py-4">
                         <div class="py-42px-4 sm:px-6 lg:px-8">
                             <p class="font-bold py-2">Buscar Viaje por:</p>
@@ -185,30 +174,37 @@
         </div>
         @if ($modal_liquidate_travel)
             <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                <p class="text-3xl font-semibold mb-2">Numero de servicio #{{ $budget->id }} - {{ $budget->name }}
+                <p class="text-3xl font-semibold mb-2">
+                    Numero de servicio #{{ $budget->id }} - {{ $budget->name }}
                 </p>
                 @if ($budget->enable_tax)
                     <p class="text-lg font-semibold">Presupuestado:
                         ${{ number_format($budget->totalWithOutTax(), 2) }}
                     </p>
                 @else
-                    <p class="text-lg font-semibold">Presupuestado: ${{ number_format($budget->totalWithTax(), 2) }}
+                    <p class="text-lg font-semibold">
+                        Presupuestado: ${{ number_format($budget->totalWithTax(), 2) }}
                     </p>
                 @endif
-                <p class="text-lg font-semibold">Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}
+                <p class="text-lg font-semibold">
+                    Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}
                 </p>
-                <p class="text-lg font-semibold {{ $balance > 0 ? 'text-green-500' : 'text-red-500' }}">Balance:
-                    ${{ number_format($balance, 2) }}</p>
+                <p class="text-lg font-semibold {{ $balance > 0 ? 'text-green-500' : 'text-red-500' }}">
+                    Balance: ${{ number_format($balance, 2) }}
+                </p>
                 <div class="flex justify-end">
                     <x-jet-button wire:click="closeBudget">Finalizar liquidación</x-jet-button>
                 </div>
                 <div class="mt-10">
+                    {{-- Tabla nueva --}}
                     <table class="min-w-full divide-y divide-gray-300">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
                                     class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6">
                                     Concepto</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                    Presupuestado</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                     Cantidad</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
@@ -221,28 +217,42 @@
                         <tbody class="divide-y divide-gray-200 bg-white">
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <select wire:model="type"
-                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                        <option value="" disabled>-Selecciona una opcion-</option>
-                                        <option value="1">Salario</option>
-                                        <option value="2">Viaticos</option>
-                                        <option value="3">Casetas y/o Puentes</option>
-                                        <option value="4">Hospedaje</option>
-                                        <option value="5">Limpieza</option>
-                                        <option value="6">Combustibles</option>
-                                        <option value="7">Taller</option>
-                                        <option value="8">Gastos extras</option>
-                                    </select>
                                     <p>
-                                        @error('type')
+                                        Costo Disel
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalDiselCost(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="disel_cost" />
+                                    <p>
+                                        @error('disel_cost')
                                             <span class="text-red-500 text-center">{{ $message }}</span>
                                         @enderror
                                     </p>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="value" />
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addDiselCost">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <p>
-                                        @error('value')
+                                        Sueldos
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalSalary(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="salary" />
+                                    <p>
+                                        @error('salary')
                                             <span class="text-red-500 text-center">{{ $message }}</span>
                                         @enderror
                                     </p>
@@ -253,10 +263,206 @@
                                 <td
                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                    {{-- <a wire:click=""
-                                                    class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
-                                                <a wire:click=""
-                                                    class="text-red-600 hover:text-red-900 cursor-pointer">Eliminar</a> --}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Viáticos
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalPerDiem(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="per_diem" />
+                                    <p>
+                                        @error('per_diem')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Hotel
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalHotel(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="hotel" />
+                                    <p>
+                                        @error('hotel')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Carga Impositiva
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalTaxBurden(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="tax_burden" />
+                                    <p>
+                                        @error('tax_burden')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Derecho de Piso
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalFlorRigth(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="flor_rigth" />
+                                    <p>
+                                        @error('flor_rigth')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Casetas
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalBooths(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="booths" />
+                                    <p>
+                                        @error('booths')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Mantenimientos
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalMaintenance(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="maintenance" />
+                                    <p>
+                                        @error('maintenance')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Hotel
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalAmenities(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="amenities" />
+                                    <p>
+                                        @error('amenities')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <p>
+                                        Subarrendos
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    ${{ number_format($budget->totalSublet(), 2) }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="number" class="w-full" wire:model="sublet" />
+                                    <p>
+                                        @error('sublet')
+                                            <span class="text-red-500 text-center">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <x-jet-input type="text" class="w-full" wire:model="description" />
+                                </td>
+                                <td
+                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
                                 </td>
                             </tr>
                             @foreach ($budget->settlements as $settlement)
@@ -367,56 +573,9 @@
 
         @if ($modal_cancel_travel)
             <div>
-
-                {{--
-                <div class=" relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-
-                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-                    <div class="fixed inset-0 z-10 overflow-y-auto">
-                        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-
-                            <div
-                                class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                                <div class="sm:flex sm:items-start">
-                                    <div
-                                        class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <!-- Heroicon name: outline/exclamation-triangle -->
-                                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
-                                            ¿Estás seguro de
-                                            que deseas cancelar el viaje?</h3>
-                                        <div class="mt-2">
-                                            <p class="text-sm text-gray-500">Esta acción no se puede revertir, al
-                                                cancelar deberás
-                                                colocar el motivo de la cancelación.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                                    <button type="button"
-                                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Cancelar
-                                        viaje</button>
-                                    <button type="button"
-                                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">No
-                                        cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            --}}
                 <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-
-                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
+                    </div>
                     <div class="fixed inset-0 z-10 overflow-y-auto">
                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                             <div
@@ -499,11 +658,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="hidden">
                     @livewire('graciasliquidacion', key('graciasliquidacion'))
                 </div>
-
             </div>
         @endif
     </main>

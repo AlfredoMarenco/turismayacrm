@@ -73,7 +73,6 @@ class Budget extends Model
 
         if ($this->discount) {
             $totalWithOutTax = $totalWithOutTax - ($totalWithOutTax) * ($this->discount->amount);
-        } else {
         }
         return $totalWithOutTax;
     }
@@ -90,9 +89,7 @@ class Budget extends Model
 
         if ($this->discount) {
             $totalWithTax = $totalWithTax - ($totalWithTax) * ($this->discount->amount);
-        } else {
         }
-
         return $totalWithTax;
     }
 
@@ -172,4 +169,136 @@ class Budget extends Model
         }
         return $validation;
     }
+
+
+    public function totalDiselCost()
+    {
+        $totalDiselCost = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalDiselCost = $totalDiselCost + $concept->disel_cost;
+            }
+        }
+
+        return $totalDiselCost;
+    }
+
+    public function totalSalary()
+    {
+        $totalSalary = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalSalary = $totalSalary + $concept->salary;
+            }
+        }
+
+        return $totalSalary;
+    }
+
+    public function totalPerDiem()
+    {
+        $totalPerDiem = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalPerDiem = $totalPerDiem + $concept->per_diem;
+            }
+        }
+
+        return $totalPerDiem;
+    }
+
+    public function totalHotel()
+    {
+        $totalHotel = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalHotel = $totalHotel + $concept->hotel;
+            }
+        }
+
+        return $totalHotel;
+    }
+
+    public function totalTaxBurden()
+    {
+        $totalTaxBurden = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalTaxBurden = $totalTaxBurden + $concept->tax_burden;
+            }
+        }
+
+        return $totalTaxBurden;
+    }
+
+    public function totalFlorRigth()
+    {
+        $totalFlorRigth = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalFlorRigth = $totalFlorRigth + $concept->flor_rigth;
+            }
+        }
+
+        return $totalFlorRigth;
+    }
+
+    public function totalBooths()
+    {
+        $totalBooths = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalBooths = $totalBooths + $concept->booths;
+            }
+        }
+
+        return $totalBooths;
+    }
+
+    public function totalMaintenance()
+    {
+        $totalMaintenance = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalMaintenance = $totalMaintenance + $concept->maintenance;
+            }
+        }
+
+        return $totalMaintenance;
+    }
+
+    public function totalAmenities()
+    {
+        $totalAmenities = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalAmenities = $totalAmenities + $concept->amenities;
+            }
+        }
+
+        return $totalAmenities;
+    }
+
+    public function totalSublet()
+    {
+        $totalSublet = 0;
+        $vehicles = Vehicle::where('budget_id', $this->id)->get();
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->concepts as $concept) {
+                $totalSublet = $totalSublet + $concept->sublet;
+            }
+        }
+
+        return $totalSublet;
+    }
+
 }
