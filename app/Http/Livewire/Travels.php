@@ -49,6 +49,30 @@ class Travels extends Component
     public $sublet;
 
 
+    public $disel_cost_settlement;
+    public $salary_settlement;
+    public $per_diem_settlement;
+    public $hotel_settlement;
+    public $tax_burden_settlement;
+    public $flor_rigth_settlement;
+    public $booths_settlement;
+    public $maintenance_settlement;
+    public $amenities_settlement;
+    public $sublet_settlement;
+
+
+    public $disel_cost_settlement_bool=false;
+    public $salary_settlement_bool=false;
+    public $per_diem_settlement_bool=false;
+    public $hotel_settlement_bool=false;
+    public $tax_burden_settlement_bool=false;
+    public $flor_rigth_settlement_bool=false;
+    public $booths_settlement_bool=false;
+    public $maintenance_settlement_bool=false;
+    public $amenities_settlement_bool=false;
+    public $sublet_settlement_bool=false;
+
+
     public $editFormSettlement = [
         'type' => null,
         'value' => null,
@@ -72,6 +96,7 @@ class Travels extends Component
     public function mount(){
         $this->dates = new  Carbon();
 
+
     }
 
     public function selectedBudget(Budget $budget)
@@ -79,6 +104,51 @@ class Travels extends Component
         $this->table_travels = false;
         $this->modal_liquidate_travel = true;
         $this->budget = $budget;
+        $settlements = $budget->settlements;
+        foreach ($settlements as $settlement) {
+            switch ($settlement->type) {
+                case '1':
+                    $this->disel_cost_settlement = $settlement;
+                    $this->disel_cost_settlement_bool = true;
+                    break;
+                case '2':
+                    $this->salary_settlement = $settlement;
+                    $this->salary_settlement_bool = true;
+                    break;
+                case '3':
+                    $this->per_diem_settlement = $settlement;
+                    $this->per_diem_settlement_bool = true;
+                    break;
+                case '4':
+                    $this->hotel_settlement = $settlement;
+                    $this->hotel_settlement_bool = true;
+                    break;
+                case '5':
+                    $this->tax_burden_settlement = $settlement;
+                    $this->tax_burden_settlement_bool = true;
+                    break;
+                case '6':
+                    $this->flor_rigth_settlement = $settlement;
+                    $this->flor_rigth_settlement_bool = true;
+                    break;
+                case '7':
+                    $this->booths_settlement = $settlement;
+                    $this->booths_settlement_bool = true;
+                    break;
+                case '8':
+                    $this->maintenance_settlement = $settlement;
+                    $this->maintenance_settlement_bool = true;
+                    break;
+                case '9':
+                    $this->amenities_settlement = $settlement;
+                    $this->amenities_settlement_bool = true;
+                    break;
+                case '10':
+                    $this->sublet_settlement = $settlement;
+                    $this->sublet_settlement_bool = true;
+                    break;
+            }
+        }
         if ($budget->enable_tax) {
             $this->balance = $budget->totalWithOutTax()-$budget->totalSettlement();
         }else{
@@ -109,8 +179,9 @@ class Travels extends Component
         $this->reset('type','value','description');
     }
 
-    public function editSettlement(Settlement $settlement)
+    public function editSettlement($value)
     {
+        $settlement = Settlement::find($value);
         $this->settlement = $settlement;
         $this->editFormSettlement['type'] = $settlement->type;
         $this->editFormSettlement['value'] = $settlement->value;
@@ -126,6 +197,7 @@ class Travels extends Component
             'value' => $this->editFormSettlement['value'],
             'description' => $this->editFormSettlement['description']
         ]);
+        $this->budget = Budget::where('id',$this->budget->id)->first();
 
         if ($this->budget->enable_tax) {
             $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
@@ -133,7 +205,6 @@ class Travels extends Component
             $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
         }
 
-        $this->budget = Budget::where('id',$this->budget->id)->first();
         $this->modal_edit_settlement = false;
     }
 
@@ -194,11 +265,14 @@ class Travels extends Component
         ]);
 
         $settlement = Settlement::create([
-            'type' => 6,
+            'type' => 1,
             'value' => $this->disel_cost,
             'description' => $this->description,
             'budget_id' => $this->budget->id
         ]);
+
+        $this->disel_cost_settlement = $settlement;
+        $this->disel_cost_settlement_bool = true;
 
         $this->budget = Budget::where('id',$settlement->budget_id)->first();
 
@@ -208,6 +282,241 @@ class Travels extends Component
             $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
         }
         $this->reset('type','value','description');
+    }
+
+
+    public function addSalary()
+    {
+        $this->validate([
+            'salary' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 2,
+            'value' => $this->salary,
+            'description' => $this->description2,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->salary_settlement = $settlement;
+        $this->salary_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description2');
+    }
+
+    public function addPerDiem()
+    {
+        $this->validate([
+            'per_diem' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 3,
+            'value' => $this->per_diem,
+            'description' => $this->description3,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->per_diem_settlement = $settlement;
+        $this->per_diem_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description3');
+    }
+
+    public function addHotel()
+    {
+        $this->validate([
+            'hotel' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 4,
+            'value' => $this->hotel,
+            'description' => $this->description4,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->hotel_settlement = $settlement;
+        $this->hotel_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description4');
+    }
+
+    public function addTaxBurden()
+    {
+        $this->validate([
+            'tax_burden' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 5,
+            'value' => $this->tax_burden,
+            'description' => $this->description5,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->tax_burden_settlement = $settlement;
+        $this->tax_burden_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description5');
+    }
+
+    public function addFlorRigth()
+    {
+        $this->validate([
+            'flor_rigth' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 6,
+            'value' => $this->flor_rigth,
+            'description' => $this->description6,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->flor_rigth_settlement = $settlement;
+        $this->flor_rigth_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description6');
+    }
+
+    public function addBooths()
+    {
+        $this->validate([
+            'booths' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 7,
+            'value' => $this->booths,
+            'description' => $this->description7,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->booths_settlement = $settlement;
+        $this->booths_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description7');
+    }
+
+    public function addMaintenance()
+    {
+        $this->validate([
+            'maintenance' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 8,
+            'value' => $this->maintenance,
+            'description' => $this->description8,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->maintenance_settlement = $settlement;
+        $this->maintenance_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description8');
+    }
+
+    public function addAmenities()
+    {
+        $this->validate([
+            'amenities' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 9,
+            'value' => $this->amenities,
+            'description' => $this->description9,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->amenities_settlement = $settlement;
+        $this->amenities_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description9');
+    }
+
+    public function addSublet()
+    {
+        $this->validate([
+            'sublet' => 'required'
+        ]);
+
+        $settlement = Settlement::create([
+            'type' => 10,
+            'value' => $this->sublet,
+            'description' => $this->description10,
+            'budget_id' => $this->budget->id
+        ]);
+
+        $this->sublet_settlement = $settlement;
+        $this->sublet_settlement_bool = true;
+
+        $this->budget = Budget::where('id',$settlement->budget_id)->first();
+
+        if ($this->budget->enable_tax) {
+            $this->balance = $this->budget->totalWithOutTax()-$this->budget->totalSettlement();
+        }else{
+            $this->balance = $this->budget->totalWithTax()-$this->budget->totalSettlement();
+        }
+        $this->reset('type','value','description10');
     }
 
 

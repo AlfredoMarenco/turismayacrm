@@ -190,7 +190,7 @@
                     Gastos Reales: ${{ number_format($budget->totalSettlement(), 2) }}
                 </p>
                 <p class="text-lg font-semibold {{ $balance > 0 ? 'text-green-500' : 'text-red-500' }}">
-                    Balance: ${{ number_format($balance, 2) }}
+                    Balance Global: ${{ number_format($balance, 2) }}
                 </p>
                 <div class="flex justify-end">
                     <x-jet-button wire:click="closeBudget">Finalizar liquidación</x-jet-button>
@@ -208,6 +208,8 @@
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                     Cantidad</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
+                                    Balance</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500">
                                     Descripcion</th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                     <span class="sr-only">Accion</span>
@@ -224,21 +226,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalDiselCost(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="disel_cost" />
-                                    <p>
-                                        @error('disel_cost')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addDiselCost">Agregar</x-jet-button>
-                                </td>
+                                @if ($disel_cost_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($disel_cost_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalDiselCost() - $disel_cost_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalDiselCost() - $disel_cost_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalDiselCost() - $disel_cost_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $disel_cost_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $disel_cost_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="disel_cost" />
+                                        <p>
+                                            @error('disel_cost')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addDiselCost">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -249,21 +277,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalSalary(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="salary" />
-                                    <p>
-                                        @error('salary')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($salary_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($salary_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalSalary() - $salary_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalSalary() - $salary_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalSalary() - $salary_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $salary_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $salary_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="salary" />
+                                        <p>
+                                            @error('salary')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addSalary">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -274,21 +328,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalPerDiem(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="per_diem" />
-                                    <p>
-                                        @error('per_diem')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($per_diem_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($per_diem_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalPerDiem() - $per_diem_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalPerDiem() - $per_diem_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalPerDiem() - $per_diem_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $per_diem_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $per_diem_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="per_diem" />
+                                        <p>
+                                            @error('per_diem')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description3" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addPerDiem">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -299,21 +379,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalHotel(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="hotel" />
-                                    <p>
-                                        @error('hotel')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($hotel_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($hotel_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalHotel() - $hotel_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalHotel() - $hotel_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalHotel() - $hotel_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $hotel_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $hotel_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="hotel" />
+                                        <p>
+                                            @error('hotel')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description4" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addHotel">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -324,21 +430,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalTaxBurden(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="tax_burden" />
-                                    <p>
-                                        @error('tax_burden')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($tax_burden_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($tax_burden_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalTaxBurden() - $tax_burden_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalTaxBurden() - $tax_burden_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalTaxBurden() - $tax_burden_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $tax_burden_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $tax_burden_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="tax_burden" />
+                                        <p>
+                                            @error('tax_burden')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description5" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addTaxBurden">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -349,21 +481,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalFlorRigth(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="flor_rigth" />
-                                    <p>
-                                        @error('flor_rigth')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($flor_rigth_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($flor_rigth_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalFlorRigth() - $flor_rigth_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalFlorRigth() - $flor_rigth_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalFlorRigth() - $flor_rigth_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $flor_rigth_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $flor_rigth_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="flor_rigth" />
+                                        <p>
+                                            @error('flor_rigth')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description6" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addFlorRigth">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -374,21 +532,47 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalBooths(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="booths" />
-                                    <p>
-                                        @error('booths')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($booths_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($booths_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalBooths() - $booths_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalBooths() - $booths_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalBooths() - $booths_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $booths_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $booths_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="booths" />
+                                        <p>
+                                            @error('booths')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description7" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addBooths">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -399,46 +583,98 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalMaintenance(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="maintenance" />
-                                    <p>
-                                        @error('maintenance')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($maintenance_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($maintenance_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalMaintenance() - $maintenance_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalMaintenance() - $maintenance_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalMaintenance() - $maintenance_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $maintenance_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $maintenance_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="maintenance" />
+                                        <p>
+                                            @error('maintenance')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description8" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addMaintenance">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <p>
-                                        Hotel
+                                        Amenidades
                                     </p>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalAmenities(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="amenities" />
-                                    <p>
-                                        @error('amenities')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
+                                @if ($amenities_settlement_bool)
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <p>${{ number_format($amenities_settlement->value, 2) }}</p>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalAmenities() - $amenities_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalAmenities() - $amenities_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalAmenities() - $amenities_settlement->value, 2) }}
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <p>{{ $amenities_settlement->description }}</p>
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <a wire:click="editSettlement({{ $amenities_settlement->id }})"
+                                            class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
+                                    </td>
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="amenities" />
+                                        <p>
+                                            @error('amenities')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description9" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addAmenities">Agregar</x-jet-button>
+                                    </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -449,74 +685,48 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     ${{ number_format($budget->totalSublet(), 2) }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="number" class="w-full" wire:model="sublet" />
-                                    <p>
-                                        @error('sublet')
-                                            <span class="text-red-500 text-center">{{ $message }}</span>
-                                        @enderror
-                                    </p>
-                                </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <x-jet-input type="text" class="w-full" wire:model="description" />
-                                </td>
-                                <td
-                                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <x-jet-button wire:click="addSettlement">Agregar</x-jet-button>
-                                </td>
-                            </tr>
-                            @foreach ($budget->settlements as $settlement)
-                                <tr>
+                                @if ($sublet_settlement_bool)
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        @switch($settlement->type)
-                                            @case(1)
-                                                <p class="font-semibold">Salario</p>
-                                            @break
-
-                                            @case(2)
-                                                <p class="font-semibold">Viaticos</p>
-                                            @break
-
-                                            @case(3)
-                                                <p class="font-semibold">Casetas y/o Puentes</p>
-                                            @break
-
-                                            @case(4)
-                                                <p class="font-semibold">Hospedaje</p>
-                                            @break
-
-                                            @case(5)
-                                                <p class="font-semibold">Limpieza</p>
-                                            @break
-
-                                            @case(6)
-                                                <p class="font-semibold">Combustibles</p>
-                                            @break
-
-                                            @case(7)
-                                                <p class="font-semibold">Taller</p>
-                                            @break
-
-                                            @case(8)
-                                                <p class="font-semibold">Gastos extras</p>
-                                            @break
-                                        @endswitch
+                                        <p>${{ number_format($sublet_settlement->value, 2) }}</p>
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        ${{ number_format($settlement->value, 2) }}
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                        @if ($budget->totalSublet() - $sublet_settlement->value > 0)
+                                            <p class="text-green-600">
+                                                ${{ number_format($budget->totalSublet() - $sublet_settlement->value, 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-red-500">
+                                                ${{ number_format($budget->totalSublet() - $sublet_settlement->value, 2) }}
+                                            </p>
+                                        @endif
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $settlement->description }}
+                                    <td>
+                                        <p>{{ $sublet_settlement->description }}</p>
                                     </td>
                                     <td
                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a wire:click="editSettlement({{ $settlement }})"
+                                        <a wire:click="editSettlement({{ $sublet_settlement->id }})"
                                             class="text-blue-600 hover:text-indigo-900 cursor-pointer">Editar</a>
-                                        <a wire:click="modalDeleteSettlement({{ $settlement }})"
-                                            class="text-red-600 hover:text-red-900 cursor-pointer">Eliminar</a>
                                     </td>
-                                </tr>
-                            @endforeach
+                                @else
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="number" class="w-full" wire:model="sublet" />
+                                        <p>
+                                            @error('sublet')
+                                                <span class="text-red-500 text-center">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <x-jet-input type="text" class="w-full" wire:model="description10" />
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                        <x-jet-button wire:click="addSublet">Agregar</x-jet-button>
+                                    </td>
+                                @endif
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -529,18 +739,38 @@
                 <x-slot name="content">
                     <div class="mb-2">
                         <x-jet-label value="Tipo de concepto" />
-                        <select wire:model="editFormSettlement.type"
-                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                            <option value="" disabled>-Selecciona una opcion-</option>
-                            <option value="1">Salario</option>
-                            <option value="2">Viaticos</option>
-                            <option value="3">Casetas y/o Puentes</option>
-                            <option value="4">Hospedaje</option>
-                            <option value="5">Limpieza</option>
-                            <option value="6">Combustibles</option>
-                            <option value="7">Taller</option>
-                            <option value="8">Gastos extras</option>
-                        </select>
+                        @switch($editFormSettlement['type'])
+                            @case(1)
+                                <p class="p-2">Costo Disel</p>
+                            @break
+                            @case(2)
+                                <p class="p-2">Sueldos</p>
+                            @break
+                            @case(3)
+                                <p class="p-2">Viaticos</p>
+                            @break
+                            @case(4)
+                                <p class="p-2">Hotel</p>
+                            @break
+                            @case(5)
+                                <p class="p-2">Carga Impositiva</p>
+                            @break
+                            @case(6)
+                                <p class="p-2">Derecho de Piso</p>
+                            @break
+                            @case(7)
+                                <p class="p-2">Casetas</p>
+                            @break
+                            @case(8)
+                                <p class="p-2">Mantenimientos</p>
+                            @break
+                            @case(9)
+                                <p class="p-2">Amenidades</p>
+                            @break
+                            @case(10)
+                                <p class="p-2">Subarrendos</p>
+                            @break
+                        @endswitch
                     </div>
                     <div class="mb-2">
                         <x-jet-label value="Valor" />
