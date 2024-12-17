@@ -1111,7 +1111,7 @@
                                 </x-slot>
                             </x-jet-dialog-modal>
                             {{-- Modal detalles presupuestos --}}
-                            <x-jet-dialog-modal wire:model="modal_details_budget">
+                            {{-- <x-jet-dialog-modal wire:model="modal_details_budget">
                                 <x-slot name="title">
                                     Detalles del presupuesto
                                 </x-slot>
@@ -1402,7 +1402,7 @@
                                     <x-jet-danger-button class="mx-2"
                                         wire:click="$set('modal_details_budget',false)">Cerrar</x-jet-danger-button>
                                 </x-slot>
-                            </x-jet-dialog-modal>
+                            </x-jet-dialog-modal> --}}
                         </div>
                     </div>
                 </div>
